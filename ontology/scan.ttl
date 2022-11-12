@@ -1,0 +1,34 @@
+@prefix : <http://www.semanticweb.org/jef/ontologies/2022/10/untitled-ontology-4#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.semanticweb.org/jef/ontologies/2022/10/onto> a owl:Ontology .
+
+:addressValue a owl:DatatypeProperty ;
+    rdfs:domain :Device ;
+    rdfs:range xsd:string .
+
+:deviceAddress a owl:ObjectProperty ;
+    rdfs:domain :Device ;
+    rdfs:range :IpAddress .
+
+:devicePort a owl:ObjectProperty ;
+    rdfs:domain :Device ;
+    rdfs:range :Port .
+
+:portNumber a owl:DatatypeProperty ;
+    rdfs:domain :Port .
+
+:portService a owl:DatatypeProperty ;
+    rdfs:domain :Port .
+
+:portStatus a owl:DatatypeProperty ;
+    rdfs:domain :Port .
+
+:IpAddress a owl:Class .
+
+:Device a owl:Class .
+
+:Port a owl:Class .
+
