@@ -1,7 +1,6 @@
 @prefix : <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://www.semanticweb.org/jef/ontologies/2022/10/demo> a owl:Ontology .
 
@@ -14,10 +13,6 @@
 
 :addressValue a owl:DatatypeProperty ;
     rdfs:domain :IpAddress .
-
-:dev_10.110.187.192 a :Device ;
-    :deviceAddress :10.110.187.192 ;
-    :devicePort :8000 .
 
 :deviceAccount a owl:ObjectProperty ;
     rdfs:domain :Device ;
@@ -65,32 +60,22 @@
     rdfs:domain :WebService ;
     rdfs:range :Webpage .
 
-:10.110.187.192 a :IpAddress ;
-    :addressValue "10.110.187.192" .
-
-:8000 a :Port ;
-    :portNumber 8000 ;
-    :portService :http-alt ;
-    :portStatus "open" .
-
 :WebService a owl:Class ;
     rdfs:subClassOf :Service .
 
 :Webpage a owl:Class .
 
-:http-alt :serviceName "http-alt" .
+:IpAddress a owl:Class .
+
+:Device a owl:Class .
 
 :Hash a owl:Class .
-
-:IpAddress a owl:Class .
 
 :Password a owl:Class .
 
 :Account a owl:Class .
 
-:Device a owl:Class .
+:Port a owl:Class .
 
 :Service a owl:Class .
-
-:Port a owl:Class .
 

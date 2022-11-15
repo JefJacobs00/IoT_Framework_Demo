@@ -1,6 +1,15 @@
+import re
 class OutputParser:
-    def stringParse(self, output):
-        result = ""
+    def stringParse(self, input:str, mapping, infoStart:str):
+        lines = re.findall(f'{infoStart}.*', input)
+        result = []
+        for i in range(len(lines)):
+            result.append({})
+            for key in mapping:
+                result[i][key] = ""
+                matches = re.findall(f'({mapping[key]})([a-zA-Z0-9.@/_-]+)', lines[i])
+                for item in matches:
+                    result[i][key] = item[1]
         return result
 
     def jsonParse(self, output):

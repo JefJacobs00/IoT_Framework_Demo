@@ -6,13 +6,15 @@ class Gobuster():
         self.ontology = ontology
 
     def perform_enum(self, host, port, type, wordlist, flags):
-        cmd = f'~/go/bin/gobuster {type} -u http://{host}:{port} -w {wordlist} -t 200 --timeout 5s {flags}'
+        cmd = f'gobuster {type} -u http://{host}:{port} -w {wordlist}'
 
         p = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE, close_fds=True)
 
         (output, err) = p.communicate()
         output = output.decode("utf-8")
         err = err.decode("utf-8")
+
+        return output
 
         result = {}
         if type == 'dir':

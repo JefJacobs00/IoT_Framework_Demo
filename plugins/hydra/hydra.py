@@ -6,7 +6,7 @@ class Hydra:
 
     def brute_hydra_ssh(self, host, port):
         # print('running hydra')
-        wordlist = f'wordlists/default_credentials/ssh.txt'
+        wordlist = f'wordlists/default_credentials/test.txt'
         # wordlist = f'wordlists/default_credentials/common2.txt'
         cmd = f'hydra -C {wordlist} {host} -s {port} -t 4 ssh'
 
@@ -15,4 +15,6 @@ class Hydra:
         (output, err) = p.communicate()
         output = output.decode("utf-8")
         print(output, err)
+
+        return output
 

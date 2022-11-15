@@ -270,6 +270,7 @@ admin:ibm
 admin:monitor
 admin:turnkey
 admin:vagrant
+admin:Password
 user:!root
 user:Cisco
 user:NeXT
