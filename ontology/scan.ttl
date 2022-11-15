@@ -1,13 +1,27 @@
-@prefix : <http://www.semanticweb.org/jef/ontologies/2022/10/untitled-ontology-4#> .
+@prefix : <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://www.semanticweb.org/jef/ontologies/2022/10/onto> a owl:Ontology .
+<http://www.semanticweb.org/jef/ontologies/2022/10/demo> a owl:Ontology .
+
+:accountPassword a owl:ObjectProperty ;
+    rdfs:domain :Account ;
+    rdfs:range :Password .
+
+:accountUsername a owl:DatatypeProperty ;
+    rdfs:domain :Account .
 
 :addressValue a owl:DatatypeProperty ;
+    rdfs:domain :IpAddress .
+
+:dev_10.110.187.192 a :Device ;
+    :deviceAddress :10.110.187.192 ;
+    :devicePort :8000 .
+
+:deviceAccount a owl:ObjectProperty ;
     rdfs:domain :Device ;
-    rdfs:range xsd:string .
+    rdfs:range :Account .
 
 :deviceAddress a owl:ObjectProperty ;
     rdfs:domain :Device ;
@@ -17,18 +31,66 @@
     rdfs:domain :Device ;
     rdfs:range :Port .
 
+:hashFunction a owl:DatatypeProperty ;
+    rdfs:domain :Hash .
+
+:hashValue a owl:DatatypeProperty ;
+    rdfs:domain :Hash .
+
+:passwordCleartext a owl:DatatypeProperty ;
+    rdfs:domain :Password .
+
+:passwordHash a owl:ObjectProperty ;
+    rdfs:domain :Password ;
+    rdfs:range :Hash .
+
 :portNumber a owl:DatatypeProperty ;
     rdfs:domain :Port .
 
-:portService a owl:DatatypeProperty ;
-    rdfs:domain :Port .
+:portService a owl:ObjectProperty ;
+    rdfs:domain :Port ;
+    rdfs:range :Service .
 
 :portStatus a owl:DatatypeProperty ;
     rdfs:domain :Port .
 
+:serviceAccount a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :Account .
+
+:serviceName a owl:DatatypeProperty ;
+    rdfs:domain :Service .
+
+:webservicePage a owl:ObjectProperty ;
+    rdfs:domain :WebService ;
+    rdfs:range :Webpage .
+
+:10.110.187.192 a :IpAddress ;
+    :addressValue "10.110.187.192" .
+
+:8000 a :Port ;
+    :portNumber 8000 ;
+    :portService :http-alt ;
+    :portStatus "open" .
+
+:WebService a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:Webpage a owl:Class .
+
+:http-alt :serviceName "http-alt" .
+
+:Hash a owl:Class .
+
 :IpAddress a owl:Class .
 
+:Password a owl:Class .
+
+:Account a owl:Class .
+
 :Device a owl:Class .
+
+:Service a owl:Class .
 
 :Port a owl:Class .
 

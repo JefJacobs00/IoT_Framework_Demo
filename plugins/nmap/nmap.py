@@ -13,7 +13,7 @@ class Nmap:
         sc = scanner.scan(host, arguments=' '.join(flags))
         result = scanner._scan_result['scan']
 
-        unwanted_keys = ['addresses', 'status', 'reason', 'conf', 'extrainfo']
+        unwanted_keys = ['addresses', 'status', 'reason', 'conf', 'extrainfo','hostnames']
         result = utils.rm_fields(result, unwanted_keys)
         self.save_output(result)
 
@@ -25,4 +25,4 @@ class Nmap:
                 for port in result[ip][protocol]:
                     service = result[ip][protocol][port]['name']
                     state = result[ip][protocol][port]['state']
-                    onto.add_port_to_onto(port, service, state, dev, self.ontology)
+                    onto.add_port_to_onto(port, state, service, dev, self.ontology)
