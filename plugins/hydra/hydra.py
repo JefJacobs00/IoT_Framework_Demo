@@ -1,12 +1,12 @@
 from subprocess import Popen, PIPE
 
+from ontology import ontology
 from plugins.outputParser import OutputParser
 
 
 class Hydra:
-    def __init__(self, ontology):
-        self.ontology = ontology
-        self.parser = {'ipAddress': 'host: ',
+    def __init__(self):
+        self.parser = {'ipaddress': 'host: ',
                                'protocol': '\]\[',
                                'port': '^\[',
                                'username': 'login: ',
