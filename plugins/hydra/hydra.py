@@ -1,8 +1,17 @@
 from subprocess import Popen, PIPE
 
+from plugins.outputParser import OutputParser
+
+
 class Hydra:
     def __init__(self, ontology):
         self.ontology = ontology
+        self.parser = {'ipAddress': 'host: ',
+                               'protocol': '\]\[',
+                               'port': '^\[',
+                               'username': 'login: ',
+                               'password': 'password: '}
+        self.lineStart = '\[\d+\]'
 
     def brute_hydra_ssh(self, host, port):
         # print('running hydra')
@@ -14,7 +23,7 @@ class Hydra:
 
         (output, err) = p.communicate()
         output = output.decode("utf-8")
-        print(output, err)
 
-        return output
+        outputParser = OutputParser()
+        return outputParser.stringParse(output, self.parser, self.lineStart)
 
