@@ -1,35 +1,17 @@
-from enum import Enum
+import rdflib
+from rdflib import Graph, RDF, OWL
 
-from owlready import get_ontology, onto_path, Thing, Property
-from rdflib import Graph, Namespace
-from ontology_alchemy import Ontology, Session
-import xml.etree.ElementTree as ET
-
-from rdflib.namespace import NamespaceManager
-
-import plugins.nmap.nmap as nmp
-from ontology import ontology
-from plugins.gobuster.gobuster import Gobuster
 from plugins.hydra.hydra import Hydra
 
+g = Graph()
+g.parse("ontology/demo.ttl")
 
-
-dev = ontology.Device()
-ip = ontology.IpAddress()
-
-dev.addresses.append(ip)
-
-ip.Ipv4.append("192.168.0.106")
-
-for address in dev.addresses:
-    print(address.Ipv4)
-
-ontology.save()
+for s, p, o in g.triples((None, None, OWL.DatatypeProperty)):
+    print(s)
 
 hydra = Hydra()
 o = hydra.brute_hydra_ssh("192.168.0.106", 22)
 
-print(o)
 
 #gobuster = Gobuster(g)
 #result = gobuster.enum_dir("192.168.0.106", 8000)

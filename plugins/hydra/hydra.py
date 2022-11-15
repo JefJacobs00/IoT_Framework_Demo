@@ -6,7 +6,7 @@ from plugins.outputParser import OutputParser
 
 class Hydra:
     def __init__(self):
-        self.parser = {'ipaddress': 'host: ',
+        self.parser = {'ipv4': 'host: ',
                                'protocol': '\]\[',
                                'port': '^\[',
                                'username': 'login: ',
