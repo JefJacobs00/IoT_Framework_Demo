@@ -1,8 +1,12 @@
+import json
+import re
+
 import rdflib
 from rdflib import Graph, RDF, OWL
 
 from plugins.hydra.hydra import Hydra
 from plugins.nmap.nmap import Nmap
+from plugins.outputParser import OutputParser
 
 g = Graph()
 g.parse("ontology/demo.ttl")
@@ -15,8 +19,15 @@ g.parse("ontology/demo.ttl")
 #result = gobuster.enum_dir("192.168.0.106", 8000)
 
 plugin = Nmap(g)
-plugin.enum_fast_scan("10.110.187.192")
+result = plugin.enum_fast_scan("192.168.0.212")
 
+
+def rec(result):
+    for i in result:
+        print(result[i])
+
+rec(result)
+print(result)
 #g.serialize(destination="ontology/scan.ttl")
 
 
