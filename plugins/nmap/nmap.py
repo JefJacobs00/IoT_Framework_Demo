@@ -1,3 +1,5 @@
+import json
+
 import nmap
 import common.utils as utils
 import ontology.ontology_wrapper as ontology
@@ -12,6 +14,8 @@ class Nmap:
         flags = ['-P']
         sc = scanner.scan(host, arguments=' '.join(flags))
         result = scanner._scan_result['scan']
+
+        a = json.dumps(result)
 
         unwanted_keys = ['addresses', 'status', 'reason', 'conf', 'extrainfo','hostnames']
         result = utils.rm_fields(result, unwanted_keys)

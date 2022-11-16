@@ -54,7 +54,7 @@
                 rdfs:range :Account .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#webservicePage
+###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#ebservicePage
 :webservicePage rdf:type owl:ObjectProperty ;
                 rdfs:domain :WebService ;
                 rdfs:range :Webpage .
