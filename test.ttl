@@ -5,11 +5,8 @@
 <http://www.semanticweb.org/jef/ontologies/2022/10/demo> a owl:Ontology .
 
 :IpAddress1 a :IpAddress ;
+    :addressPort :Port1 ;
     :ipv4 "192.168.0.106" .
-
-:Port1 a :Port ;
-    :portNumber "22" ;
-    :portService :Service1 .
 
 :accountPassword a owl:ObjectProperty ;
     rdfs:domain :Account ;
@@ -17,6 +14,10 @@
 
 :accountUsername a owl:DatatypeProperty ;
     rdfs:domain :Account .
+
+:addressPort a owl:ObjectProperty ;
+    rdfs:domain :IpAddress ;
+    rdfs:range :Port .
 
 :deviceAccount a owl:ObjectProperty ;
     rdfs:domain :Device ;
@@ -74,6 +75,10 @@
 :Password1 a :Password ;
     :passwordCleartext "Password" .
 
+:Port1 a :Port ;
+    :portNumber "22" ;
+    :portService :Service1 .
+
 :Service1 a :Service ;
     :serviceAccount :Account1 ;
     :serviceName "ssh" .
@@ -93,7 +98,7 @@
 
 :Account a owl:Class .
 
-:Port a owl:Class .
-
 :Service a owl:Class .
+
+:Port a owl:Class .
 

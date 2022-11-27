@@ -43,6 +43,11 @@
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portService
+:addressPort rdf:type owl:ObjectProperty ;
+             rdfs:domain :IpAddress  ;
+             rdfs:range :Port  .
+
+###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portService
 :portService rdf:type owl:ObjectProperty ;
              rdfs:domain :Port ;
              rdfs:range :Service .
