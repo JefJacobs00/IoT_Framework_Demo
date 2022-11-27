@@ -7,10 +7,10 @@ from plugins.outputParser import OutputParser
 class Hydra:
     def __init__(self):
         self.parser = {'ipv4': 'host: ',
-                               'protocol': '\]\[',
-                               'port': '^\[',
-                               'username': 'login: ',
-                               'password': 'password: '}
+                               'serviceName': '\]\[',
+                               'portNumber': '^\[',
+                               'accountUsername': 'login: ',
+                               'passwordCleartext': 'password: '}
         self.lineStart = '\[\d+\]'
 
     def brute_hydra_ssh(self, host, port):

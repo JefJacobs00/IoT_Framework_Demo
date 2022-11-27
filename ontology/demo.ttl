@@ -69,8 +69,8 @@
                  rdfs:domain :Account .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#addressValue
-:addressValue rdf:type owl:DatatypeProperty ;
+###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#ipv4
+:ipv4 rdf:type owl:DatatypeProperty ;
               rdfs:domain :IpAddress .
 
 
