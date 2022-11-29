@@ -14,6 +14,7 @@ class Ontology:
         self.lookup = self.__createLookup()
         self.ontology_classes = self.__getClasses()
         self.links = self.__getLinks()
+        self.graph = Graph()
 
 
     def __createLookup(self):

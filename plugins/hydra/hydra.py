@@ -23,7 +23,8 @@ class Hydra:
 
         (output, err) = p.communicate()
         output = output.decode("utf-8")
-
+        if len(err) > 0:
+            print(err)
         outputParser = OutputParser()
         return outputParser.stringParse(output, self.parser, self.lineStart)
 

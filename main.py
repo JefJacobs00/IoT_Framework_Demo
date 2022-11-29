@@ -6,7 +6,7 @@ from rdflib.plugins.sparql import prepareQuery
 
 from ontology.ontology import Ontology
 from plugins.hydra.hydra import Hydra
-
+from plugins.nmap.nmap import Nmap
 
 g = Graph()
 g.parse('ontology/demo.ttl')
@@ -18,7 +18,7 @@ ontology = Ontology(g)
 hydra = Hydra()
 o = hydra.brute_hydra_ssh("192.168.0.106", 22)
 
-
+print(o)
 
 ontology.putOutputIntoOntology(o)
 
