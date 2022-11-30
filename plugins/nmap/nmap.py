@@ -4,6 +4,7 @@ from subprocess import Popen, PIPE
 import nmap
 import common.utils as utils
 import ontology.ontology_wrapper as ontology
+from plugins.outputParser import OutputParser
 
 
 class Nmap:
@@ -20,7 +21,6 @@ class Nmap:
     def enum_fast_scan(self, host):
         scanner = nmap.PortScanner()
         flags = ['-F']
-        sc = scanner.scan(host, arguments='-oG '.join(flags))
+        sc = scanner.scan(host, arguments=' '.join(flags))
         result = scanner._scan_result['scan']
-
         return result

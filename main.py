@@ -1,28 +1,35 @@
-import rdflib
-from rdflib import Graph, OWL, RDF, FOAF
-from rdflib.extras.infixowl import Class
-from rdflib.namespace import NamespaceManager, Namespace
-from rdflib.plugins.sparql import prepareQuery
+import re
+
+from rdflib import Graph
 
 from ontology.ontology import Ontology
 from plugins.hydra.hydra import Hydra
 from plugins.nmap.nmap import Nmap
+from plugins.outputParser import OutputParser
 
 g = Graph()
 g.parse('ontology/demo.ttl')
 
 ontology = Ontology(g)
 
+nmap = Nmap()
+output = nmap.enum_terminal("192.168.0.106")
+outputParser = OutputParser()
 
+m = re.compile(r'(?P<portNumber>[0-9]+)/(?P<protocol>[a-z]+)(\s+)(?P<portStatus>[a-z]+)(\s+)(?P<serviceName>[a-z?/]*)')
+result = outputParser.stringParseMatcher(m, '\n', output)
+for r in result:
+    r['ipv4'] = "192.168.0.106"
+
+print(result)
+ontology.putOutputIntoOntology(result)
 
 hydra = Hydra()
 o = hydra.brute_hydra_ssh("192.168.0.106", 22)
 
-print(o)
-
 ontology.putOutputIntoOntology(o)
+#
+# ontology.putOutputIntoOntology(o)
 
-# gobuster = Gobuster(g)
-# result = gobuster.enum_dir("192.168.0.106", 8000)
 
-# g.serialize(destination="ontology/scan.ttl")
+ontology.saveToFile('scan.ttl')

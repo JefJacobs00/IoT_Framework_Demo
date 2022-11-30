@@ -12,6 +12,11 @@ class OutputParser:
                     result[i][key] = item[1]
         return result
 
-    def jsonParse(self, output):
-        result = ""
-        return result
+    def stringParseMatcher(self, matcher, lineEnd, input:str):
+        lines = re.split(lineEnd, input)
+        list = []
+        for line in lines:
+            result = matcher.search(line)
+            if result is not None:
+                list.append(result.groupdict())
+        return list

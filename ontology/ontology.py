@@ -56,34 +56,60 @@ class Ontology:
         for line in output:
             structured.append(self.structureInfo(line))
 
-        objects = []
         for line in structured:
+            objects = []
             for key in line:
                 objects.append((key,self.convertToClass((key, line[key]))))
+            for key, object in objects:
+                for link in self.links[key]:
+                    test = [key for key in objects if key[0] == link[0]]
+                    if len(test) > 0:
+                        self.graph.add((test[0][1], link[1], object))
 
-        for i in objects:
-            key = i[0]
-            object = i[1]
-            for link in self.links[key]:
-                test = [key for key in objects if key[0] == link[0]]
-                if len(test) > 0:
-                    self.graph.add((test[0][1], link[1], object))
-        self.graph.serialize(destination="test.ttl")
+
+    def checkIfExists(self,type, properties):
+        for s, p, o in self.graph.triples((None, None, self.lookup[type])):
+            equal = True
+            obj = None
+            for prop in properties:
+                for s, p, o in self.graph.triples((s, self.lookup[prop[0]], None)):
+                    if o.__str__() == prop[1]:
+                        equal = True and equal
+                        obj = s
+                    else:
+                        equal = False
+            if equal:
+                return obj
+
+
+
+
+
     def convertToClass(self, value:tuple):
         item = value[0]
         properties = value[1]
-        object = self.createOntologyObject(item)
+        obj = self.checkIfExists(item,properties)
+        if obj is None:
+            obj = self.createOntologyObject(item)
+
         for property in properties:
-            self.addPropertyToObject(object, property)
-        return object
+            self.addPropertyToObject(obj, property)
+        return obj
 
 
     def addPropertyToObject(self, object, property):
         propertyName = property[0]
         propertyValue = property[1]
         self.graph.add((object, self.lookup[propertyName], Literal(propertyValue)))
+
+
     def createOntologyObject(self, name):
-        object = URIRef(self.lookup['ontology'] + "#" + str(name)+'1')
+
+        ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
+        i = 1;
+        for s, p, o in self.graph.triples((None, None, ontoClass)):
+            i = int(s.__str__()[-1:])+1
+        object = URIRef(self.lookup['ontology'] + "#" + str(name) + str(i))
         self.graph.add((object, RDF.type, self.lookup[name]))
         return object
 
@@ -91,8 +117,12 @@ class Ontology:
         information = {}
         for property in info:
             key = self.findClassFromProperty(property)
-            if not information.keys().__contains__(key):
-                information[key] = []
-            information[key].append((property, info[property]))
+            if key is not None:
+                if not information.keys().__contains__(key):
+                    information[key] = []
+                information[key].append((property, info[property]))
 
         return information
+
+    def saveToFile(self, path:str):
+        self.graph.serialize(destination=path)
