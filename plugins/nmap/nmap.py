@@ -16,6 +16,7 @@ class Nmap:
         (output, err) = p.communicate()
         print(err)
 
+
         output = output.decode("utf-8")
         return output
     def enum_fast_scan(self, host):

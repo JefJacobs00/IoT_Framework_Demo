@@ -1,31 +1,20 @@
-http(Ip) :- deviceSerices(Ip,literal('http')).
-ssh(Ip) :- deviceSerices(Ip,literal('ssh')).
-telnet(Ip) :- deviceSerices(Ip,literal('telnet')).
-ftp(Ip) :- deviceSerices(Ip,literal('ftp')).
+% tool profile , list of requirements
+profile(nmap_1, [ip=IP]) :- ip(IP).
 
-requirements(nmap, [ip]).
+profile(hydra_ssh, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'ssh').
+profile(hydra_telnet, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'telnet').
+profile(hydra_ftp, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'ftp').
 
-requirements(gobuster, [ip,http]).
-
-requirements(hydra,[ip,ssh]). 
-requirements(hydra,[ip,telnet]).
-requirements(hydra,[ip,ftp]).
+profile(gobuster_https, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'https').
+profile(gobuster_http, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'http').
 
 
+nmap_1(Parameters) :-
+    format('nmap -F ~w',[Parameters.ip]).
 
-check_requirements([]).
-check_requirements([Predicate|Predicates]) :-
-    call(Predicate, X),  
-    findall(X, call(Predicate, X), List), 
-    List \= [], 
-    check_requirements(Predicates).
+hydra_ssh(Parameters) :-
+    format('hydra -C wordlists/default_credentials/test.txt ~w ssh',[Parameters.ip]).
 
-check_tool_requirements(Tool) :-
-    requirements(Tool, Requirements),
-    check_requirements(Requirements).
-
-
-
-all_requirements_satisfied(Tool,Device) :-
-    requirements(Tool, Requirements),
-    forall(member(Requirement, Requirements), satisfies_requirement(Device, Requirement)).
+tools :-
+    profile(Tool, Parameters),
+    call(Tool, Parameters).
