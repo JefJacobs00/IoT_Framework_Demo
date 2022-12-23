@@ -22,7 +22,7 @@ def find_plugins(exclude=[]):
         # print(f'starting plugin {f}')
         module = importlib.import_module("plugins.%s.%s" % (f, f))
         class_name = ''.join(map(str.capitalize, f.split('_')))
-        class_ = getattr(module, class_name)
+        class_ = getattr(module, class_name)()
         plugins[f] = class_
 
     return plugins
@@ -38,7 +38,7 @@ ontology = Ontology(g)
 #
 # ontology.putOutputIntoOntology(o)
 
-plugins = find_plugins(['hydra'])
+plugins = find_plugins([])
 #
 # ontology.putOutputIntoOntology(o)
 prolog = pyswip.Prolog()
@@ -49,8 +49,9 @@ for query_result in prolog.query('tools(Tool, Command)'):
     print(query_result)
     if query_result['Tool'] in plugins:
         sc = getattr(plugins[query_result['Tool']], 'execute_command')
-        command = [0,query_result['Command']]
-        print(sc(*command))
-
+        command = [query_result['Command']]
+        result = sc(*command)
+        print(result)
+        ontology.putOutputIntoOntology(result)
 
 ontology.saveToFile('scan.ttl')

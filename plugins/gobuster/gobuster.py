@@ -5,8 +5,7 @@ from plugins.outputParser import OutputParser
 
 
 class Gobuster():
-    def __init__(self, ontology):
-        self.ontology = ontology
+    def __init__(self):
         self.parser = {'page': '2K', 'status': 'Status: ', 'size': 'Size: ', 'redirect': '--> '}
         self.lineStart = '\['
 

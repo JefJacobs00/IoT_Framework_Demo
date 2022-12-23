@@ -33,7 +33,7 @@ class Nmap:
         (output, err) = p.communicate()
         print(err)
         outputParser = OutputParser()
-        result =outputParser.stringParseMatcher(self.parser, '\n', output)
+        result = outputParser.stringParseMatcher(self.parser, '\n', output.decode("utf-8"))
         for r in result:
             r['ipv4'] = "192.168.0.106"
 
