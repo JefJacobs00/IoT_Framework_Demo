@@ -18,6 +18,12 @@
                  rdfs:range :Password .
 
 
+###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#addressPort
+:addressPort rdf:type owl:ObjectProperty ;
+             rdfs:domain :IpAddress ;
+             rdfs:range :Port .
+
+
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#deviceAccount
 :deviceAccount rdf:type owl:ObjectProperty ;
                rdfs:domain :Device ;
@@ -43,11 +49,6 @@
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portService
-:addressPort rdf:type owl:ObjectProperty ;
-             rdfs:domain :IpAddress  ;
-             rdfs:range :Port  .
-
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portService
 :portService rdf:type owl:ObjectProperty ;
              rdfs:domain :Port ;
              rdfs:range :Service .
@@ -59,7 +60,7 @@
                 rdfs:range :Account .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#ebservicePage
+###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#webservicePage
 :webservicePage rdf:type owl:ObjectProperty ;
                 rdfs:domain :WebService ;
                 rdfs:range :Webpage .
@@ -71,42 +72,50 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#accountUsername
 :accountUsername rdf:type owl:DatatypeProperty ;
-                 rdfs:domain :Account .
-
-
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#ipv4
-:ipv4 rdf:type owl:DatatypeProperty ;
-              rdfs:domain :IpAddress .
+                 rdfs:domain :Account ;
+                 rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#hashFunction
 :hashFunction rdf:type owl:DatatypeProperty ;
-              rdfs:domain :Hash .
+              rdfs:domain :Hash ;
+              rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#hashValue
 :hashValue rdf:type owl:DatatypeProperty ;
-           rdfs:domain :Hash .
+           rdfs:domain :Hash ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#ipv4
+:ipv4 rdf:type owl:DatatypeProperty ;
+      rdfs:domain :IpAddress ;
+      rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#passwordCleartext
 :passwordCleartext rdf:type owl:DatatypeProperty ;
-                   rdfs:domain :Password .
+                   rdfs:domain :Password ;
+                   rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portNumber
 :portNumber rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Port .
+            rdfs:domain :Port ;
+            rdfs:range xsd:unsignedInt .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portStatus
 :portStatus rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Port .
+            rdfs:domain :Port ;
+            rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#serviceName
 :serviceName rdf:type owl:DatatypeProperty ;
-             rdfs:domain :Service .
+             rdfs:domain :Service ;
+             rdfs:range xsd:string .
 
 
 #################################################################

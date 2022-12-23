@@ -32,4 +32,9 @@ class Nmap:
         p = Popen(command, shell=True, stdout=PIPE, stderr=PIPE, close_fds=True)
         (output, err) = p.communicate()
         print(err)
-        return outputparser
+        outputParser = OutputParser()
+        result =outputParser.stringParseMatcher(self.parser, '\n', output)
+        for r in result:
+            r['ipv4'] = "192.168.0.106"
+
+        return result
