@@ -54,4 +54,4 @@ for query_result in prolog.query('tools(Tool, Command)'):
         print(result)
         ontology.putOutputIntoOntology(result)
 
-ontology.saveToFile('scan.ttl')
+#ontology.saveToFile('scan.ttl')
