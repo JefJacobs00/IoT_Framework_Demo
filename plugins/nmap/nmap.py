@@ -28,13 +28,11 @@ class Nmap:
         result = scanner._scan_result['scan']
         return result
 
-    def execute_command(self, command):
+    def execute_command(self, command, target):
         p = Popen(command, shell=True, stdout=PIPE, stderr=PIPE, close_fds=True)
         (output, err) = p.communicate()
-        print(err)
         outputParser = OutputParser()
         result = outputParser.stringParseMatcher(self.parser, '\n', output.decode("utf-8"))
         for r in result:
-            r['ipv4'] = "192.168.0.106"
-
+            r['ipv4'] = target
         return result

@@ -31,27 +31,38 @@ g = Graph()
 g.parse('ontology/demo.ttl')
 ontology = Ontology(g)
 
+ip = input("Give the target ip:\n")
+r = [{}]
 
-#
-# hydra = Hydra()
-# o = hydra.brute_hydra_ssh("192.168.0.106", 22)
-#
-# ontology.putOutputIntoOntology(o)
+r[0]['ipv4'] = ip
 
+ontology.putOutputIntoOntology(r)
+ontology.saveToFile('ontology/test.ttl')
+
+hasExecuted = True
+execTools = []
 plugins = find_plugins([])
-#
-# ontology.putOutputIntoOntology(o)
-prolog = pyswip.Prolog()
+while hasExecuted:
+    prolog = pyswip.Prolog()
 
-prolog.consult('ontology/tools.pl')
-prolog.consult('ontology/parser.pl')
-for query_result in prolog.query('tools(Tool, Command)'):
-    print(query_result)
-    if query_result['Tool'] in plugins:
-        sc = getattr(plugins[query_result['Tool']], 'execute_command')
-        command = [query_result['Command']]
-        result = sc(*command)
-        print(result)
-        ontology.putOutputIntoOntology(result)
+    prolog.consult('ontology/parser.pl')
+    prolog.consult('ontology/tools.pl')
 
-ontology.saveToFile('scan.ttl')
+    hasExecuted = False
+    for result in prolog.query('tools(Tool, Command)'):
+        if result['Tool'] in plugins and result not in execTools:
+            print(f"Executing tool {result['Tool']} with the command {result['Command']}")
+            sc = getattr(plugins[result['Tool']], 'execute_command')
+            command = [result['Command']]
+            output = sc(*command, ip)
+            print(output)
+            ontology.putOutputIntoOntology(output)
+            ontology.saveToFile('ontology/test.ttl')
+
+            execTools.append(result)
+            hasExecuted = True
+
+
+
+
+ontology.saveToFile('ontology/test.ttl')

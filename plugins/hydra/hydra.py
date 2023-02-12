@@ -28,7 +28,7 @@ class Hydra:
         outputParser = OutputParser()
         return outputParser.stringParse(output, self.parser, self.lineStart)
 
-    def execute_command(self, command):
+    def execute_command(self, command, target):
         p = Popen(command, shell=True, stdout=PIPE, stderr=PIPE, close_fds=True)
 
         (output, err) = p.communicate()
