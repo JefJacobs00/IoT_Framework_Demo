@@ -25,16 +25,10 @@ nmap_1(Parameters, Command) :-
     format_command('nmap -F ~w', [Parameters.ip], Command).
 
 nmap_2(Parameters, Command) :-
-    format_command('nmap -sC -sV -p- ~w', [Parameters.ip], Command).
+    format_command('nmap -sC -sV -P ~w ~w', [Parameters.port, Parameters.ip], Command).
 
 hydra_ssh(Parameters, Command) :-
     format_command('hydra -C wordlists/default_credentials/test.txt ~w ssh' , [Parameters.ip], Command).
-
-gobuster_http(Parameters, Command) :-
-    format_command('gobuster dir -u http://~w:~w -w wordlists/common.txt', [Parameters.ip, Parameters.port], Command).
-
-gobuster_https(Parameters, Command) :-
-    format_command('gobuster dir -u https://~w:~w -w wordlists/common.txt', [Parameters.ip, Parameters.port], Command).
 
 tools(Tool, Command) :-
     profile(Profile, Parameters),
