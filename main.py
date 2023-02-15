@@ -1,6 +1,7 @@
 import importlib
 import os
 import re
+from threading import Thread
 
 from rdflib import Graph
 import pyswip
@@ -27,11 +28,23 @@ def find_plugins(exclude=[]):
 
     return plugins
 
+def execute_scan(tool, command, target):
+    global running_scan
+    running_scan += 1
+    print(f"Executing tool {tool} with the command {command}")
+    sc = getattr(plugins[tool], 'execute_command')
+    output = sc(command, target)
+    print(output)
+    ontology.putOutputIntoOntology(output)
+    ontology.saveToFile('ontology/test.ttl')
+    running_scan -= 1
+
 g = Graph()
 g.parse('ontology/demo.ttl')
 ontology = Ontology(g)
 
-ip = input("Give the target ip:\n")
+#ip = input("Give the target ip:\n")
+ip = "192.168.0.106"
 r = [{}]
 
 r[0]['ipv4'] = ip
@@ -39,28 +52,24 @@ r[0]['ipv4'] = ip
 ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/test.ttl')
 
-hasExecuted = True
+has_executed = True
+running_scan = 0
+
 execTools = []
 plugins = find_plugins([])
-while hasExecuted:
-    prolog = pyswip.Prolog()
 
+prolog = pyswip.Prolog()
+prolog.consult('ontology/tools.pl')
+while has_executed or (running_scan > 0):
     prolog.consult('ontology/parser.pl')
-    prolog.consult('ontology/tools.pl')
 
-    hasExecuted = False
+    has_executed = False
     for result in prolog.query('tools(Tool, Command)'):
         if result['Tool'] in plugins and result not in execTools:
-            print(f"Executing tool {result['Tool']} with the command {result['Command']}")
-            sc = getattr(plugins[result['Tool']], 'execute_command')
-            command = [result['Command']]
-            output = sc(*command, ip)
-            print(output)
-            ontology.putOutputIntoOntology(output)
-            ontology.saveToFile('ontology/test.ttl')
-
+            thread = Thread(target=execute_scan, args=(result['Tool'], result['Command'], ip))
+            thread.start()
             execTools.append(result)
-            hasExecuted = True
+            has_executed = True
 
 
 
