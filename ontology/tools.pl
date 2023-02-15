@@ -9,7 +9,7 @@ tool(gobuster, gobuster_http).
 tool(gobuster, gobuster_https).
 
 profile(nmap_1, [ip=IP]) :- ip(IP).
-profile(nmap_2, [ip=IP,port=P]) :- ip(IP), devicePorts(IP,P).
+profile(nmap_2, [ip=IP]) :- ip(IP).
 
 profile(hydra_ssh, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'ssh').
 profile(hydra_telnet, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'telnet').

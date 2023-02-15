@@ -34,9 +34,9 @@ def execute_scan(tool, command, target):
     print(f"Executing tool {tool} with the command {command}")
     sc = getattr(plugins[tool], 'execute_command')
     output = sc(command, target)
-    print(output)
     ontology.putOutputIntoOntology(output)
     ontology.saveToFile('ontology/test.ttl')
+    print(output)
     running_scan -= 1
 
 g = Graph()
