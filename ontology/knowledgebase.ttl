@@ -5,6 +5,9 @@ ns1:IpAddress1 a ns1:IpAddress ;
         ns1:Port2 ;
     ns1:ipv4 "192.168.0.106" .
 
+ns1:IpAddress2 a ns1:IpAddress ;
+    ns1:ipv4 "192.168.0.108" .
+
 ns1:Account1 a ns1:Account ;
     ns1:accountPassword ns1:Password1 ;
     ns1:accountUsername "testuserdemo" .

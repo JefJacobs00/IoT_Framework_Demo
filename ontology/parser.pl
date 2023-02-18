@@ -2,9 +2,11 @@
 :- use_module(library(semweb/turtle)).
 :- use_module(library(semweb/rdfs)).
 :- rdf_load(library(semweb/rdfs)).
-
-:- rdf_load('test.ttl', [format('turtle')]).
 :- rdf_register_prefix(ns1, 'http://www.semanticweb.org/jef/ontologies/2022/10/demo#').
+
+load_ontology() :-
+    rdf_load('knowledgebase.ttl', [format('turtle')]).
+
 
 ip(X) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
@@ -19,7 +21,7 @@ password(X) :-
     rdf(A,ns1:'passwordCleartext',literal(X)).
 
 port(X) :-
-    rdfs_individual_of(A, ns1:'Password'),
+    rdfs_individual_of(A, ns1:'Port'),
     rdf(A,ns1:'portNumber',literal(X)).
 
 devicePorts(Ip, Port) :-

@@ -5,11 +5,8 @@ from threading import Thread
 
 from rdflib import Graph
 import pyswip
-
 from ontology.ontology import Ontology
-from plugins.hydra.hydra import Hydra
-from plugins.nmap.nmap import Nmap
-from plugins.outputParser import OutputParser
+
 
 
 def find_plugins(exclude=[]):
@@ -35,43 +32,45 @@ def execute_scan(tool, command, target):
     sc = getattr(plugins[tool], 'execute_command')
     output = sc(command, target)
     ontology.putOutputIntoOntology(output)
-    ontology.saveToFile('ontology/test.ttl')
+    ontology.saveToFile('ontology/knowledgebase.ttl')
     print(output)
     running_scan -= 1
 
+def start_scanning(target):
+    ontology.putOutputIntoOntology(target)
+    ontology.saveToFile('ontology/knowledgebase.ttl')
+
+    has_executed = True
+    running_scan = 0
+
+    executed_tools = []
+
+    prolog = pyswip.Prolog()
+    prolog.consult('ontology/tools.pl')
+    while has_executed or (running_scan > 0):
+        prolog.consult('ontology/parser.pl')
+
+        has_executed = False
+        for result in prolog.query('tools(Tool, Command)'):
+            if result['Tool'] in plugins and result not in executed_tools:
+                thread = Thread(target=execute_scan, args=(result['Tool'], result['Command'], ip))
+                thread.start()
+                executed_tools.append(result)
+                has_executed = True
+
+    ontology.saveToFile('ontology/knowledgebase.ttl')
+
+
 g = Graph()
-g.parse('ontology/demo.ttl')
+g.parse('ontology/knowledge_ontology.ttl')
 ontology = Ontology(g)
 
+plugins = find_plugins([])
 #ip = input("Give the target ip:\n")
 ip = "192.168.0.106"
 r = [{}]
 
 r[0]['ipv4'] = ip
 
-ontology.putOutputIntoOntology(r)
-ontology.saveToFile('ontology/test.ttl')
-
-has_executed = True
-running_scan = 0
-
-execTools = []
-plugins = find_plugins([])
-
-prolog = pyswip.Prolog()
-prolog.consult('ontology/tools.pl')
-while has_executed or (running_scan > 0):
-    prolog.consult('ontology/parser.pl')
-
-    has_executed = False
-    for result in prolog.query('tools(Tool, Command)'):
-        if result['Tool'] in plugins and result not in execTools:
-            thread = Thread(target=execute_scan, args=(result['Tool'], result['Command'], ip))
-            thread.start()
-            execTools.append(result)
-            has_executed = True
 
 
-
-
-ontology.saveToFile('ontology/test.ttl')
