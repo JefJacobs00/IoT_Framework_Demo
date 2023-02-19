@@ -3,8 +3,6 @@ import re
 from subprocess import Popen, PIPE
 
 import nmap
-import common.utils as utils
-import ontology.ontology_wrapper as ontology
 from plugins.outputParser import OutputParser
 
 

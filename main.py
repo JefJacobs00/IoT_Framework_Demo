@@ -6,7 +6,7 @@ from threading import Thread
 from rdflib import Graph
 import pyswip
 from ontology.ontology import Ontology
-
+from plugins.configParser import ConfigParser
 
 
 def find_plugins(exclude=[]):
@@ -60,6 +60,8 @@ def start_scanning(target):
 
     ontology.saveToFile('ontology/knowledgebase.ttl')
 
+c = ConfigParser('')
+c.read_plugins()
 
 g = Graph()
 g.parse('ontology/knowledge_ontology.ttl')

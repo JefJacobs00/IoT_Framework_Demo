@@ -1,11 +1,13 @@
 {
+  "tools":{
   "name": "nmap",
   "version": "",
-  "profiles": {
-    "fast_scan": {
-      "requirements": ["ip"],
-      "results": ["port", "service"],
-      "Command": "nmap -F <ip>"
+    "profiles": {
+      "fast_scan": {
+        "requirements": ["ip"],
+        "results": ["port", "service"],
+        "Command": "nmap -F <ip>"
+      }
     }
   }
 }

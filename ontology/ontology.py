@@ -88,7 +88,7 @@ class Ontology:
     def convertToClass(self, value:tuple):
         item = value[0]
         properties = value[1]
-        obj = self.checkIfExists(item,properties)
+        obj = self.checkIfExists(item, properties)
         if obj is None:
             obj = self.createOntologyObject(item)
 
@@ -106,7 +106,7 @@ class Ontology:
     def createOntologyObject(self, name):
 
         ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
-        i = 1;
+        i = 1
         for s, p, o in self.graph.triples((None, None, ontoClass)):
             i = int(s.__str__()[-1:])+1
         object = URIRef(self.lookup['ontology'] + "#" + str(name) + str(i))
