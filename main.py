@@ -77,5 +77,5 @@ ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
-c.read_plugins()
+c.read_profiles()
 

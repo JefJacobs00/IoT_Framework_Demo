@@ -51,7 +51,7 @@ class ConfigParser:
 
     def config_to_onto(self, config_json):
         self.add_tool(config_json)
-        self.add_plugins(config_json)
+        self.add_profiles(config_json)
         self.graph.serialize(destination='test.ttl')
 
 
@@ -62,14 +62,38 @@ class ConfigParser:
             properties.append((property, tools[property]))
         return self.convertToClass(('Tool', properties))
 
-    def add_plugins(self, config_json):
-        plugins_json = self.recursive_search(config_json, 'Profile')
-        for plugin in plugins_json:
-            print(plugins_json[plugin])
-        print(plugins_json)
-    def add_plugin(self, plugin_config):
-        print("TODO")
+    def add_profiles(self, config_json):
+        profiles_json = self.recursive_search(config_json, 'Profile')
+        for profile in profiles_json:
+            self.add_profile(profile, profiles_json[profile])
+        print(profiles_json)
+    def add_profile(self, name, profile_config):
+        properties = []
+        properties.append(('name', name))
+        for property in self.onto_classes['Profile']:
+            if property in profile_config:
+                properties.append((property, profile_config[property]))
+        profile = self.convertToClass(('Profile', properties))
 
+        for requirement in profile_config['Requirement']:
+            requirement_uri = self.add_requirement(requirement)
+            self.graph.add((profile, self.links['Requirement'][0][1],requirement_uri))
+
+        for result in profile_config['Result']:
+            result_uri = self.add_result(result)
+            self.graph.add((profile, self.links['Result'][0][1], result_uri))
+
+
+        return profile
+
+    def add_result(self, result):
+        properties = []
+        properties.append(('result',result))
+        return self.convertToClass(('Result', properties))
+    def add_requirement(self, requirement):
+        properties = []
+        properties.append(('requirement',requirement))
+        return self.convertToClass(('Requirement', properties))
     def recursive_search(self, config, search_key):
         for key in config:
             if key == search_key:
@@ -117,14 +141,14 @@ class ConfigParser:
         propertyValue = property[1]
         self.graph.add((object, self.lookup[propertyName], Literal(propertyValue)))
 
-    def read_config_file(self, plugin):
-        for file_name in os.listdir('plugins/' + plugin):
+    def read_config_file(self, profile):
+        for file_name in os.listdir('plugins/' + profile):
             if file_name == '__pycache__' or '.py' in file_name:
                 continue
-            file = open('plugins/' + plugin + '/' + file_name)
+            file = open('plugins/' + profile + '/' + file_name)
             self.config_to_onto(json.load(file))
 
-    def read_plugins(self):
+    def read_profiles(self):
         for f in os.listdir('plugins'):
             if (f == '__pycache__' or '.py' in f):
                 continue

@@ -97,7 +97,6 @@ class Ontology:
         self.graph.add((object, self.lookup[propertyName], Literal(propertyValue)))
 
     def createOntologyObject(self, name):
-
         ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
         i = 1
         for s, p, o in self.graph.triples((None, None, ontoClass)):

@@ -7,6 +7,11 @@
         "Requirement": ["ip"],
         "Result": ["port", "service"],
         "Command": "nmap -F <ip>"
+      },
+      "full_scan": {
+        "Requirement": ["ip"],
+        "Result": ["port", "service"],
+        "Command": "nmap -F -sC -sV -p- <ip>"
       }
     }
   }
