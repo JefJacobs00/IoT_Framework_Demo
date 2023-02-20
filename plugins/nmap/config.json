@@ -9,7 +9,7 @@
         "Command": "nmap -F <ip>"
       },
       "full_scan": {
-        "Requirement": ["ip"],
+        "Requirement": ["ip", "port"],
         "Result": ["port", "service"],
         "Command": "nmap -F -sC -sV -p- <ip>"
       }

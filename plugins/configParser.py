@@ -52,7 +52,7 @@ class ConfigParser:
     def config_to_onto(self, config_json):
         self.add_tool(config_json)
         self.add_profiles(config_json)
-        self.graph.serialize(destination='test.ttl')
+        self.graph.serialize(destination='ontology/tools.ttl')
 
 
     def add_tool(self, config_json):
