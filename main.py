@@ -74,6 +74,7 @@ r = [{}]
 
 r[0]['ipv4'] = ip
 ontology.putOutputIntoOntology(r)
+ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
 c.read_plugins()

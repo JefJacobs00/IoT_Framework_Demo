@@ -4,8 +4,8 @@
   "version": "",
     "Profile": {
       "fast_scan": {
-        "requirements": ["ip"],
-        "results": ["port", "service"],
+        "Requirement": ["ip"],
+        "Result": ["port", "service"],
         "Command": "nmap -F <ip>"
       }
     }

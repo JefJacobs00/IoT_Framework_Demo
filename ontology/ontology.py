@@ -7,15 +7,15 @@ class Ontology:
         self.graph = graph
         self.__queryClasses = prepareQuery("SELECT ?s WHERE { ?s rdf:type owl:Class }", )
         self.__queryDataProperties = prepareQuery("SELECT ?s ?o ?d WHERE { ?s rdf:type owl:DatatypeProperty; "
-                                                "rdfs:domain ?class}", )
-        self.__queryObjectProperty = prepareQuery("SELECT ?s ?range ?domain WHERE { ?s rdf:type owl:ObjectProperty; rdfs:domain "
-                                                "?domain; rdfs:range ?range .}", )
+                                                  "rdfs:domain ?class}", )
+        self.__queryObjectProperty = prepareQuery(
+            "SELECT ?s ?range ?domain WHERE { ?s rdf:type owl:ObjectProperty; rdfs:domain "
+            "?domain; rdfs:range ?range .}", )
 
         self.lookup = self.__createLookup()
         self.ontology_classes = self.__getClasses()
         self.links = self.__getLinks()
         self.graph = Graph()
-
 
     def __createLookup(self):
         lookup = {}
@@ -46,12 +46,12 @@ class Ontology:
                 links[c].append((key, op.s))
         return links
 
-    def findClassFromProperty(self, property:str):
+    def findClassFromProperty(self, property: str):
         for key in self.ontology_classes:
             if self.ontology_classes[key].__contains__(property):
                 return key
 
-    def putOutputIntoOntology(self, output:list):
+    def putOutputIntoOntology(self, output: list):
         structured = []
         for line in output:
             structured.append(self.structureInfo(line))
@@ -59,15 +59,14 @@ class Ontology:
         for line in structured:
             objects = []
             for key in line:
-                objects.append((key,self.convertToClass((key, line[key]))))
+                objects.append((key, self.convertToClass((key, line[key]))))
             for key, object in objects:
                 for link in self.links[key]:
                     test = [key for key in objects if key[0] == link[0]]
                     if len(test) > 0:
                         self.graph.add((test[0][1], link[1], object))
 
-
-    def checkIfExists(self,type, properties):
+    def checkIfExists(self, type, properties):
         for s, p, o in self.graph.triples((None, None, self.lookup[type])):
             equal = True
             obj = None
@@ -81,11 +80,7 @@ class Ontology:
             if equal:
                 return obj
 
-
-
-
-
-    def convertToClass(self, value:tuple):
+    def convertToClass(self, value: tuple):
         item = value[0]
         properties = value[1]
         obj = self.checkIfExists(item, properties)
@@ -96,24 +91,22 @@ class Ontology:
             self.addPropertyToObject(obj, property)
         return obj
 
-
     def addPropertyToObject(self, object, property):
         propertyName = property[0]
         propertyValue = property[1]
         self.graph.add((object, self.lookup[propertyName], Literal(propertyValue)))
-
 
     def createOntologyObject(self, name):
 
         ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
         i = 1
         for s, p, o in self.graph.triples((None, None, ontoClass)):
-            i = int(s.__str__()[-1:])+1
+            i = int(s.__str__()[-1:]) + 1
         object = URIRef(self.lookup['ontology'] + "#" + str(name) + str(i))
         self.graph.add((object, RDF.type, self.lookup[name]))
         return object
 
-    def structureInfo(self, info:dict):
+    def structureInfo(self, info: dict):
         information = {}
         for property in info:
             key = self.findClassFromProperty(property)
@@ -124,5 +117,5 @@ class Ontology:
 
         return information
 
-    def saveToFile(self, path:str):
+    def saveToFile(self, path: str):
         self.graph.serialize(destination=path)

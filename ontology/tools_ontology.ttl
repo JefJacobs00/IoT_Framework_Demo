@@ -24,11 +24,11 @@
                   rdfs:range :ExecutionData .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2023/tools#hasOutput
-:hasOutput rdf:type owl:ObjectProperty ;
+###  http://www.semanticweb.org/jef/ontologies/2023/tools#hasresult
+:hasresult rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf owl:topObjectProperty ;
            rdfs:domain :Profile ;
-           rdfs:range :Output .
+           rdfs:range :result .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools#hasProfile
@@ -51,9 +51,9 @@
                rdfs:domain :Profile .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2023/tools#Output
-:Output rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Output .
+###  http://www.semanticweb.org/jef/ontologies/2023/tools#result
+:result rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Result .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools#ResultScore
@@ -91,8 +91,8 @@
 :ExecutionData rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2023/tools#Output
-:Output rdf:type owl:Class .
+###  http://www.semanticweb.org/jef/ontologies/2023/tools#Result
+:result rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools#Profile
