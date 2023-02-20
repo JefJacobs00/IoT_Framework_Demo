@@ -1,8 +1,8 @@
 {
-  "tools":{
+  "Tool":{
   "name": "nmap",
   "version": "",
-    "profiles": {
+    "Profile": {
       "fast_scan": {
         "requirements": ["ip"],
         "results": ["port", "service"],

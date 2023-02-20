@@ -25,6 +25,7 @@ def find_plugins(exclude=[]):
 
     return plugins
 
+
 def execute_scan(tool, command, target):
     global running_scan
     running_scan += 1
@@ -35,6 +36,7 @@ def execute_scan(tool, command, target):
     ontology.saveToFile('ontology/knowledgebase.ttl')
     print(output)
     running_scan -= 1
+
 
 def start_scanning(target):
     ontology.putOutputIntoOntology(target)
@@ -60,19 +62,19 @@ def start_scanning(target):
 
     ontology.saveToFile('ontology/knowledgebase.ttl')
 
-c = ConfigParser('')
-c.read_plugins()
 
 g = Graph()
 g.parse('ontology/knowledge_ontology.ttl')
 ontology = Ontology(g)
 
 plugins = find_plugins([])
-#ip = input("Give the target ip:\n")
+# ip = input("Give the target ip:\n")
 ip = "192.168.0.106"
 r = [{}]
 
 r[0]['ipv4'] = ip
+ontology.putOutputIntoOntology(r)
 
-
+c = ConfigParser()
+c.read_plugins()
 

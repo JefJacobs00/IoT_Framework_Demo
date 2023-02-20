@@ -6,7 +6,7 @@ from rdflib.plugins.sparql import prepareQuery
 
 
 class ConfigParser:
-    def __int__(self):
+    def __init__(self):
         self.graph = Graph()
         self.graph.parse('ontology/tools_ontology.ttl')
 
@@ -18,7 +18,6 @@ class ConfigParser:
             "?domain; rdfs:range ?range .}", )
 
         self.onto_classes = self.__get_classes()
-        print(self.onto_classes)
 
     def __get_classes(self):
         ontology_classes = {}
@@ -32,6 +31,7 @@ class ConfigParser:
 
     def config_to_onto(self, config_json):
         print(self.onto_classes)
+        print(config_json)
 
     def read_config_file(self, plugin):
         for file_name in os.listdir('plugins/' + plugin):
