@@ -1,7 +1,7 @@
 import os
 import json
 
-from rdflib import Graph, RDF
+from rdflib import Graph, RDF, URIRef, Literal
 from rdflib.plugins.sparql import prepareQuery
 
 
@@ -20,6 +20,7 @@ class ConfigParser:
         self.lookup = self.__createLookup()
         self.onto_classes = self.__get_classes()
         self.links = self.__getLinks()
+        self.graph = Graph()
 
     def __createLookup(self):
         lookup = {}
@@ -49,24 +50,72 @@ class ConfigParser:
         return ontology_classes
 
     def config_to_onto(self, config_json):
-        for key in config_json:
-            self.recursive_search(config_json[key],key,)
+        self.add_tool(config_json)
+        self.add_plugins(config_json)
+        self.graph.serialize(destination='test.ttl')
 
-    def find_properties(self, class_name, config_json):
-        properties = self.create_properties(class_name)
-        self.recursive_search(config_json, class_name, properties)
-        return (class_name, properties)
 
-    def create_properties(self, class_name):
-        properties = {}
-        for key in self.onto_classes[class_name]:
-            properties[key] = ""
+    def add_tool(self, config_json):
+        tools = self.recursive_search(config_json, 'Tool')
+        properties = []
+        for property in self.onto_classes['Tool']:
+            properties.append((property, tools[property]))
+        return self.convertToClass(('Tool', properties))
 
-        return properties
-    def recursive_search(self, config_json, class_name):
-        for key in config_json:
-            if type(config_json[key]) is dict:
-                self.recursive_search(config_json[key], key)
+    def add_plugins(self, config_json):
+        plugins_json = self.recursive_search(config_json, 'Profile')
+        for plugin in plugins_json:
+            print(plugins_json[plugin])
+        print(plugins_json)
+    def add_plugin(self, plugin_config):
+        print("TODO")
+
+    def recursive_search(self, config, search_key):
+        for key in config:
+            if key == search_key:
+                return config[key]
+            elif type(config[key]) is dict:
+                return self.recursive_search(config[key], search_key)
+
+    def checkIfExists(self, type, properties):
+        for s, p, o in self.graph.triples((None, None, self.lookup[type])):
+            equal = True
+            obj = None
+            for prop in properties:
+                for s, p, o in self.graph.triples((s, self.lookup[prop[0]], None)):
+                    if o.__str__() == prop[1]:
+                        equal = True and equal
+                        obj = s
+                    else:
+                        equal = False
+            if equal:
+                return obj
+
+    def convertToClass(self, value: tuple):
+        item = value[0]
+        properties = value[1]
+        obj = self.checkIfExists(item, properties)
+        if obj is None:
+            obj = self.createOntologyObject(item)
+
+        for property in properties:
+            self.addPropertyToObject(obj, property)
+        return obj
+
+    def createOntologyObject(self, name):
+
+        ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
+        i = 1
+        for s, p, o in self.graph.triples((None, None, ontoClass)):
+            i = int(s.__str__()[-1:]) + 1
+        object = URIRef(self.lookup['ontology'] + "#" + str(name) + str(i))
+        self.graph.add((object, RDF.type, self.lookup[name]))
+        return object
+
+    def addPropertyToObject(self, object, property):
+        propertyName = property[0]
+        propertyValue = property[1]
+        self.graph.add((object, self.lookup[propertyName], Literal(propertyValue)))
 
     def read_config_file(self, plugin):
         for file_name in os.listdir('plugins/' + plugin):
