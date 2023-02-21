@@ -38,19 +38,20 @@ def execute_scan(tool, command, target):
     running_scan -= 1
 
 
+running_scan = 0
 def start_scanning(target):
     ontology.putOutputIntoOntology(target)
     ontology.saveToFile('ontology/knowledgebase.ttl')
 
     has_executed = True
-    running_scan = 0
 
     executed_tools = []
 
     prolog = pyswip.Prolog()
     prolog.consult('ontology/tools.pl')
+    prolog.consult('ontology/parser.pl')
     while has_executed or (running_scan > 0):
-        prolog.consult('ontology/parser.pl')
+        prolog.query('load_ontology()')
 
         has_executed = False
         for result in prolog.query('tools(Tool, Command)'):
@@ -78,4 +79,6 @@ ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
 c.read_profiles()
+
+start_scanning(ip)
 

@@ -76,7 +76,8 @@ class ConfigParser:
         profile = self.convertToClass(('Profile', properties))
 
         for requirement in profile_config['Requirement']:
-            requirement_uri = self.add_requirement(requirement)
+            value = profile_config['Requirement'][requirement]
+            requirement_uri = self.add_requirement(requirement, value)
             self.graph.add((profile, self.links['Requirement'][0][1],requirement_uri))
 
         for result in profile_config['Result']:
@@ -90,9 +91,8 @@ class ConfigParser:
         properties = []
         properties.append(('result',result))
         return self.convertToClass(('Result', properties))
-    def add_requirement(self, requirement):
-        properties = []
-        properties.append(('requirement',requirement))
+    def add_requirement(self, requirement, value):
+        properties = [('requirement', requirement), ('value', value)]
         return self.convertToClass(('Requirement', properties))
     def recursive_search(self, config, search_key):
         for key in config:

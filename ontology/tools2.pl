@@ -13,21 +13,31 @@ profile(X) :-
     rdfs_individual_of(A, ns2:'Profile'),
     rdf(A,ns2:'name',literal(X)).
 
-profileRequirement(Profile,Requirement) :-
+profile_requirement(Profile,Requirement) :-
     rdfs_individual_of(A, ns2:'Profile'),
     rdf(A,ns2:'hasRequirement',B),
     rdf(A,ns2:'name',literal(Profile)),
     rdf(B,ns2:'requirement',literal(Requirement)).
 
-profileResult(Profile, Result) :-
+profile_value(Profile,Value) :-
+    rdfs_individual_of(A, ns2:'Profile'),
+    rdf(A,ns2:'hasRequirement',B),
+    rdf(A,ns2:'name',literal(Profile)),
+    rdf(B,ns2:'value',literal(Value)).
+
+profile_result(Profile, Result) :-
     rdfs_individual_of(A, ns2:'Profile'),
     rdf(A,ns2:'hasResult',B),
     rdf(A,ns2:'name',literal(Profile)),
     rdf(B,ns2:'result',literal(Result)).
 
+test_requirements(Requirements, Values) :-
+    maplist(call, Requirements, Values).
 
-profileRequirements(A, Cs) :-
-    bagof(B, profileRequirement(A, B), Cs).
+profile_requirements(Profile, Requirements, Values) :-
+    bagof(R, profile_requirement(Profile, R), Requirements),
+    %bagof(V, profile_value(Profile, V), Values),
+    test_requirements(Requirements, Values) .
 
 
 
