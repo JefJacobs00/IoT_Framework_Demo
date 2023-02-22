@@ -4,12 +4,12 @@
   "version": "",
     "Profile": {
       "fast_scan": {
-        "Requirement": {"ip": "_"},
+        "Requirement": {"ip": "Ip"},
         "Result": ["port", "service"],
         "Command": "nmap -F <ip>"
       },
       "full_scan": {
-        "Requirement": {"ip": "Ip", "port": "Port", "service": "ssh"},
+        "Requirement": {"ip": "_Ip", "port": "_Port", "service": "ssh"},
         "Result": ["port", "service"],
         "Command": "nmap -F -sC -sV -p- <ip>"
       }

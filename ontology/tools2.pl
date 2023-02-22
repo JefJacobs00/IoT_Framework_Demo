@@ -19,11 +19,17 @@ profile_requirement(Profile,Requirement) :-
     rdf(A,ns2:'name',literal(Profile)),
     rdf(B,ns2:'requirement',literal(Requirement)).
 
-profile_value(Profile,Value) :-
+profile_value(Profile, Value) :-
     rdfs_individual_of(A, ns2:'Profile'),
-    rdf(A,ns2:'hasRequirement',B),
-    rdf(A,ns2:'name',literal(Profile)),
-    rdf(B,ns2:'value',literal(Value)).
+    rdf(A, ns2:'hasRequirement', B),
+    rdf(A, ns2:'name', literal(Profile)),
+    rdf(B, ns2:'value', literal(ValueStr)),
+    ( sub_atom(ValueStr, 0, 1, _, Char), char_type(Char, upper) ->
+        atom_string(Atom, ValueStr),
+        Value = Atom
+    ; otherwise ->
+        Value = ValueStr
+    ).
 
 profile_result(Profile, Result) :-
     rdfs_individual_of(A, ns2:'Profile'),
@@ -32,11 +38,12 @@ profile_result(Profile, Result) :-
     rdf(B,ns2:'result',literal(Result)).
 
 test_requirements(Requirements, Values) :-
+    write(Values),
     maplist(call, Requirements, Values).
 
 profile_requirements(Profile, Requirements, Values) :-
     bagof(R, profile_requirement(Profile, R), Requirements),
-    %bagof(V, profile_value(Profile, V), Values),
+    bagof(V, profile_value(Profile, V), Values),
     test_requirements(Requirements, Values) .
 
 

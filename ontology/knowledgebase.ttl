@@ -1,14 +1,5 @@
 @prefix ns1: <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
 
 ns1:IpAddress1 a ns1:IpAddress ;
-    ns1:addressPort ns1:Port1 ;
     ns1:ipv4 "192.168.0.106" .
-
-ns1:Port1 a ns1:Port ;
-    ns1:portNumber "22" ;
-    ns1:portService ns1:Service1 ;
-    ns1:portStatus "open" .
-
-ns1:Service1 a ns1:Service ;
-    ns1:serviceName "ssh" .
 

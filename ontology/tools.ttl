@@ -22,15 +22,15 @@ ns1:Tool1 a ns1:Tool ;
 
 ns1:Requirement1 a ns1:Requirement ;
     ns1:requirement "ip" ;
-    ns1:value "_" .
+    ns1:value "Ip" .
 
 ns1:Requirement2 a ns1:Requirement ;
     ns1:requirement "ip" ;
-    ns1:value "Ip" .
+    ns1:value "_Ip" .
 
 ns1:Requirement3 a ns1:Requirement ;
     ns1:requirement "port" ;
-    ns1:value "Port" .
+    ns1:value "_Port" .
 
 ns1:Requirement4 a ns1:Requirement ;
     ns1:requirement "service" ;
