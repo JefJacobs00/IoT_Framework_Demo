@@ -66,7 +66,7 @@ def start_scanning(target):
 
 g = Graph()
 g.parse('ontology/knowledge_ontology.ttl')
-ontology = Ontology(g)
+ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 
 plugins = find_plugins([])
 # ip = input("Give the target ip:\n")
