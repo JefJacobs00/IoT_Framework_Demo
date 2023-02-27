@@ -3,7 +3,7 @@ from rdflib.plugins.sparql import prepareQuery
 
 
 class Ontology:
-    def __init__(self, graph: Graph):
+    def __init__(self, graph: Graph, existing_info=None):
         self.graph = graph
         self.__queryClasses = prepareQuery("SELECT ?s WHERE { ?s rdf:type owl:Class }", )
         self.__queryDataProperties = prepareQuery("SELECT ?s ?o ?d WHERE { ?s rdf:type owl:DatatypeProperty; "
@@ -16,6 +16,8 @@ class Ontology:
         self.ontology_classes = self.__getClasses()
         self.links = self.__getLinks()
         self.graph = Graph()
+        if existing_info is not None:
+            self.graph.parse(existing_info)
 
     def __createLookup(self):
         lookup = {}
