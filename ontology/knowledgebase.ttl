@@ -3,42 +3,13 @@
 ns1:History1 a ns1:History ;
     ns1:command "b'nmap -F 192.168.0.106'" ;
     ns1:hasHistory ns1:Port1,
-        ns1:Service1 .
-
-ns1:History4 a ns1:History ;
-    ns1:command "b'nmap -F 192.168.0.106'" ;
-    ns1:hasHistory ns1:Port1,
         ns1:Service1 ;
     ns1:profileName "nmap" .
 
-ns1:History5 a ns1:History ;
+ns1:History2 a ns1:History ;
     ns1:command "b'nmap -sC -sV -p- 192.168.0.106'" ;
     ns1:hasHistory ns1:Port1,
         ns1:Service1 ;
-    ns1:profileName "nmap" .
-
-ns1:History6 a ns1:History ;
-    ns1:command "b'nmap -sC -sV -p- 192.168.0.106'" ;
-    ns1:hasHistory ns1:Port2,
-        ns1:Service2 ;
-    ns1:profileName "nmap" .
-
-ns1:History7 a ns1:History ;
-    ns1:command "b'nmap -F 192.168.0.106'" ;
-    ns1:hasHistory ns1:Port1,
-        ns1:Service1 ;
-    ns1:profileName "nmap" .
-
-ns1:History8 a ns1:History ;
-    ns1:command "b'nmap -sC -sV -p- 192.168.0.106'" ;
-    ns1:hasHistory ns1:Port1,
-        ns1:Service1 ;
-    ns1:profileName "nmap" .
-
-ns1:History9 a ns1:History ;
-    ns1:command "b'nmap -sC -sV -p- 192.168.0.106'" ;
-    ns1:hasHistory ns1:Port2,
-        ns1:Service2 ;
     ns1:profileName "nmap" .
 
 ns1:IpAddress1 a ns1:IpAddress ;
