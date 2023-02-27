@@ -48,7 +48,7 @@ def start_scanning(target):
     executed_tools = []
 
     prolog = pyswip.Prolog()
-    prolog.consult('ontology/tools2.pl')
+    prolog.consult('ontology/tools.pl')
     prolog.consult('ontology/parser.pl')
     while has_executed or (running_scan > 0):
         prolog.query('load_ontology()')
@@ -73,18 +73,34 @@ plugins = find_plugins([])
 ip = "192.168.0.106"
 r = [{}]
 
-r[0]['ipv4'] = ip
-ontology.putOutputIntoOntology(r)
-ontology.saveToFile('ontology/knowledgebase.ttl')
+# r[0]['ipv4'] = ip
+# ontology.putOutputIntoOntology(r)
+# ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
-c.read_profiles()
+c.read_profiles('ontology/tools_config.pl')
 
-prolog = pyswip.Prolog()
 
-prolog.consult('ontology/tools2.pl')
-prolog.consult('ontology/parser.pl')
+# prolog = pyswip.Prolog()
+#
+# prolog.consult('ontology/tools2.pl')
+# prolog.consult('ontology/parser.pl')
+#
+# prolog.query('load_ontology()')
+# profiles = {}
+# for profile in prolog.query('profile(Profile)'):
+#     profiles[profile['Profile']] = {'Requirements': [], 'Values': []}
+#
+# for profile in profiles:
+#     for requirement in prolog.query(f'profile_requirement({profile}, Requirement)'):
+#         profiles[profile]['Requirements'].append(requirement['Requirement'])
+#     for value in prolog.query(f'profile_value({profile}, Value)'):
+#         profiles[profile]['Values'].append(value['Value'])
+#
+# for profile in profiles:
+#     requirements = str(profiles[profile]["Requirements"]).replace("\'", "")
+#     values = str(profiles[profile]["Values"]).replace("\'", "")
+#     print(profile)
+#     for results in prolog.query(f'profile_requirements({profile}, {requirements}, {values})'):
+#         print(results)
 
-prolog.query('load_ontology()')
-for profile in prolog.query('profile(Profile)'):
-    print(profile)

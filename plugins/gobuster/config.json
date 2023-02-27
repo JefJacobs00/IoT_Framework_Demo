@@ -1,0 +1,35 @@
+{
+  "Tool":{
+  "name": "gobuster",
+  "version": "",
+    "Profile": {
+      "http_dir_scan_small": {
+        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "http"]},
+        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Result": ["webpage"],
+        "Command": "gobuster dir -u http://<ip>:<port>/ -w wordlists/common.txt"
+      },
+
+      "https_dir_scan_small": {
+        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "https"]},
+        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Result": ["webpage"],
+        "Command": "gobuster dir -u https://<ip>:<port>/ -w wordlists/common.txt"
+      },
+
+      "http_dir_scan_big": {
+        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "http"]},
+        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Result": ["webpage"],
+        "Command": "gobuster dir -u http://<ip>:<port>/ -w wordlists/big.txt"
+      },
+
+      "https_dir_scan_big": {
+        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "https"]},
+        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Result": ["webpage"],
+        "Command": "gobuster dir -u https://<ip>:<port>/ -w wordlists/big.txt"
+      }
+    }
+  }
+}

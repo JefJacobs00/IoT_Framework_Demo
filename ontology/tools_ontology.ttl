@@ -29,6 +29,11 @@
                 rdfs:domain :Profile ;
                 rdfs:range :Requirement .
 
+###  http://www.semanticweb.org/jef/ontologies/2023/tools/hasParameter
+:hasParameter rdf:type owl:ObjectProperty ;
+                rdfs:domain :Profile ;
+                rdfs:range :Parameter .
+
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/hasResult
 :hasResult rdf:type owl:ObjectProperty ;
@@ -44,6 +49,9 @@
 :value rdf:type owl:DatatypeProperty ;
        rdfs:domain :Requirement .
 
+###  http://www.semanticweb.org/jef/ontologies/2023/tools#value
+:value rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Parameter .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Command
 :Command rdf:type owl:DatatypeProperty ;
@@ -82,6 +90,9 @@
 :requirement rdf:type owl:DatatypeProperty ;
              rdfs:domain :Requirement .
 
+###  http://www.semanticweb.org/jef/ontologies/2023/tools/requirement
+:parameter rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Parameter .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/result
 :result rdf:type owl:DatatypeProperty ;
@@ -108,6 +119,8 @@
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Requirement
 :Requirement rdf:type owl:Class .
 
+###  http://www.semanticweb.org/jef/ontologies/2023/tools/Parameter
+:Parameter rdf:type owl:Class .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Result
 :Result rdf:type owl:Class .

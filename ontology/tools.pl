@@ -18,9 +18,6 @@ profile(hydra_ftp, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'ftp').
 profile(gobuster_https, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'https').
 profile(gobuster_http, [ip=IP, port=P]) :- ip(IP), deviceServices(IP, P, 'http').
 
-format_command(Template, Parameters, Command) :-
-    format(string(Command), Template, Parameters).
-
 nmap_1(Parameters, Command) :-
     format_command('nmap -F ~w', [Parameters.ip], Command).
 
@@ -40,3 +37,6 @@ tools(Tool, Command) :-
     profile(Profile, Parameters),
     call(Profile, Parameters, Command),
     tool(Tool, Profile).
+
+format_command(Template, Parameters, Command) :-
+    format(string(Command), Template, Parameters).

@@ -1,8 +1,10 @@
 import os
 import json
+import re
 
 from rdflib import Graph, RDF, URIRef, Literal
 from rdflib.plugins.sparql import prepareQuery
+
 
 
 class ConfigParser:
@@ -123,11 +125,10 @@ class ConfigParser:
             obj = self.createOntologyObject(item)
 
         for property in properties:
-            self.addPropertyToObject(obj, property)
+            self.add_property_to_object(obj, property)
         return obj
 
     def createOntologyObject(self, name):
-
         ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
         i = 1
         for s, p, o in self.graph.triples((None, None, ontoClass)):
@@ -136,24 +137,85 @@ class ConfigParser:
         self.graph.add((object, RDF.type, self.lookup[name]))
         return object
 
-    def addPropertyToObject(self, object, property):
+    def add_property_to_object(self, object, property):
         propertyName = property[0]
         propertyValue = property[1]
         self.graph.add((object, self.lookup[propertyName], Literal(propertyValue)))
 
-    def read_config_file(self, profile):
+    def read_config_file(self, profile, prolog_output=None):
         for file_name in os.listdir('plugins/' + profile):
             if file_name == '__pycache__' or '.py' in file_name:
                 continue
             file = open('plugins/' + profile + '/' + file_name)
-            self.config_to_onto(json.load(file))
+            data = json.load(file)
+            self.config_to_onto(data)
+            prolog_str = self.config_to_prolog(data)
 
-    def read_profiles(self):
+            if prolog_output is not None:
+                f = open(prolog_output, 'a+')
+                f.write(prolog_str)
+
+    def config_to_prolog(self, config_json):
+        tool = config_json['Tool']
+
+        tool_predicates = ""
+        profile_predicates = ""
+        command_predicates = ""
+
+        # tool(<tool_name>, <profile_name>)
+        # profile(<profile_name>, <[parameters]>) :- requirement(value), ... ,  requirement(value).
+        for profile in tool['Profile']:
+            profile_config = tool['Profile'][profile]
+            tool_predicates += f"tool({tool['name']}, {profile}).\n"
+
+            requirements = self.configure_dict_string(profile_config['Requirement'], '(', ')')
+            parameters = self.configure_dict_string(profile_config['Parameter'], '=','')
+            command_predicates += self.configure_command(profile_config['Command'], profile)
+            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}. \n"
+
+        return tool_predicates + "\n" + profile_predicates + "\n" + command_predicates
+
+    def configure_dict_string(self, config_json, value_start, value_end):
+        str = ""
+        for key in config_json:
+            if str != "":
+                str += ', '
+            value = config_json[key]
+            value_str = ""
+            if type(value) is list:
+                for v in value:
+                    if value_str != "":
+                        value_str += ', '
+                    value_str += v
+            else:
+                value_str = value
+
+            str += f"{key}{value_start}{value_str}{value_end}"
+        return str
+
+
+    def configure_command(self, command, profile_name):
+        command_predicate = f"{profile_name}(Parameters, Command) :- \n"
+        parameters = re.findall(f'<([a-z0-9-]+)>', command)
+        formated_command = re.sub(f'(<[a-z0-9-]+>)', '~w', command)
+        parameters_str = ""
+        for parameter in parameters:
+            if parameters_str != "":
+                parameters_str += ", "
+            parameters_str += f"Parameters.{parameter}"
+
+        return command_predicate + f"\tformat_command(\"{formated_command}\", [{parameters_str}], Command). \n\n"
+
+
+    def read_profiles(self, prolog_output=None):
+        if prolog_output is not None:
+            # Clear file
+            f = open(prolog_output, 'w')
+            f.write('')
+
         for f in os.listdir('plugins'):
             if (f == '__pycache__' or '.py' in f):
                 continue
-            self.read_config_file(f)
+            self.read_config_file(f, prolog_output)
 
-# Lees de config files van de tools in en maak aan de hand van deze config files de ontology data aan (tools_ontology.ttl)
-# save deze dan in een tools.ttl bestand die alle tools en nodige data bevatten.
-# insperatie van ontology.py
+

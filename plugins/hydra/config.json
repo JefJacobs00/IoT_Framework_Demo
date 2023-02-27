@@ -1,0 +1,26 @@
+{
+  "Tool":{
+  "name": "hydra",
+  "version": "",
+    "Profile": {
+      "ssh_attack": {
+        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "ssh"]},
+        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Result": ["account", "password"],
+        "Command": "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>"
+      },
+      "ftp_attack": {
+        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "ftp"]},
+        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Result": ["account", "password"],
+        "Command": "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>"
+      },
+      "telnet_attack": {
+        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "telnet"]},
+        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Result": ["account", "password"],
+        "Command": "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> "
+      }
+    }
+  }
+}

@@ -5,11 +5,13 @@
     "Profile": {
       "fast_scan": {
         "Requirement": {"ip": "Ip"},
+        "Parameter": {"ip": "Ip"},
         "Result": ["port", "service"],
         "Command": "nmap -F <ip>"
       },
       "full_scan": {
-        "Requirement": {"ip": "_Ip", "port": "_Port", "service": "ssh"},
+        "Requirement": {"ip": "Ip"},
+        "Parameter": {"ip": "Ip"},
         "Result": ["port", "service"],
         "Command": "nmap -F -sC -sV -p- <ip>"
       }
