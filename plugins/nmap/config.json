@@ -13,7 +13,7 @@
         "Requirement": {"ip": "Ip"},
         "Parameter": {"ip": "Ip"},
         "Result": ["port", "service"],
-        "Command": "nmap -F -sC -sV -p- <ip>"
+        "Command": "nmap -sC -sV -p- <ip>"
       }
     }
   }

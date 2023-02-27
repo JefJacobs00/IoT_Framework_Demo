@@ -41,7 +41,7 @@ def execute_scan(tool, command, target):
 running_scan = 0
 def start_scanning(target):
     ontology.putOutputIntoOntology(target)
-    ontology.saveToFile('ontology/knowledgebase.ttl')
+    #ontology.saveToFile('ontology/knowledgebase.ttl')
 
     has_executed = True
 
@@ -50,14 +50,14 @@ def start_scanning(target):
     prolog = pyswip.Prolog()
     prolog.consult('ontology/tools.pl')
     prolog.consult('ontology/parser.pl')
+    prolog.consult('ontology/tools_config.pl')
     while has_executed or (running_scan > 0):
         prolog.query('load_ontology()')
 
         has_executed = False
-        for result in prolog.query('tools(Tool, Command)'):
+        for result in prolog.query('tools(Tool,Command)'):
             if result['Tool'] in plugins and result not in executed_tools:
-                thread = Thread(target=execute_scan, args=(result['Tool'], result['Command'], ip))
-                thread.start()
+                execute_scan(result['Tool'], result['Command'], ip)
                 executed_tools.append(result)
                 has_executed = True
 
@@ -71,36 +71,16 @@ ontology = Ontology(g)
 plugins = find_plugins([])
 # ip = input("Give the target ip:\n")
 ip = "192.168.0.106"
-r = [{}]
+r = [{'ipv4':ip}]
 
 # r[0]['ipv4'] = ip
 # ontology.putOutputIntoOntology(r)
 # ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
-c.read_profiles('ontology/tools_config.pl')
+#c.read_profiles('ontology/tools_config.pl')
+
+start_scanning(r)
 
 
-# prolog = pyswip.Prolog()
-#
-# prolog.consult('ontology/tools2.pl')
-# prolog.consult('ontology/parser.pl')
-#
-# prolog.query('load_ontology()')
-# profiles = {}
-# for profile in prolog.query('profile(Profile)'):
-#     profiles[profile['Profile']] = {'Requirements': [], 'Values': []}
-#
-# for profile in profiles:
-#     for requirement in prolog.query(f'profile_requirement({profile}, Requirement)'):
-#         profiles[profile]['Requirements'].append(requirement['Requirement'])
-#     for value in prolog.query(f'profile_value({profile}, Value)'):
-#         profiles[profile]['Values'].append(value['Value'])
-#
-# for profile in profiles:
-#     requirements = str(profiles[profile]["Requirements"]).replace("\'", "")
-#     values = str(profiles[profile]["Values"]).replace("\'", "")
-#     print(profile)
-#     for results in prolog.query(f'profile_requirements({profile}, {requirements}, {values})'):
-#         print(results)
 

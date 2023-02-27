@@ -100,7 +100,6 @@ class Ontology:
         ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
         i = 1
         for s, p, o in self.graph.triples((None, None, ontoClass)):
-            print(s)
             i = int(s.__str__()[-1:]) + 1
         object = URIRef(self.lookup['ontology'] + "#" + str(name) + str(i))
         self.graph.add((object, RDF.type, self.lookup[name]))

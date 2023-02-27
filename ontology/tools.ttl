@@ -36,7 +36,7 @@ ns1:Profile5 a ns1:Profile ;
     ns1:name "fast_scan" .
 
 ns1:Profile6 a ns1:Profile ;
-    ns1:Command "nmap -F -sC -sV -p- <ip>" ;
+    ns1:Command "nmap -sC -sV -p- <ip>" ;
     ns1:hasRequirement ns1:Requirement1 ;
     ns1:hasResult ns1:Result2,
         ns1:Result3 ;
