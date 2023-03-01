@@ -1,10 +1,10 @@
-@prefix : <http://www.semanticweb.org/jef/ontologies/2023/demo#> .
+@prefix : <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/jef/ontologies/2023/demo#> .
+@base <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
 
 <http://www.semanticweb.org/jef/ontologies/2023/demo> rdf:type owl:Ontology .
 
@@ -42,16 +42,10 @@
             rdfs:range :Port .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2023/demo#hasHistory
-:hasHistory rdf:type owl:ObjectProperty ;
-            rdfs:domain :History ;
-            rdfs:range :Account ,
-                       :Hash ,
-                       :Password ,
-                       :Port ,
-                       :Service ,
-                       :WebService ,
-                       :Webpage .
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#hasScan
+:hasScan rdf:type owl:ObjectProperty ;
+         rdfs:domain :Scan ;
+         rdfs:range :ExecutionData .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#passwordHash
@@ -82,6 +76,11 @@
 #    Data properties
 #################################################################
 
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Duration
+:Duration rdf:type owl:DatatypeProperty ;
+          rdfs:domain :ExecutionData .
+
+
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#accountUsername
 :accountUsername rdf:type owl:DatatypeProperty ;
                  rdfs:domain :Account ;
@@ -90,7 +89,12 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#command
 :command rdf:type owl:DatatypeProperty ;
-         rdfs:domain :History .
+         rdfs:domain :Scan .
+
+
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#executionTime
+:executionTime rdf:type owl:DatatypeProperty ;
+               rdfs:domain :ExecutionData .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#hashFunction
@@ -136,12 +140,17 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#profileName
 :profileName rdf:type owl:DatatypeProperty ;
-             rdfs:domain :History .
+             rdfs:domain :Scan .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#redirect
 :redirect rdf:type owl:DatatypeProperty ;
           rdfs:domain :Webpage .
+
+
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#resultScore
+:resultScore rdf:type owl:DatatypeProperty ;
+             rdfs:domain :ExecutionData .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#serviceName
@@ -172,12 +181,12 @@
 :Device rdf:type owl:Class .
 
 
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#ExecutionData
+:ExecutionData rdf:type owl:Class .
+
+
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#Hash
 :Hash rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/jef/ontologies/2023/demo#History
-:History rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#IpAddress
@@ -190,6 +199,10 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#Port
 :Port rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Scan
+:Scan rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#Service
