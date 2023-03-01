@@ -1,48 +1,48 @@
-@prefix : <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
+@prefix : <http://www.semanticweb.org/jef/ontologies/2023/demo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
+@base <http://www.semanticweb.org/jef/ontologies/2023/demo#> .
 
-<http://www.semanticweb.org/jef/ontologies/2022/10/demo> rdf:type owl:Ontology .
+<http://www.semanticweb.org/jef/ontologies/2023/demo> rdf:type owl:Ontology .
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#accountPassword
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#accountPassword
 :accountPassword rdf:type owl:ObjectProperty ;
                  rdfs:domain :Account ;
                  rdfs:range :Password .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#addressPort
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#addressPort
 :addressPort rdf:type owl:ObjectProperty ;
              rdfs:domain :IpAddress ;
              rdfs:range :Port .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#deviceAccount
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#deviceAccount
 :deviceAccount rdf:type owl:ObjectProperty ;
                rdfs:domain :Device ;
                rdfs:range :Account .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#deviceAddress
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#deviceAddress
 :deviceAddress rdf:type owl:ObjectProperty ;
                rdfs:domain :Device ;
                rdfs:range :IpAddress .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#devicePort
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#devicePort
 :devicePort rdf:type owl:ObjectProperty ;
             rdfs:domain :Device ;
             rdfs:range :Port .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#hasHistory
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#hasHistory
 :hasHistory rdf:type owl:ObjectProperty ;
             rdfs:domain :History ;
             rdfs:range :Account ,
@@ -54,25 +54,25 @@
                        :Webpage .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#passwordHash
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#passwordHash
 :passwordHash rdf:type owl:ObjectProperty ;
               rdfs:domain :Password ;
               rdfs:range :Hash .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portService
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#portService
 :portService rdf:type owl:ObjectProperty ;
              rdfs:domain :Port ;
              rdfs:range :Service .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#serviceAccount
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#serviceAccount
 :serviceAccount rdf:type owl:ObjectProperty ;
                 rdfs:domain :Service ;
                 rdfs:range :Account .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#webservicePage
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#webservicePage
 :webservicePage rdf:type owl:ObjectProperty ;
                 rdfs:domain :WebService ;
                 rdfs:range :Webpage .
@@ -82,80 +82,80 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#accountUsername
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#accountUsername
 :accountUsername rdf:type owl:DatatypeProperty ;
                  rdfs:domain :Account ;
                  rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#command
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#command
 :command rdf:type owl:DatatypeProperty ;
          rdfs:domain :History .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#hashFunction
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#hashFunction
 :hashFunction rdf:type owl:DatatypeProperty ;
               rdfs:domain :Hash ;
               rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#hashValue
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#hashValue
 :hashValue rdf:type owl:DatatypeProperty ;
            rdfs:domain :Hash ;
            rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#ipv4
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#ipv4
 :ipv4 rdf:type owl:DatatypeProperty ;
       rdfs:domain :IpAddress ;
       rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#page
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#page
 :page rdf:type owl:DatatypeProperty ;
       rdfs:domain :Webpage .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#passwordCleartext
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#passwordCleartext
 :passwordCleartext rdf:type owl:DatatypeProperty ;
                    rdfs:domain :Password ;
                    rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portNumber
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#portNumber
 :portNumber rdf:type owl:DatatypeProperty ;
             rdfs:domain :Port ;
             rdfs:range xsd:unsignedInt .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#portStatus
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#portStatus
 :portStatus rdf:type owl:DatatypeProperty ;
             rdfs:domain :Port ;
             rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#profileName
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#profileName
 :profileName rdf:type owl:DatatypeProperty ;
              rdfs:domain :History .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#redirect
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#redirect
 :redirect rdf:type owl:DatatypeProperty ;
           rdfs:domain :Webpage .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#serviceName
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#serviceName
 :serviceName rdf:type owl:DatatypeProperty ;
              rdfs:domain :Service ;
              rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#size
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#size
 :size rdf:type owl:DatatypeProperty ;
       rdfs:domain :Webpage .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#status
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#status
 :status rdf:type owl:DatatypeProperty ;
         rdfs:domain :Webpage .
 
@@ -164,44 +164,44 @@
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#Account
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Account
 :Account rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#Device
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Device
 :Device rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#Hash
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Hash
 :Hash rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#History
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#History
 :History rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#IpAddress
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#IpAddress
 :IpAddress rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#Password
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Password
 :Password rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#Port
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Port
 :Port rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#Service
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Service
 :Service rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#WebService
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#WebService
 :WebService rdf:type owl:Class ;
             rdfs:subClassOf :Service .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2022/10/demo#Webpage
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage
 :Webpage rdf:type owl:Class .
 
 

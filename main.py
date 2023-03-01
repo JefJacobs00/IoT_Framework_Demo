@@ -41,7 +41,7 @@ def execute_scan(tool, command, target):
 running_scan = 0
 def start_scanning(target):
     ontology.putOutputIntoOntology(target)
-    #ontology.saveToFile('ontology/knowledgebase.ttl')
+    ontology.saveToFile('ontology/knowledgebase.ttl')
 
     has_executed = True
 
@@ -52,7 +52,7 @@ def start_scanning(target):
     prolog.consult('ontology/parser.pl')
     prolog.consult('ontology/tools_config.pl')
     while has_executed or (running_scan > 0):
-        prolog.query('load_ontology()')
+        a = prolog.query('load_ontology()')
 
         has_executed = False
         for result in prolog.query('tools(Tool,Command)'):
@@ -65,7 +65,15 @@ def start_scanning(target):
 
 
 g = Graph()
+
+g.parse('ontology/tools_ontology.ttl')
 g.parse('ontology/knowledge_ontology.ttl')
+
+
+
+for n in g.namespaces():
+    print(n)
+
 ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 
 plugins = find_plugins([])

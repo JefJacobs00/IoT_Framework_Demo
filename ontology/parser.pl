@@ -2,7 +2,7 @@
 :- use_module(library(semweb/turtle)).
 :- use_module(library(semweb/rdfs)).
 :- rdf_load(library(semweb/rdfs)).
-:- rdf_register_prefix(ns1, 'http://www.semanticweb.org/jef/ontologies/2022/10/demo#').
+:- rdf_register_prefix(ns1, 'http://www.semanticweb.org/jef/ontologies/2023/demo#').
 :- rdf_load('knowledgebase.ttl', [format('turtle')]).
 
 
