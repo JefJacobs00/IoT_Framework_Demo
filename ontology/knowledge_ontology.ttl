@@ -65,12 +65,11 @@
           rdfs:domain :Scan ;
           rdfs:range :Account ,
                      :Hash ,
-                     :IpAddress ,
                      :Password ,
                      :Port ,
-                     :Scan ,
                      :Service ,
                      :Webpage .
+
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#serviceAccount
