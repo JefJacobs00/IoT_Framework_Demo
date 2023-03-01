@@ -1,4 +1,4 @@
-@prefix : <http://www.semanticweb.org/jef/ontologies/2022/10/demo#> .
+@prefix : <http://www.semanticweb.org/jef/ontologies/2023/demo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -58,6 +58,19 @@
 :portService rdf:type owl:ObjectProperty ;
              rdfs:domain :Port ;
              rdfs:range :Service .
+
+
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#scanInfo
+:scanInfo rdf:type owl:ObjectProperty ;
+          rdfs:domain :Scan ;
+          rdfs:range :Account ,
+                     :Hash ,
+                     :IpAddress ,
+                     :Password ,
+                     :Port ,
+                     :Scan ,
+                     :Service ,
+                     :Webpage .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#serviceAccount
