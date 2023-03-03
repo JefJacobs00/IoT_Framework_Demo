@@ -1,3 +1,5 @@
+import datetime
+import math
 import time
 from abc import abstractmethod, ABC
 from subprocess import Popen, PIPE
@@ -23,5 +25,7 @@ class Tool(ABC):
             r['ipv4'] = target
             r['profileName'] = 'nmap'
             r['command'] = command
-            r['duration'] = (end_time - start_time) * 1000
+            r['duration'] = round((end_time - start_time) * 1000, 2)
+            r['executionTime'] = datetime.datetime.now().strftime('%H:%M %d/%m/%Y')
+            r['resultScore'] = 0
         return result

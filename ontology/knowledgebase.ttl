@@ -20,10 +20,14 @@ ns1:Scan2 a ns1:Scan ;
         ns1:Service1 .
 
 ns1:ExecutionData1 a ns1:ExecutionData ;
-    ns1:duration 2.022307e+02 .
+    ns1:duration 9.143e+01 ;
+    ns1:executionTime "18:15 03/03/2023" ;
+    ns1:resultScore 0 .
 
 ns1:ExecutionData2 a ns1:ExecutionData ;
-    ns1:duration 6.162606e+03 .
+    ns1:duration 6.15038e+03 ;
+    ns1:executionTime "18:15 03/03/2023" ;
+    ns1:resultScore 0 .
 
 ns1:Port1 a ns1:Port ;
     ns1:portNumber "22" ;
