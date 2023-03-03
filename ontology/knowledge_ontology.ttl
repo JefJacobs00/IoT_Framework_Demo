@@ -88,8 +88,8 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/jef/ontologies/2023/demo#Duration
-:Duration rdf:type owl:DatatypeProperty ;
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#duration
+:duration rdf:type owl:DatatypeProperty ;
           rdfs:domain :ExecutionData .
 
 

@@ -69,14 +69,9 @@ g = Graph()
 g.parse('ontology/tools_ontology.ttl')
 g.parse('ontology/knowledge_ontology.ttl')
 
-
-
-for n in g.namespaces():
-    print(n)
-
 ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 
-plugins = find_plugins([])
+plugins = find_plugins(['tool.py'])
 # ip = input("Give the target ip:\n")
 ip = "192.168.0.106"
 r = [{'ipv4':ip}]

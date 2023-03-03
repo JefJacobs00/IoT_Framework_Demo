@@ -1,21 +1,14 @@
-from subprocess import Popen, PIPE
-import re
-
-from plugins.outputParser import OutputParser
+from plugins.tool import Tool
 
 
-class Gobuster():
+class Gobuster(Tool):
     def __init__(self):
-        self.parser = {'page': '2K', 'status': 'Status: ', 'size': 'Size: ', 'redirect': '--> '}
-        self.lineStart = '\['
+        parser = {'page': '2K', 'status': 'Status: ', 'size': 'Size: ', 'redirect': '--> '}
+        line_start = '\['
+        super().__init__(parser=parser, info_start=line_start)
 
     def execute_command(self, command, target):
-        p = Popen(command, shell=True, stdout=PIPE, stderr=PIPE, close_fds=True)
-
-        (output, err) = p.communicate()
-        output = output.decode("utf-8")
-        outputParser = OutputParser()
-        return outputParser.stringParse(output, self.parser, self.lineStart)
+        return super().execute_command(command, target)
 
     # def enum_vhost(self, hostnames, port):
     # 	  flags = '-r'

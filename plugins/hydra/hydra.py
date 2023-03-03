@@ -1,25 +1,17 @@
-from subprocess import Popen, PIPE
-
-from ontology import ontology
-from plugins.outputParser import OutputParser
+from plugins.tool import Tool
 
 
-class Hydra:
+class Hydra(Tool):
     def __init__(self):
-        self.parser = {'ipv4': 'host: ',
-                               'serviceName': '\]\[',
-                               'portNumber': '^\[',
-                               'accountUsername': 'login: ',
-                               'passwordCleartext': 'password: '}
-        self.lineStart = '\[\d+\]'
+        parser = {'ipv4': 'host: ',
+                           'serviceName': '\]\[',
+                           'portNumber': '^\[',
+                           'accountUsername': 'login: ',
+                           'passwordCleartext': 'password: '}
+        line_start = '\[\d+\]'
+
+        super().__init__(parser=parser, info_start=line_start)
 
     def execute_command(self, command, target):
-        p = Popen(command, shell=True, stdout=PIPE, stderr=PIPE, close_fds=True)
-
-        (output, err) = p.communicate()
-        output = output.decode("utf-8")
-        if len(err) > 0:
-            print(err)
-        outputParser = OutputParser()
-        return outputParser.stringParse(output, self.parser, self.lineStart)
+        return super().execute_command(command, target)
 
