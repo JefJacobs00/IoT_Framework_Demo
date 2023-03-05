@@ -1,6 +1,6 @@
 {
   "Tool":{
-  "name": "gobuster",
+  "toolName": "gobuster",
   "version": "",
     "Profile": {
       "http_dir_scan_small": {

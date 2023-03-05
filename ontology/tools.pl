@@ -1,4 +1,4 @@
-tools(Tool, Command) :-
+tools(Tool, Profile, Command) :-
     profile(Profile, Parameters),
     call(Profile, Parameters, Command),
     tool(Tool, Profile).

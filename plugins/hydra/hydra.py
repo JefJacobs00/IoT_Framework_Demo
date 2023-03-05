@@ -12,6 +12,6 @@ class Hydra(Tool):
 
         super().__init__(parser=parser, info_start=line_start)
 
-    def execute_command(self, command, target):
-        return super().execute_command(command, target)
+    def execute_command(self, command, target, profile):
+        return super().execute_command(command, target, profile)
 

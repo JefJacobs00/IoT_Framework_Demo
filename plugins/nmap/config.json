@@ -1,6 +1,6 @@
 {
   "Tool":{
-  "name": "nmap",
+  "toolName": "nmap",
   "version": "",
     "Profile": {
       "fast_scan": {

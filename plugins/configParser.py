@@ -71,7 +71,7 @@ class ConfigParser:
         print(profiles_json)
     def add_profile(self, name, profile_config):
         properties = []
-        properties.append(('name', name))
+        properties.append(('profileName', name))
         for property in self.onto_classes['Profile']:
             if property in profile_config:
                 properties.append((property, profile_config[property]))
@@ -166,7 +166,7 @@ class ConfigParser:
         # profile(<profile_name>, <[parameters]>) :- requirement(value), ... ,  requirement(value).
         for profile in tool['Profile']:
             profile_config = tool['Profile'][profile]
-            tool_predicates += f"tool({tool['name']}, {profile}).\n"
+            tool_predicates += f"tool({tool['toolName']}, {profile}).\n"
 
             requirements = self.configure_dict_string(profile_config['Requirement'], '(', ')')
             parameters = self.configure_dict_string(profile_config['Parameter'], '=','')

@@ -1,46 +1,53 @@
 @prefix ns1: <http://www.semanticweb.org/jef/ontologies/2023/tools#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.semanticweb.org/jef/ontologies/2023/tools_data> rdf:type owl:Ontology .
 
 ns1:Profile1 a ns1:Profile ;
     ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/common.txt" ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement2 ;
     ns1:hasResult ns1:Result1 ;
-    ns1:name "http_dir_scan_small" .
+    ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile2 a ns1:Profile ;
     ns1:Command "gobuster dir -u https://<ip>:<port>/ -w wordlists/common.txt" ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement3 ;
     ns1:hasResult ns1:Result1 ;
-    ns1:name "https_dir_scan_small" .
+    ns1:profileName "https_dir_scan_small" .
 
 ns1:Profile3 a ns1:Profile ;
     ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/big.txt" ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement4 ;
     ns1:hasResult ns1:Result1 ;
-    ns1:name "http_dir_scan_big" .
+    ns1:profileName "http_dir_scan_big" .
 
 ns1:Profile4 a ns1:Profile ;
     ns1:Command "gobuster dir -u https://<ip>:<port>/ -w wordlists/big.txt" ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement5 ;
     ns1:hasResult ns1:Result1 ;
-    ns1:name "https_dir_scan_big" .
+    ns1:profileName "https_dir_scan_big" .
 
 ns1:Profile5 a ns1:Profile ;
     ns1:Command "nmap -F <ip>" ;
     ns1:hasRequirement ns1:Requirement1 ;
     ns1:hasResult ns1:Result2,
         ns1:Result3 ;
-    ns1:name "fast_scan" .
+    ns1:profileName "fast_scan" .
 
 ns1:Profile6 a ns1:Profile ;
     ns1:Command "nmap -sC -sV -p- <ip>" ;
     ns1:hasRequirement ns1:Requirement1 ;
     ns1:hasResult ns1:Result2,
         ns1:Result3 ;
-    ns1:name "full_scan" .
+    ns1:profileName "full_scan" .
 
 ns1:Profile7 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>" ;
@@ -48,7 +55,7 @@ ns1:Profile7 a ns1:Profile ;
         ns1:Requirement6 ;
     ns1:hasResult ns1:Result4,
         ns1:Result5 ;
-    ns1:name "ssh_attack" .
+    ns1:profileName "ssh_attack" .
 
 ns1:Profile8 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>" ;
@@ -56,7 +63,7 @@ ns1:Profile8 a ns1:Profile ;
         ns1:Requirement7 ;
     ns1:hasResult ns1:Result4,
         ns1:Result5 ;
-    ns1:name "ftp_attack" .
+    ns1:profileName "ftp_attack" .
 
 ns1:Profile9 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> " ;
@@ -64,18 +71,18 @@ ns1:Profile9 a ns1:Profile ;
         ns1:Requirement8 ;
     ns1:hasResult ns1:Result4,
         ns1:Result5 ;
-    ns1:name "telnet_attack" .
+    ns1:profileName "telnet_attack" .
 
 ns1:Tool1 a ns1:Tool ;
-    ns1:name "gobuster" ;
+    ns1:toolName "gobuster" ;
     ns1:version "" .
 
 ns1:Tool2 a ns1:Tool ;
-    ns1:name "nmap" ;
+    ns1:toolName "nmap" ;
     ns1:version "" .
 
 ns1:Tool3 a ns1:Tool ;
-    ns1:name "hydra" ;
+    ns1:toolName "hydra" ;
     ns1:version "" .
 
 ns1:Requirement2 a ns1:Requirement ;

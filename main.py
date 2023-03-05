@@ -26,12 +26,12 @@ def find_plugins(exclude=[]):
     return plugins
 
 
-def execute_scan(tool, command, target):
+def execute_scan(tool, profile,  command, target):
     global running_scan
     running_scan += 1
     print(f"Executing tool {tool} with the command {command}")
     sc = getattr(plugins[tool], 'execute_command')
-    output = sc(command, target)
+    output = sc(command, target, profile)
     ontology.putOutputIntoOntology(output)
     ontology.saveToFile('ontology/knowledgebase.ttl')
     print(output)
@@ -55,13 +55,22 @@ def start_scanning(target):
         a = prolog.query('load_ontology()')
 
         has_executed = False
-        for result in prolog.query('tools(Tool,Command)'):
+        profiles = {}
+        for result in prolog.query('tools(Tool, Profile, Command)'):
             if result['Tool'] in plugins and result not in executed_tools:
-                execute_scan(result['Tool'], result['Command'], ip)
-                executed_tools.append(result)
-                has_executed = True
+                profiles[result['Profile']] = []
+                # execute_scan(result['Tool'], result['Profile'], result['Command'], ip)
+                # executed_tools.append(result)
+                # has_executed = True
+        for profile in profiles:
+            for times in prolog.query(f'profileDuration({profile}, Duration)'):
+                profiles[profile].append(float(times['Duration']))
+        averages = {key: sum(profiles[key]) / len(profiles[key]) for key in profiles}
+        sorted_profiles = sorted(averages, key=averages.get)
+        print(sorted_profiles)
+        print(averages)
 
-    ontology.saveToFile('ontology/knowledgebase.ttl')
+    #ontology.saveToFile('ontology/knowledgebase.ttl')
 
 
 g = Graph()

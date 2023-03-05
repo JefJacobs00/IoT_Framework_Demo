@@ -18,6 +18,7 @@ class Ontology:
         self.graph = Graph()
         if existing_info is not None:
             self.graph.parse(existing_info)
+            self.graph.parse('./ontology/tools.ttl')
 
     def __createLookup(self):
         lookup = {}

@@ -1,4 +1,4 @@
-@prefix a: <http://www.semanticweb.org/jef/ontologies/2023/tools#> .
+@prefix : <http://www.semanticweb.org/jef/ontologies/2023/tools#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -13,32 +13,32 @@
 #################################################################
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/hasExecutionData
-a:hasExecutionData rdf:type owl:ObjectProperty ;
-                  rdfs:domain a:Profile ;
-                  rdfs:range a:ExecutionData .
+:hasExecutionData rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Profile ;
+                  rdfs:range :ExecutionData .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/hasProfile
-a:hasProfile rdf:type owl:ObjectProperty ;
-            rdfs:domain a:Tool ;
-            rdfs:range a:Profile .
+:hasProfile rdf:type owl:ObjectProperty ;
+            rdfs:domain :Tool ;
+            rdfs:range :Profile .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/hasRequirement
-a:hasRequirement rdf:type owl:ObjectProperty ;
-                rdfs:domain a:Profile ;
-                rdfs:range a:Requirement .
+:hasRequirement rdf:type owl:ObjectProperty ;
+                rdfs:domain :Profile ;
+                rdfs:range :Requirement .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/hasParameter
-a:hasParameter rdf:type owl:ObjectProperty ;
-                rdfs:domain a:Profile ;
-                rdfs:range a:Parameter .
+:hasParameter rdf:type owl:ObjectProperty ;
+                rdfs:domain :Profile ;
+                rdfs:range :Parameter .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/hasResult
-a:hasResult rdf:type owl:ObjectProperty ;
-           rdfs:domain a:Profile ;
-           rdfs:range a:Result .
+:hasResult rdf:type owl:ObjectProperty ;
+           rdfs:domain :Profile ;
+           rdfs:range :Result .
 
 
 #################################################################
@@ -46,62 +46,64 @@ a:hasResult rdf:type owl:ObjectProperty ;
 #################################################################
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools#value
-a:value rdf:type owl:DatatypeProperty ;
-       rdfs:domain a:Requirement .
+:value rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Requirement .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools#value
-a:value rdf:type owl:DatatypeProperty ;
-       rdfs:domain a:Parameter .
+:value rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Parameter .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Command
-a:Command rdf:type owl:DatatypeProperty ;
-         rdfs:domain a:Profile .
+:Command rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Profile .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/LastExecution
-a:LastExecution rdf:type owl:DatatypeProperty ;
-               rdfs:domain a:Profile .
+:LastExecution rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Profile .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/ResultScore
-a:ResultScore rdf:type owl:DatatypeProperty ;
-             rdfs:domain a:ExecutionData ;
+:ResultScore rdf:type owl:DatatypeProperty ;
+             rdfs:domain :ExecutionData ;
              rdfs:range xsd:boolean .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Time
-a:Time rdf:type owl:DatatypeProperty ;
-      rdfs:domain a:ExecutionData ;
+:Time rdf:type owl:DatatypeProperty ;
+      rdfs:domain :ExecutionData ;
       rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/UserPriority
-a:UserPriority rdf:type owl:DatatypeProperty ;
-              rdfs:domain a:Profile .
+:UserPriority rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Profile .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2023/tools/name
-a:name rdf:type owl:DatatypeProperty ;
-      rdfs:domain a:Profile ,
-                  a:Tool .
+###  http://www.semanticweb.org/jef/ontologies/2023/tools/profileName
+:profileName rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Profile .
 
-
-###  http://www.semanticweb.org/jef/ontologies/2023/tools/requirement
-a:requirement rdf:type owl:DatatypeProperty ;
-             rdfs:domain a:Requirement .
+###  http://www.semanticweb.org/jef/ontologies/2023/tools/toolName
+:toolName rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Tool .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/requirement
-a:parameter rdf:type owl:DatatypeProperty ;
-             rdfs:domain a:Parameter .
+:requirement rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Requirement .
+
+###  http://www.semanticweb.org/jef/ontologies/2023/tools/requirement
+:parameter rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Parameter .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/result
-a:result rdf:type owl:DatatypeProperty ;
-        rdfs:domain a:Result .
+:result rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Result .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/version
-a:version rdf:type owl:DatatypeProperty ;
-         rdfs:domain a:Tool .
+:version rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Tool .
 
 
 #################################################################
@@ -109,25 +111,25 @@ a:version rdf:type owl:DatatypeProperty ;
 #################################################################
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/ExecutionData
-a:ExecutionData rdf:type owl:Class .
+:ExecutionData rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Profile
-a:Profile rdf:type owl:Class .
+:Profile rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Requirement
-a:Requirement rdf:type owl:Class .
+:Requirement rdf:type owl:Class .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Parameter
-a:Parameter rdf:type owl:Class .
+:Parameter rdf:type owl:Class .
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Result
-a:Result rdf:type owl:Class .
+:Result rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Tool
-a:Tool rdf:type owl:Class .
+:Tool rdf:type owl:Class .
 
 
 ###  Generated by the OWL API (version 4.5.24.2023-01-14T21:28:32Z) https://github.com/owlcs/owlapi

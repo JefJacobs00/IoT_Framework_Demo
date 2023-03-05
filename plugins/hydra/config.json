@@ -1,6 +1,6 @@
 {
   "Tool":{
-  "name": "hydra",
+  "toolName": "hydra",
   "version": "",
     "Profile": {
       "ssh_attack": {

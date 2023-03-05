@@ -3,6 +3,7 @@
 :- use_module(library(semweb/rdfs)).
 :- rdf_load(library(semweb/rdfs)).
 :- rdf_register_prefix(ns1, 'http://www.semanticweb.org/jef/ontologies/2023/demo#').
+:- rdf_register_prefix(ns2, 'http://www.semanticweb.org/jef/ontologies/2023/tools#').
 :- rdf_load('knowledgebase.ttl', [format('turtle')]).
 
 
@@ -44,5 +45,16 @@ deviceServices(Ip, Port, Service) :-
     rdf(C, ns1:'serviceName', literal(Service)).
 
 
+profileDuration(Profile, Duration) :-
+    rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Scan, ns1:'duration', literal(type('http://www.w3.org/2001/XMLSchema#double', Duration))),
+    rdf(Scan,ns1:'scanInfo',B),
+    rdf(B,ns2:'profileName',literal(Profile)).
+
+profileScore(Profile, Score) :-
+    rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Scan, ns1:'resultScore', Score),
+    rdf(Scan,ns1:'scanInfo',B),
+    rdf(B,ns2:'profileName', literal(Profile)).
 
 
