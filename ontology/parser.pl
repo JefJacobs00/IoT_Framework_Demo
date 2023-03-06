@@ -53,7 +53,7 @@ profileDuration(Profile, Duration) :-
 
 profileScore(Profile, Score) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
-    rdf(Scan, ns1:'resultScore', Score),
+    rdf(Scan, ns1:'resultScore', literal(type('http://www.w3.org/2001/XMLSchema#integer',Score))),
     rdf(Scan,ns1:'scanInfo',B),
     rdf(B,ns2:'profileName', literal(Profile)).
 

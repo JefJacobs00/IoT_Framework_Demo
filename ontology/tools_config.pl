@@ -1,3 +1,6 @@
+:- discontiguous tool/2.
+:- discontiguous profile/2.
+
 tool(gobuster, http_dir_scan_small).
 tool(gobuster, https_dir_scan_small).
 tool(gobuster, http_dir_scan_big).

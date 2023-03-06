@@ -38,7 +38,31 @@ def execute_scan(tool, profile,  command, target):
     running_scan -= 1
 
 
-running_scan = 0
+def get_runnable_profiles(prolog, executed_tools):
+    profiles = {}
+    for result in prolog.query(f'tools(Tool, Profile, Command)'):
+        if result['Tool'] in plugins and result not in executed_tools:
+            profile = result['Profile']
+            properties = {}
+            properties['Tool'] = result['Tool']
+            properties['Command'] = result['Command']
+            profiles[profile] = properties
+
+    return profiles
+
+
+def get_avg_profile_duration(prolog, profile):
+    durations = []
+    for times in prolog.query(f'profileDuration({profile}, Duration)'):
+        durations.append(float(times['Duration']))
+    return sum(durations)/len(durations)
+
+def get_avg_profile_score(prolog, profile):
+    score = []
+    for times in prolog.query(f'profileScore({profile}, Score)'):
+        score.append(int(times['Score']))
+    return sum(score)/len(score)
+
 def start_scanning(target):
     ontology.putOutputIntoOntology(target)
     ontology.saveToFile('ontology/knowledgebase.ttl')
@@ -51,26 +75,24 @@ def start_scanning(target):
     prolog.consult('ontology/tools.pl')
     prolog.consult('ontology/parser.pl')
     prolog.consult('ontology/tools_config.pl')
-    while has_executed or (running_scan > 0):
+    while has_executed:
         a = prolog.query('load_ontology()')
 
         has_executed = False
-        profiles = {}
-        for result in prolog.query('tools(Tool, Profile, Command)'):
-            if result['Tool'] in plugins and result not in executed_tools:
-                profiles[result['Profile']] = []
-                # execute_scan(result['Tool'], result['Profile'], result['Command'], ip)
-                # executed_tools.append(result)
-                # has_executed = True
+        profiles = get_runnable_profiles(prolog, executed_tools)
         for profile in profiles:
-            for times in prolog.query(f'profileDuration({profile}, Duration)'):
-                profiles[profile].append(float(times['Duration']))
-        averages = {key: sum(profiles[key]) / len(profiles[key]) for key in profiles}
-        sorted_profiles = sorted(averages, key=averages.get)
+            profiles[profile]['avg_duration'] = get_avg_profile_duration(prolog, profile)
+            profiles[profile]['avg_score'] = get_avg_profile_score(prolog, profile)
+
+        sorted_profiles = sorted(profiles.items(), key=lambda x: x[1]['avg_duration'])
+
         print(sorted_profiles)
-        print(averages)
+        print(profiles)
 
     #ontology.saveToFile('ontology/knowledgebase.ttl')
+
+
+
 
 
 g = Graph()

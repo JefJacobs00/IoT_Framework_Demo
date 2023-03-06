@@ -10,11 +10,3 @@ class Gobuster(Tool):
     def execute_command(self, command, target):
         return super().execute_command(command, target)
 
-    # def enum_vhost(self, hostnames, port):
-    # 	  flags = '-r'
-    #     # print(hostnames)
-    #     for h in hostnames:
-    #         hostname = h['name']
-    #         type = 'vhost'
-    #         wordlist = 'wordlists/subdomains-top1million-5000.txt'
-    #         return self.perform_enum(hostname, port, type, wordlist, self.flags_vhost)

@@ -27,7 +27,7 @@ ns2:Scan2 a ns2:Scan ;
 
 ns2:Scan3 a ns2:Scan ;
     ns2:command "b'nmap -F 192.168.0.106'" ;
-    ns2:duration 3.0212e+06 ;
+    ns2:duration 3.0212e+01 ;
     ns2:executionTime "15:49 05/03/2023" ;
     ns2:resultScore 0 ;
     ns2:scanInfo ns2:Port1,
