@@ -84,9 +84,9 @@ def start_scanning(target):
             profiles[profile]['avg_duration'] = get_avg_profile_duration(prolog, profile)
             profiles[profile]['avg_score'] = get_avg_profile_score(prolog, profile)
 
-        sorted_profiles = sorted(profiles.items(), key=lambda x: x[1]['avg_duration'])
+        sorted_keys = sorted(profiles, key=lambda x: profiles[x]['avg_duration'])
 
-        print(sorted_profiles)
+        print(sorted_keys)
         print(profiles)
 
     #ontology.saveToFile('ontology/knowledgebase.ttl')
