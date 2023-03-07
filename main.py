@@ -28,14 +28,12 @@ def find_plugins(exclude=[]):
 
 def execute_scan(tool, profile,  command, target):
     global running_scan
-    running_scan += 1
     print(f"Executing tool {tool} with the command {command}")
     sc = getattr(plugins[tool], 'execute_command')
     output = sc(command, target, profile)
     ontology.putOutputIntoOntology(output)
     ontology.saveToFile('ontology/knowledgebase.ttl')
     print(output)
-    running_scan -= 1
 
 
 def get_runnable_profiles(prolog, executed_tools):
@@ -55,12 +53,20 @@ def get_avg_profile_duration(prolog, profile):
     durations = []
     for times in prolog.query(f'profileDuration({profile}, Duration)'):
         durations.append(float(times['Duration']))
+
+    if len(durations) == 0:
+        return 0
+
     return sum(durations)/len(durations)
 
 def get_avg_profile_score(prolog, profile):
     score = []
     for times in prolog.query(f'profileScore({profile}, Score)'):
         score.append(int(times['Score']))
+
+    if len(score) == 0:
+        return 0
+
     return sum(score)/len(score)
 
 def start_scanning(target):
@@ -77,7 +83,6 @@ def start_scanning(target):
     prolog.consult('ontology/tools_config.pl')
     while has_executed:
         a = prolog.query('load_ontology()')
-
         has_executed = False
         profiles = get_runnable_profiles(prolog, executed_tools)
         for profile in profiles:
@@ -86,10 +91,14 @@ def start_scanning(target):
 
         sorted_keys = sorted(profiles, key=lambda x: profiles[x]['avg_duration'])
 
-        print(sorted_keys)
-        print(profiles)
+        for profile in sorted_keys:
+            if profile not in executed_tools:
+                executed_tools.append(profile)
+                profile_properties = profiles[profile]
+                execute_scan(profile_properties['Tool'], profile, profile_properties['Command'], target)
+                has_executed = True
 
-    #ontology.saveToFile('ontology/knowledgebase.ttl')
+    ontology.saveToFile('ontology/knowledgebase.ttl')
 
 
 
@@ -107,14 +116,13 @@ plugins = find_plugins(['tool.py'])
 ip = "192.168.0.106"
 r = [{'ipv4':ip}]
 
-# r[0]['ipv4'] = ip
-# ontology.putOutputIntoOntology(r)
-# ontology.saveToFile('ontology/knowledgebase.ttl')
+ontology.putOutputIntoOntology(r)
+ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
 #c.read_profiles('ontology/tools_config.pl')
 
-start_scanning(r)
+start_scanning(r[0]["ipv4"])
 
 
 
