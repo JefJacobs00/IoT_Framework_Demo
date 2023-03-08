@@ -1,0 +1,8 @@
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-05 14:49 CET
+Nmap scan report for 192.168.0.106
+Host is up (0.021s latency).
+Not shown: 99 closed tcp ports (conn-refused)
+PORT   STATE SERVICE
+22/tcp open  ssh
+
+Nmap done: 1 IP address (1 host up) scanned in 0.70 seconds

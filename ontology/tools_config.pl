@@ -1,12 +1,13 @@
 :- discontiguous tool/2.
 :- discontiguous profile/2.
+:- dynamic executed/1.
 
 tool(gobuster, http_dir_scan_small).
 tool(gobuster, https_dir_scan_small).
 tool(gobuster, http_dir_scan_big).
 tool(gobuster, https_dir_scan_big).
 
-profile(http_dir_scan_small, [ip=Ip, port=Port]) :- ip(Ip), deviceServices(Ip, Port, http). 
+profile(http_dir_scan_small, [ip=Ip, port=Port]) :- ip(Ip), deviceServices(Ip, Port, http).
 profile(https_dir_scan_small, [ip=Ip, port=Port]) :- ip(Ip), deviceServices(Ip, Port, https). 
 profile(http_dir_scan_big, [ip=Ip, port=Port]) :- ip(Ip), deviceServices(Ip, Port, http). 
 profile(https_dir_scan_big, [ip=Ip, port=Port]) :- ip(Ip), deviceServices(Ip, Port, https). 
@@ -26,10 +27,10 @@ https_dir_scan_big(Parameters, Command) :-
 tool(nmap, fast_scan).
 tool(nmap, full_scan).
 
-profile(fast_scan, [ip=Ip]) :- ip(Ip). 
+profile(fast_scan, [ip=Ip]) :- ip(Ip), \+ executed(fast_scan).
 profile(full_scan, [ip=Ip]) :- ip(Ip). 
 
-fast_scan(Parameters, Command) :- 
+fast_scan(Parameters, Command) :-
 	format_command("nmap -F ~w", [Parameters.ip], Command). 
 
 full_scan(Parameters, Command) :- 

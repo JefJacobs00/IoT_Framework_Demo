@@ -1,6 +1,5 @@
 from plugins.tool import Tool
 
-
 class Gobuster(Tool):
     def __init__(self):
         parser = {'page': '2K', 'status': 'Status: ', 'size': 'Size: ', 'redirect': '--> '}

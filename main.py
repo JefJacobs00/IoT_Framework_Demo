@@ -90,6 +90,7 @@ def start_scanning(target):
             profiles[profile]['avg_score'] = get_avg_profile_score(prolog, profile)
 
         sorted_keys = sorted(profiles, key=lambda x: profiles[x]['avg_duration'])
+        print(profiles)
 
         for profile in sorted_keys:
             if profile not in executed_tools:
@@ -98,7 +99,7 @@ def start_scanning(target):
                 execute_scan(profile_properties['Tool'], profile, profile_properties['Command'], target)
                 has_executed = True
 
-    ontology.saveToFile('ontology/knowledgebase.ttl')
+    #ontology.saveToFile('ontology/knowledgebase.ttl')
 
 
 

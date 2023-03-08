@@ -1,0 +1,33 @@
+@prefix ns1: <http://www.semanticweb.org/jef/ontologies/2023/tools#> .
+
+ns1:Profile1 a ns1:Profile ;
+    ns1:Command "nmap -F <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result1,
+        ns1:Result2 ;
+    ns1:name "fast_scan" .
+
+ns1:Profile2 a ns1:Profile ;
+    ns1:Command "nmap -F -sC -sV -p- <ip>" ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement2 ;
+    ns1:hasResult ns1:Result1,
+        ns1:Result2 ;
+    ns1:name "full_scan" .
+
+ns1:Tool1 a ns1:Tool ;
+    ns1:name "nmap" ;
+    ns1:version "" .
+
+ns1:Requirement2 a ns1:Requirement ;
+    ns1:requirement "port" .
+
+ns1:Requirement1 a ns1:Requirement ;
+    ns1:requirement "ip" .
+
+ns1:Result1 a ns1:Result ;
+    ns1:result "port" .
+
+ns1:Result2 a ns1:Result ;
+    ns1:result "service" .
+
