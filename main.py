@@ -8,7 +8,6 @@ import pyswip
 from ontology.ontology import Ontology
 from plugins.configParser import ConfigParser
 
-
 def find_plugins(exclude=[]):
     # find all plugins available and initialize them
     plugins = {}
@@ -121,9 +120,9 @@ ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
-#c.read_profiles('ontology/tools_config.pl')
+c.read_profiles('ontology/tools_config.pl')
 
-start_scanning(r[0]["ipv4"])
+#start_scanning(r[0]["ipv4"])
 
 
 

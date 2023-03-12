@@ -171,7 +171,7 @@ class ConfigParser:
             requirements = self.configure_dict_string(profile_config['Requirement'], '(', ')')
             parameters = self.configure_dict_string(profile_config['Parameter'], '=','')
             command_predicates += self.configure_command(profile_config['Command'], profile)
-            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}. \n"
+            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}, \+ excluded({profile}). \n"
 
         return tool_predicates + "\n" + profile_predicates + "\n" + command_predicates
 
@@ -211,7 +211,8 @@ class ConfigParser:
         if prolog_output is not None:
             # Clear file
             f = open(prolog_output, 'w')
-            f.write('')
+            headers = ":- discontiguous tool/2.\n:- discontiguous profile/2.\n:- dynamic executed/1.\n"
+            f.write(headers)
 
         for f in os.listdir('plugins'):
             if (f == '__pycache__' or '.py' in f):
