@@ -60,7 +60,6 @@ class Ontology:
         structured = []
         for line in output:
             structured.append(self.structureInfo(line))
-        self.calculate_score(structured)
         for line in structured:
             objects = []
             for key in line:
