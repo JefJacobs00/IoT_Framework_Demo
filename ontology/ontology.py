@@ -58,7 +58,8 @@ class Ontology:
         structured = []
         for line in output:
             structured.append(self.structureInfo(line))
-
+        if 'Profile' in structured:
+            print('Calculate score for: '+{structured['Profile']})
         for line in structured:
             objects = []
             for key in line:

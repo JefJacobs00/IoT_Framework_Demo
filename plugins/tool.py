@@ -27,7 +27,6 @@ class Tool(ABC):
             r['command'] = command
             r['duration'] = round((end_time - start_time) * 1000, 2)
             r['executionTime'] = datetime.datetime.now().strftime('%H:%M %d/%m/%Y')
-            r['resultScore'] = 0
 
         self.write_output(f'./ScanOutputs/{profile}_{datetime.datetime.now()}', output)
         return result

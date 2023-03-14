@@ -9,10 +9,24 @@ ns2:IpAddress1 a ns2:IpAddress ;
     ns2:ipv4 "192.168.0.106" .
 
 ns2:Scan1 a ns2:Scan ;
-    ns2:command "b'nmap -F 192.168.0.106'" ;
-    ns2:duration 2.4437e+02 ;
-    ns2:executionTime "15:56 08/03/2023" ;
+    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.106:22'",
+        "b'nmap -F 192.168.0.106'" ;
+    ns2:duration 2.4437e+02,
+        2.94912e+03 ;
+    ns2:executionTime "15:50 13/03/2023",
+        "15:56 08/03/2023" ;
     ns2:resultScore 0 ;
+    ns2:scanInfo ns2:Account1,
+        ns2:Password1,
+        ns2:Port1,
+        ns2:Service1,
+        ns1:Profile5,
+        ns1:Profile7 .
+
+ns2:Scan10 a ns2:Scan ;
+    ns2:command "b'nmap -F 192.168.0.106'" ;
+    ns2:duration 9.398e+01 ;
+    ns2:executionTime "15:48 13/03/2023" ;
     ns2:scanInfo ns2:Port1,
         ns2:Service1,
         ns1:Profile5 .
@@ -187,6 +201,12 @@ ns2:Port2 a ns2:Port ;
 ns2:Service2 a ns2:Service ;
     ns2:serviceName "http" .
 
+ns1:Result2 a ns1:Result ;
+    ns1:result "port" .
+
+ns1:Result3 a ns1:Result ;
+    ns1:result "service" .
+
 ns1:Profile7 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>" ;
     ns1:hasRequirement ns1:Requirement1,
@@ -195,11 +215,11 @@ ns1:Profile7 a ns1:Profile ;
         ns1:Result5 ;
     ns1:profileName "ssh_attack" .
 
-ns1:Result2 a ns1:Result ;
-    ns1:result "port" .
+ns1:Result4 a ns1:Result ;
+    ns1:result "account" .
 
-ns1:Result3 a ns1:Result ;
-    ns1:result "service" .
+ns1:Result5 a ns1:Result ;
+    ns1:result "password" .
 
 ns2:Account1 a ns2:Account ;
     ns2:accountPassword ns2:Password1 ;
@@ -215,12 +235,6 @@ ns1:Profile5 a ns1:Profile ;
         ns1:Result3 ;
     ns1:profileName "fast_scan" .
 
-ns1:Result4 a ns1:Result ;
-    ns1:result "account" .
-
-ns1:Result5 a ns1:Result ;
-    ns1:result "password" .
-
 ns1:Profile6 a ns1:Profile ;
     ns1:Command "nmap -sC -sV -p- <ip>" ;
     ns1:hasRequirement ns1:Requirement1 ;
@@ -231,6 +245,10 @@ ns1:Profile6 a ns1:Profile ;
 ns1:Result1 a ns1:Result ;
     ns1:result "webpage" .
 
+ns1:Requirement1 a ns1:Requirement ;
+    ns1:requirement "ip" ;
+    ns1:value "Ip" .
+
 ns2:Port1 a ns2:Port ;
     ns2:portNumber "22" ;
     ns2:portService ns2:Service1 ;
@@ -239,8 +257,4 @@ ns2:Port1 a ns2:Port ;
 ns2:Service1 a ns2:Service ;
     ns2:serviceAccount ns2:Account1 ;
     ns2:serviceName "ssh" .
-
-ns1:Requirement1 a ns1:Requirement ;
-    ns1:requirement "ip" ;
-    ns1:value "Ip" .
 
