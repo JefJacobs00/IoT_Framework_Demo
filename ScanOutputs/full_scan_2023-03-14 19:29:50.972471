@@ -1,0 +1,86 @@
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-14 19:27 CET
+Nmap scan report for 192.168.0.185
+Host is up (0.00066s latency).
+Not shown: 65526 filtered tcp ports (no-response)
+PORT      STATE SERVICE        VERSION
+80/tcp    open  http           Microsoft IIS httpd 10.0
+|_http-title: IIS Windows
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+135/tcp   open  msrpc          Microsoft Windows RPC
+2179/tcp  open  vmrdp?
+3306/tcp  open  mysql          MySQL (unauthorized)
+3394/tcp  open  d2k-tapestry2?
+| fingerprint-strings: 
+|   DNSVersionBindReqTCP, FourOhFourRequest, GenericLines, GetRequest, Help, JavaRMI, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, NCP, NULL, NotesRPC, RPCCheck, RTSPRequest, SIPOptions, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, X11Probe: 
+|_    {"type":"Tier1","version":"1.0"}
+3580/tcp  open  http           National Instruments LabVIEW service locator httpd 1.0.0
+|_http-title: Service Unavailable
+|_http-server-header: NI Service Locator/1.0.0 (SLServer)
+8080/tcp  open  http           SimpleHTTPServer 0.6 (Python 3.9.12)
+|_http-title: Directory listing for /
+|_http-server-header: SimpleHTTP/0.6 Python/3.9.12
+33060/tcp open  mysqlx?
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, LDAPSearchReq, NotesRPC, SSLSessionReq, TLSSessionReq, X11Probe, afp: 
+|     Invalid message"
+|_    HY000
+57621/tcp open  unknown
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port3394-TCP:V=7.93%I=7%D=3/14%Time=6410BCEF%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(GenericLines,2
+SF:2,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(GetRequest,22,"{\"
+SF:type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(RTSPRequest,22,"{\"type\
+SF:":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(RPCCheck,22,"{\"type\":\"Tier
+SF:1\",\"version\":\"1\.0\"}\r\n")%r(DNSVersionBindReqTCP,22,"{\"type\":\"
+SF:Tier1\",\"version\":\"1\.0\"}\r\n")%r(Help,22,"{\"type\":\"Tier1\",\"ve
+SF:rsion\":\"1\.0\"}\r\n")%r(SSLSessionReq,22,"{\"type\":\"Tier1\",\"versi
+SF:on\":\"1\.0\"}\r\n")%r(TerminalServerCookie,22,"{\"type\":\"Tier1\",\"v
+SF:ersion\":\"1\.0\"}\r\n")%r(TLSSessionReq,22,"{\"type\":\"Tier1\",\"vers
+SF:ion\":\"1\.0\"}\r\n")%r(Kerberos,22,"{\"type\":\"Tier1\",\"version\":\"
+SF:1\.0\"}\r\n")%r(SMBProgNeg,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"
+SF:}\r\n")%r(X11Probe,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%
+SF:r(FourOhFourRequest,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")
+SF:%r(LDAPSearchReq,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(
+SF:LDAPBindReq,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(SIPOp
+SF:tions,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(LANDesk-RC,
+SF:22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(TerminalServer,22
+SF:,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(NCP,22,"{\"type\":\
+SF:"Tier1\",\"version\":\"1\.0\"}\r\n")%r(NotesRPC,22,"{\"type\":\"Tier1\"
+SF:,\"version\":\"1\.0\"}\r\n")%r(JavaRMI,22,"{\"type\":\"Tier1\",\"versio
+SF:n\":\"1\.0\"}\r\n");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port33060-TCP:V=7.93%I=7%D=3/14%Time=6410BCF5%P=x86_64-pc-linux-gnu%r(N
+SF:ULL,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(GenericLines,9,"\x05\0\0\0\x0b\
+SF:x08\x05\x1a\0")%r(GetRequest,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(HTTPOp
+SF:tions,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(RTSPRequest,9,"\x05\0\0\0\x0b
+SF:\x08\x05\x1a\0")%r(RPCCheck,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(DNSVers
+SF:ionBindReqTCP,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(DNSStatusRequestTCP,2
+SF:B,"\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88'\x1a\x0fI
+SF:nvalid\x20message\"\x05HY000")%r(Help,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")
+SF:%r(SSLSessionReq,2B,"\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01
+SF:\x10\x88'\x1a\x0fInvalid\x20message\"\x05HY000")%r(TerminalServerCookie
+SF:,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(TLSSessionReq,2B,"\x05\0\0\0\x0b\x
+SF:08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88'\x1a\x0fInvalid\x20message\"
+SF:\x05HY000")%r(Kerberos,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(SMBProgNeg,9
+SF:,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(X11Probe,2B,"\x05\0\0\0\x0b\x08\x05\
+SF:x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88'\x1a\x0fInvalid\x20message\"\x05HY0
+SF:00")%r(FourOhFourRequest,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(LPDString,
+SF:9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(LDAPSearchReq,2B,"\x05\0\0\0\x0b\x0
+SF:8\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88'\x1a\x0fInvalid\x20message\"\
+SF:x05HY000")%r(LDAPBindReq,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(SIPOptions
+SF:,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(LANDesk-RC,9,"\x05\0\0\0\x0b\x08\x
+SF:05\x1a\0")%r(TerminalServer,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(NCP,9,"
+SF:\x05\0\0\0\x0b\x08\x05\x1a\0")%r(NotesRPC,2B,"\x05\0\0\0\x0b\x08\x05\x1
+SF:a\0\x1e\0\0\0\x01\x08\x01\x10\x88'\x1a\x0fInvalid\x20message\"\x05HY000
+SF:")%r(JavaRMI,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(WMSRequest,9,"\x05\0\0
+SF:\0\x0b\x08\x05\x1a\0")%r(oracle-tns,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r
+SF:(ms-sql-s,9,"\x05\0\0\0\x0b\x08\x05\x1a\0")%r(afp,2B,"\x05\0\0\0\x0b\x0
+SF:8\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88'\x1a\x0fInvalid\x20message\"\
+SF:x05HY000")%r(giop,9,"\x05\0\0\0\x0b\x08\x05\x1a\0");
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 152.17 seconds

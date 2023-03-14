@@ -1,3 +1,5 @@
+import re
+
 from rdflib import Graph, RDF, URIRef, Literal
 from rdflib.plugins.sparql import prepareQuery
 
@@ -58,8 +60,7 @@ class Ontology:
         structured = []
         for line in output:
             structured.append(self.structureInfo(line))
-        if 'Profile' in structured:
-            print('Calculate score for: '+{structured['Profile']})
+        self.calculate_score(structured)
         for line in structured:
             objects = []
             for key in line:
@@ -76,11 +77,13 @@ class Ontology:
             obj = None
             for prop in properties:
                 for s, p, o in self.graph.triples((s, self.lookup[prop[0]], None)):
-                    if o.__str__() == prop[1]:
+                    if str(o) == str(prop[1]):
                         equal = True and equal
                         obj = s
                     else:
                         equal = False
+                if not equal:
+                    break
             if equal:
                 return obj
 
@@ -104,7 +107,8 @@ class Ontology:
         ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
         i = 1
         for s, p, o in self.graph.triples((None, None, ontoClass)):
-            i = int(s.__str__()[-1:]) + 1
+            n = s.__str__().replace(o.__str__(), '')
+            i = max(int(n) + 1, i)
         object = URIRef(self.lookup['ontology'] + "#" + str(name) + str(i))
         self.graph.add((object, RDF.type, self.lookup[name]))
         return object

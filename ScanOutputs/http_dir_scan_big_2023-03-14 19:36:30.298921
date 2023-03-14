@@ -1,0 +1,54 @@
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://192.168.0.185:3580/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                wordlists/big.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/03/14 19:36:21 Starting gobuster in directory enumeration mode
+===============================================================
+[2K/delete_account       (Status: 403) [Size: 120]
+[2K/delete               (Status: 403) [Size: 120]
+[2K/deleted              (Status: 403) [Size: 120]
+[2K/deleteme             (Status: 403) [Size: 120]
+[2K/deletemsg            (Status: 403) [Size: 120]
+[2K/listas               (Status: 200) [Size: 2]
+[2K/listacorreo          (Status: 200) [Size: 2]
+[2K/listar               (Status: 200) [Size: 2]
+[2K/list                 (Status: 200) [Size: 2]
+[2K/lista                (Status: 200) [Size: 2]
+[2K/listadmin            (Status: 200) [Size: 2]
+[2K/liste                (Status: 200) [Size: 2]
+[2K/listes               (Status: 200) [Size: 2]
+[2K/listing              (Status: 200) [Size: 2]
+[2K/listen               (Status: 200) [Size: 2]
+[2K/listing_photos       (Status: 200) [Size: 2]
+[2K/listinfo             (Status: 200) [Size: 2]
+[2K/listings             (Status: 200) [Size: 2]
+[2K/listingsdetail       (Status: 200) [Size: 2]
+[2K/listini              (Status: 200) [Size: 2]
+[2K/listmania            (Status: 200) [Size: 2]
+[2K/listmail             (Status: 200) [Size: 2]
+[2K/listman              (Status: 200) [Size: 2]
+[2K/listmanager          (Status: 200) [Size: 2]
+[2K/listmessenger        (Status: 200) [Size: 2]
+[2K/listuse              (Status: 200) [Size: 2]
+[2K/listview             (Status: 200) [Size: 2]
+[2K/listorderby          (Status: 200) [Size: 2]
+[2K/lists                (Status: 200) [Size: 2]
+[2K/listserv             (Status: 200) [Size: 2]
+[2K/published            (Status: 403) [Size: 120]
+[2K/publish              (Status: 403) [Size: 120]
+[2K/publishing           (Status: 403) [Size: 120]
+[2K/publishingimages     (Status: 403) [Size: 120]
+[2K/publishers           (Status: 403) [Size: 120]
+[2K/publisher            (Status: 403) [Size: 120]
+
+===============================================================
+2023/03/14 19:36:30 Finished
+===============================================================

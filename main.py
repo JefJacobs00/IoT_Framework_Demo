@@ -69,9 +69,6 @@ def get_avg_profile_score(prolog, profile):
     return sum(score)/len(score)
 
 def start_scanning(target):
-    ontology.putOutputIntoOntology(target)
-    ontology.saveToFile('ontology/knowledgebase.ttl')
-
     has_executed = True
 
     executed_tools = []
@@ -98,7 +95,7 @@ def start_scanning(target):
                 execute_scan(profile_properties['Tool'], profile, profile_properties['Command'], target)
                 has_executed = True
 
-    #ontology.saveToFile('ontology/knowledgebase.ttl')
+    ontology.saveToFile('ontology/knowledgebase.ttl')
 
 
 
@@ -113,7 +110,7 @@ ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 
 plugins = find_plugins(['tool.py'])
 # ip = input("Give the target ip:\n")
-ip = "192.168.0.106"
+ip = "192.168.0.185"
 r = [{'ipv4':ip}]
 
 ontology.putOutputIntoOntology(r)

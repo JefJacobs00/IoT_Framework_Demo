@@ -1,0 +1,11 @@
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-14 18:34 CET
+Nmap scan report for 192.168.0.185
+Host is up (0.020s latency).
+Not shown: 96 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+80/tcp   open  http
+135/tcp  open  msrpc
+3306/tcp open  mysql
+8080/tcp open  http-proxy
+
+Nmap done: 1 IP address (1 host up) scanned in 2.01 seconds
