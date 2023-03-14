@@ -1,8 +1,0 @@
-Hydra v9.4 (c) 2022 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
-
-Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2023-03-07 10:08:47
-[DATA] max 1 task per 1 server, overall 1 task, 1 login try, ~1 try per task
-[DATA] attacking ssh://192.168.0.106:22/
-[22][ssh] host: 192.168.0.106   login: testuserdemo   password: Azerty123!
-1 of 1 target successfully completed, 1 valid password found
-Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2023-03-07 10:08:49
