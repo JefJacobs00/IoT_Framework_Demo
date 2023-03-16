@@ -138,6 +138,31 @@ ns2:Scan5 a ns2:Scan ;
         ns2:Service3,
         ns1:Profile5 .
 
+ns2:Scan6 a ns2:Scan ;
+    ns2:command "b'nmap -sC -sV -p- 192.168.0.185'" ;
+    ns2:duration 1.610615e+05 ;
+    ns2:executionTime "00:16 15/03/2023" ;
+    ns2:resultScore 1.006209e+01 ;
+    ns2:scanInfo ns2:Port1,
+        ns2:Port10,
+        ns2:Port2,
+        ns2:Port3,
+        ns2:Port4,
+        ns2:Port5,
+        ns2:Port6,
+        ns2:Port7,
+        ns2:Port8,
+        ns2:Port9,
+        ns2:Service1,
+        ns2:Service2,
+        ns2:Service3,
+        ns2:Service4,
+        ns2:Service5,
+        ns2:Service6,
+        ns2:Service7,
+        ns2:Service8,
+        ns1:Profile6 .
+
 ns1:Profile2 a ns1:Profile ;
     ns1:Command "gobuster dir -u https://<ip>:<port>/ -w wordlists/common.txt" ;
     ns1:hasRequirement ns1:Requirement1,
@@ -382,13 +407,6 @@ ns1:Profile3 a ns1:Profile ;
     ns1:hasResult ns1:Result1 ;
     ns1:profileName "http_dir_scan_big" .
 
-ns1:Profile6 a ns1:Profile ;
-    ns1:Command "nmap -sC -sV -p- <ip>" ;
-    ns1:hasRequirement ns1:Requirement1 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3 ;
-    ns1:profileName "full_scan" .
-
 ns1:Requirement2 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
     ns1:value "['Ip', 'Port', 'http']" .
@@ -416,51 +434,6 @@ ns1:Requirement7 a ns1:Requirement ;
 ns1:Requirement8 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
     ns1:value "['Ip', 'Port', 'telnet']" .
-
-ns2:Port10 a ns2:Port ;
-    ns2:portNumber "57621" ;
-    ns2:portService ns2:Service8 ;
-    ns2:portStatus "open" .
-
-ns2:Port5 a ns2:Port ;
-    ns2:portNumber "2179" ;
-    ns2:portService ns2:Service4 ;
-    ns2:portStatus "open" .
-
-ns2:Port6 a ns2:Port ;
-    ns2:portNumber "3394" ;
-    ns2:portService ns2:Service5 ;
-    ns2:portStatus "open" .
-
-ns2:Port7 a ns2:Port ;
-    ns2:portNumber "3580" ;
-    ns2:portService ns2:Service1 ;
-    ns2:portStatus "open" .
-
-ns2:Port8 a ns2:Port ;
-    ns2:portNumber "7680" ;
-    ns2:portService ns2:Service6 ;
-    ns2:portStatus "open" .
-
-ns2:Port9 a ns2:Port ;
-    ns2:portNumber "33060" ;
-    ns2:portService ns2:Service7 ;
-    ns2:portStatus "open" .
-
-ns2:Service4 a ns2:Service ;
-    ns2:serviceName "vmrdp?" .
-
-ns2:Service5 a ns2:Service ;
-    ns2:serviceName "d" .
-
-ns2:Service6 a ns2:Service ;
-    ns2:serviceName "pando" .
-
-ns2:Service7 a ns2:Service ;
-    ns2:serviceName "mysqlx?" .
-
-ns2:Service8 a ns2:Service ;
-    ns2:serviceName "unknown" .
 
 ns2:Webpage1 a ns2:Webpage ;
     ns2:page "/delete" ;
@@ -547,17 +520,72 @@ ns1:Profile5 a ns1:Profile ;
         ns1:Result3 ;
     ns1:profileName "fast_scan" .
 
+ns1:Profile6 a ns1:Profile ;
+    ns1:Command "nmap -sC -sV -p- <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result2,
+        ns1:Result3 ;
+    ns1:profileName "full_scan" .
+
 ns1:Result2 a ns1:Result ;
     ns1:result "port" .
 
 ns1:Result3 a ns1:Result ;
     ns1:result "service" .
 
+ns2:Port10 a ns2:Port ;
+    ns2:portNumber "57621" ;
+    ns2:portService ns2:Service8 ;
+    ns2:portStatus "open" .
+
+ns2:Port5 a ns2:Port ;
+    ns2:portNumber "2179" ;
+    ns2:portService ns2:Service4 ;
+    ns2:portStatus "open" .
+
+ns2:Port6 a ns2:Port ;
+    ns2:portNumber "3394" ;
+    ns2:portService ns2:Service5 ;
+    ns2:portStatus "open" .
+
+ns2:Port7 a ns2:Port ;
+    ns2:portNumber "3580" ;
+    ns2:portService ns2:Service1 ;
+    ns2:portStatus "open" .
+
+ns2:Port8 a ns2:Port ;
+    ns2:portNumber "7680" ;
+    ns2:portService ns2:Service6 ;
+    ns2:portStatus "open" .
+
+ns2:Port9 a ns2:Port ;
+    ns2:portNumber "33060" ;
+    ns2:portService ns2:Service7 ;
+    ns2:portStatus "open" .
+
+ns2:Service4 a ns2:Service ;
+    ns2:serviceName "vmrdp?" .
+
+ns2:Service5 a ns2:Service ;
+    ns2:serviceName "d" .
+
+ns2:Service6 a ns2:Service ;
+    ns2:serviceName "pando" .
+
+ns2:Service7 a ns2:Service ;
+    ns2:serviceName "mysqlx?" .
+
+ns2:Service8 a ns2:Service ;
+    ns2:serviceName "unknown" .
+
 ns1:Result4 a ns1:Result ;
     ns1:result "account" .
 
 ns1:Result5 a ns1:Result ;
     ns1:result "password" .
+
+ns1:Result1 a ns1:Result ;
+    ns1:result "webpage" .
 
 ns2:Port1 a ns2:Port ;
     ns2:portNumber "80" ;
@@ -584,9 +612,6 @@ ns2:Service2 a ns2:Service ;
 
 ns2:Service3 a ns2:Service ;
     ns2:serviceName "mysql" .
-
-ns1:Result1 a ns1:Result ;
-    ns1:result "webpage" .
 
 ns2:Service1 a ns2:Service ;
     ns2:serviceName "http" .

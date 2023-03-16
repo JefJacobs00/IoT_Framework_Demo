@@ -59,6 +59,15 @@ profileScore(Profile, Score) :-
     rdf(Scan,ns1:'scanInfo',B),
     rdf(B,ns2:'profileName', literal(Profile)).
 
+profileResult(Profile, Result) :-
+    rdfs_individual_of(P, ns2:'Profile'),
+    rdf(P, ns2:'hasResult', R),
+    rdf(R,ns2:'result',literal(Result)),
+    rdf(P,ns2:'profileName', literal(Profile)).
+
+profileResults(Profile, Results) :-
+    bagof(R, profileResult(Profile,R), Results).
+
 avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
 

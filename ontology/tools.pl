@@ -17,6 +17,30 @@ tools_score(Tool, Profile, Command) :-
     call(Profile, Parameters, Command),
     tool(Tool, Profile).
 
+simular_tools_executed(Profile, X) :-
+    bagof(P, executed(P), Profiles),
+    has_same_results(Profile, Profiles, X).
+
+has_same_results(Profile, Executed_profiles, X) :-
+    profileResults(Profile, Results),
+    has_same_results_helper(Results, Executed_profiles, 0, X).
+
+has_same_results_helper(_, [], Acc, Acc).
+has_same_results_helper(Results, [Executed_profile | Executed_profiles], Acc, X) :-
+    profileResults(Executed_profile, Executed_results),
+    test_X(Results, Executed_results) -> Acc1 is Acc + 1, has_same_results_helper(Results, Executed_profiles, Acc1, X) ; has_same_results_helper(Results, Executed_profiles, Acc, X).
+
+
+test_X([], _).
+test_X([X | Xs], Ys) :-
+    memberCheckSimple(Ys,X),
+    test_X(Xs, Ys).
+
+
+% https://stackoverflow.com/questions/40530172/check-if-an-element-is-member-of-a-list
+memberCheckSimple([H|T], H).
+memberCheckSimple([_|T], H) :- memberCheckSimple(T, H).
+
 getLowest([], _, 9999999).
 getLowest([H|T], Profile, Min) :-
     avgProfileDuration(H, Avg),
