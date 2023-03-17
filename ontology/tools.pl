@@ -17,9 +17,14 @@ tools_score(Tool, Profile, Command) :-
     call(Profile, Parameters, Command),
     tool(Tool, Profile).
 
+adjust_ProfileScore(Profile, Score) :-
+    simular_tools_executed(Profile, X),
+    avgProfileScore(Profile, Avg),
+    Score is Avg - X.
+
+
 simular_tools_executed(Profile, X) :-
-    bagof(P, executed(P), Profiles),
-    has_same_results(Profile, Profiles, X).
+    bagof(P, executed(P), Profiles) -> has_same_results(Profile, Profiles, X); X = 0.
 
 has_same_results(Profile, Executed_profiles, X) :-
     profileResults(Profile, Results),
@@ -28,7 +33,10 @@ has_same_results(Profile, Executed_profiles, X) :-
 has_same_results_helper(_, [], Acc, Acc).
 has_same_results_helper(Results, [Executed_profile | Executed_profiles], Acc, X) :-
     profileResults(Executed_profile, Executed_results),
-    test_X(Results, Executed_results) -> Acc1 is Acc + 1, has_same_results_helper(Results, Executed_profiles, Acc1, X) ; has_same_results_helper(Results, Executed_profiles, Acc, X).
+    (test_X(Results, Executed_results) ->
+        Acc1 is Acc + 1,
+        has_same_results_helper(Results, Executed_profiles, Acc1, X) ;
+        has_same_results_helper(Results, Executed_profiles, Acc, X)).
 
 
 test_X([], _).

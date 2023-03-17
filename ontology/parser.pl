@@ -52,9 +52,10 @@ profileDuration(Profile, Duration) :-
     rdf(Scan,ns1:'scanInfo',B),
     rdf(B,ns2:'profileName',literal(Profile)).
 
+
 profileScore(Profile, Score) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
-    rdf(Scan, ns1:'resultScore', literal(type('http://www.w3.org/2001/XMLSchema#integer',S))),
+    rdf(Scan, ns1:'resultScore', literal(type('http://www.w3.org/2001/XMLSchema#double',S))),
     atom_number(S, Score),
     rdf(Scan,ns1:'scanInfo',B),
     rdf(B,ns2:'profileName', literal(Profile)).
@@ -72,12 +73,14 @@ avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
 
 avgProfileScore(Profile, Avg) :-
-    (bagof(Score, profileScore(Profile, Score), List) -> average(List,Avg); Avg = 0).
+    (bagof(Score, profileScore(Profile, Score), List) ->
+        (List = [] -> Avg = 0 ; average(List, Avg))
+    ; Avg = 0).
+
 
 average(List, Average) :-
     sumlist( List, Sum ),
     length( List, Length ),
-    Length > 0,
-    Average is Sum / Length.
+    (Length > 0) -> Average is Sum / Length; Average = 0.
 
 

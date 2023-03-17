@@ -23,18 +23,6 @@ http_dir_scan_big(Parameters, Command) :-
 https_dir_scan_big(Parameters, Command) :- 
 	format_command("gobuster dir -u https://~w:~w/ -w wordlists/big.txt", [Parameters.ip, Parameters.port], Command). 
 
-tool(nmap, fast_scan).
-tool(nmap, full_scan).
-
-profile(fast_scan, [ip=Ip]) :- ip(Ip), \+ executed(fast_scan). 
-profile(full_scan, [ip=Ip]) :- ip(Ip), \+ executed(full_scan). 
-
-fast_scan(Parameters, Command) :- 
-	format_command("nmap -F ~w", [Parameters.ip], Command). 
-
-full_scan(Parameters, Command) :- 
-	format_command("nmap -sC -sV -p- ~w", [Parameters.ip], Command). 
-
 tool(hydra, ssh_attack).
 tool(hydra, ftp_attack).
 tool(hydra, telnet_attack).
@@ -51,4 +39,16 @@ ftp_attack(Parameters, Command) :-
 
 telnet_attack(Parameters, Command) :- 
 	format_command("hydra -C wordlists/default_credentials/test.txt telnet://~w:~w ", [Parameters.ip, Parameters.port], Command). 
+
+tool(nmap, fast_scan).
+tool(nmap, full_scan).
+
+profile(fast_scan, [ip=Ip]) :- ip(Ip), \+ executed(fast_scan). 
+profile(full_scan, [ip=Ip]) :- ip(Ip), \+ executed(full_scan). 
+
+fast_scan(Parameters, Command) :- 
+	format_command("nmap -F ~w", [Parameters.ip], Command). 
+
+full_scan(Parameters, Command) :- 
+	format_command("nmap -sC -sV -p- ~w", [Parameters.ip], Command). 
 
