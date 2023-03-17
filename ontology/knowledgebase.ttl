@@ -1,481 +1,15 @@
 @prefix ns1: <http://www.semanticweb.org/jef/ontologies/2023/tools#> .
 @prefix ns2: <http://www.semanticweb.org/jef/ontologies/2023/demo#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ns2:IpAddress1 a ns2:IpAddress ;
-    ns2:addressPort ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Port4,
-        ns2:Port5,
-        ns2:Port6,
-        ns2:Port7 ;
     ns2:ipv4 "192.168.0.185" .
 
-ns2:Scan1 a ns2:Scan ;
-    ns2:command "b'nmap -F 192.168.0.185'" ;
-    ns2:duration 1.86184e+03 ;
-    ns2:epochTime 1.679068e+09 ;
-    ns2:executionTime "16:39 17/03/2023" ;
-    ns2:resultScore 4.611308e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns1:Profile8 .
-
-ns2:Scan10 a ns2:Scan ;
-    ns2:command "b'nmap -sC -sV -p- 192.168.0.185'" ;
-    ns2:duration 1.599307e+05 ;
-    ns2:epochTime 1.67907e+09 ;
-    ns2:executionTime "17:20 17/03/2023" ;
-    ns2:resultScore 7.043769e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Port4,
-        ns2:Port5,
-        ns2:Port6,
-        ns2:Port7,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns2:Service4,
-        ns2:Service5,
-        ns2:Service6,
-        ns1:Profile9 .
-
-ns2:Scan11 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/common.txt'" ;
-    ns2:duration 1.13489e+03 ;
-    ns2:epochTime 1.679071e+09 ;
-    ns2:executionTime "17:37 17/03/2023" ;
-    ns2:resultScore 3.762281e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage13,
-        ns2:Webpage14,
-        ns2:Webpage15,
-        ns2:Webpage16,
-        ns2:Webpage17,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage3,
-        ns2:Webpage4,
-        ns2:Webpage5,
-        ns2:Webpage6,
-        ns2:Webpage7,
-        ns2:Webpage8,
-        ns2:Webpage9,
-        ns1:Profile1 .
-
-ns2:Scan12 a ns2:Scan ;
-    ns2:command "b'nmap -F 192.168.0.185'" ;
-    ns2:duration 1.8555e+03 ;
-    ns2:epochTime 1.679071e+09 ;
-    ns2:executionTime "17:37 17/03/2023" ;
-    ns2:resultScore 4.616819e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Profile1,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3 .
-
-ns2:Scan13 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/big.txt'" ;
-    ns2:duration 4.82444e+03 ;
-    ns2:epochTime 1.679071e+09 ;
-    ns2:executionTime "17:38 17/03/2023" ;
-    ns2:resultScore 4.346201e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage15,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage21,
-        ns2:Webpage22,
-        ns2:Webpage23,
-        ns2:Webpage24,
-        ns2:Webpage25,
-        ns2:Webpage26,
-        ns2:Webpage27,
-        ns2:Webpage28,
-        ns2:Webpage29,
-        ns2:Webpage3,
-        ns2:Webpage30,
-        ns2:Webpage31,
-        ns2:Webpage32,
-        ns2:Webpage33,
-        ns2:Webpage34,
-        ns2:Webpage35,
-        ns2:Webpage36,
-        ns2:Webpage37,
-        ns2:Webpage38,
-        ns2:Webpage39,
-        ns2:Webpage4,
-        ns2:Webpage40,
-        ns2:Webpage41,
-        ns2:Webpage42,
-        ns2:Webpage43,
-        ns2:Webpage7,
-        ns2:Webpage9,
-        ns1:Profile3 .
-
-ns2:Scan14 a ns2:Scan ;
-    ns2:command "b'nmap -sC -sV -p- 192.168.0.185'" ;
-    ns2:duration 1.604779e+05 ;
-    ns2:epochTime 1.679071e+09 ;
-    ns2:executionTime "17:41 17/03/2023" ;
-    ns2:resultScore 7.04362e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Port4,
-        ns2:Port5,
-        ns2:Port6,
-        ns2:Port7,
-        ns2:Profile1,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns2:Service4,
-        ns2:Service5,
-        ns2:Service6 .
-
-ns2:Scan15 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/big.txt'" ;
-    ns2:duration 4.85527e+03 ;
-    ns2:epochTime 1.679071e+09 ;
-    ns2:executionTime "17:41 17/03/2023" ;
-    ns2:resultScore 4.341463e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage15,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage21,
-        ns2:Webpage22,
-        ns2:Webpage23,
-        ns2:Webpage24,
-        ns2:Webpage25,
-        ns2:Webpage26,
-        ns2:Webpage27,
-        ns2:Webpage28,
-        ns2:Webpage29,
-        ns2:Webpage3,
-        ns2:Webpage30,
-        ns2:Webpage31,
-        ns2:Webpage32,
-        ns2:Webpage33,
-        ns2:Webpage34,
-        ns2:Webpage35,
-        ns2:Webpage36,
-        ns2:Webpage37,
-        ns2:Webpage38,
-        ns2:Webpage39,
-        ns2:Webpage4,
-        ns2:Webpage40,
-        ns2:Webpage41,
-        ns2:Webpage42,
-        ns2:Webpage43,
-        ns2:Webpage7,
-        ns2:Webpage9,
-        ns1:Profile3 .
-
-ns2:Scan16 a ns2:Scan ;
-    ns2:command "b'nmap -sC -sV -p- 192.168.0.185'" ;
-    ns2:duration 1.601254e+05 ;
-    ns2:epochTime 1.679071e+09 ;
-    ns2:executionTime "17:44 17/03/2023" ;
-    ns2:resultScore 7.043716e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Port4,
-        ns2:Port5,
-        ns2:Port6,
-        ns2:Port7,
-        ns2:Profile1,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns2:Service4,
-        ns2:Service5,
-        ns2:Service6 .
-
-ns2:Scan17 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/big.txt'" ;
-    ns2:duration 5.54962e+03 ;
-    ns2:epochTime 1.679071e+09 ;
-    ns2:executionTime "17:44 17/03/2023" ;
-    ns2:resultScore 4.248693e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage15,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage21,
-        ns2:Webpage22,
-        ns2:Webpage23,
-        ns2:Webpage24,
-        ns2:Webpage25,
-        ns2:Webpage26,
-        ns2:Webpage27,
-        ns2:Webpage28,
-        ns2:Webpage29,
-        ns2:Webpage3,
-        ns2:Webpage30,
-        ns2:Webpage31,
-        ns2:Webpage32,
-        ns2:Webpage33,
-        ns2:Webpage34,
-        ns2:Webpage35,
-        ns2:Webpage36,
-        ns2:Webpage37,
-        ns2:Webpage38,
-        ns2:Webpage39,
-        ns2:Webpage4,
-        ns2:Webpage40,
-        ns2:Webpage41,
-        ns2:Webpage42,
-        ns2:Webpage43,
-        ns2:Webpage7,
-        ns2:Webpage9,
-        ns1:Profile3 .
-
-ns2:Scan2 a ns2:Scan ;
-    ns2:command "b'nmap -sC -sV -p- 192.168.0.185'" ;
-    ns2:duration 1.600652e+05 ;
-    ns2:epochTime 1.679068e+09 ;
-    ns2:executionTime "16:42 17/03/2023" ;
-    ns2:resultScore 7.043732e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Port4,
-        ns2:Port5,
-        ns2:Port6,
-        ns2:Port7,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns2:Service4,
-        ns2:Service5,
-        ns2:Service6,
-        ns1:Profile9 .
-
-ns2:Scan3 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/common.txt'" ;
-    ns2:duration 1.13669e+03 ;
-    ns2:epochTime 1.679069e+09 ;
-    ns2:executionTime "17:05 17/03/2023" ;
-    ns2:resultScore 3.759498e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage13,
-        ns2:Webpage14,
-        ns2:Webpage15,
-        ns2:Webpage16,
-        ns2:Webpage17,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage3,
-        ns2:Webpage4,
-        ns2:Webpage5,
-        ns2:Webpage6,
-        ns2:Webpage7,
-        ns2:Webpage8,
-        ns2:Webpage9,
-        ns1:Profile1 .
-
-ns2:Scan4 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/big.txt'" ;
-    ns2:duration 4.82744e+03 ;
-    ns2:epochTime 1.679069e+09 ;
-    ns2:executionTime "17:05 17/03/2023" ;
-    ns2:resultScore 4.345737e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage15,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage21,
-        ns2:Webpage22,
-        ns2:Webpage23,
-        ns2:Webpage24,
-        ns2:Webpage25,
-        ns2:Webpage26,
-        ns2:Webpage27,
-        ns2:Webpage28,
-        ns2:Webpage29,
-        ns2:Webpage3,
-        ns2:Webpage30,
-        ns2:Webpage31,
-        ns2:Webpage32,
-        ns2:Webpage33,
-        ns2:Webpage34,
-        ns2:Webpage35,
-        ns2:Webpage36,
-        ns2:Webpage37,
-        ns2:Webpage38,
-        ns2:Webpage39,
-        ns2:Webpage4,
-        ns2:Webpage40,
-        ns2:Webpage41,
-        ns2:Webpage42,
-        ns2:Webpage43,
-        ns2:Webpage7,
-        ns2:Webpage9,
-        ns1:Profile3 .
-
-ns2:Scan5 a ns2:Scan ;
-    ns2:command "b'nmap -F 192.168.0.185'" ;
-    ns2:duration 2.26629e+03 ;
-    ns2:epochTime 1.679069e+09 ;
-    ns2:executionTime "17:05 17/03/2023" ;
-    ns2:resultScore 4.323747e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns1:Profile8 .
-
-ns2:Scan6 a ns2:Scan ;
-    ns2:command "b'nmap -sC -sV -p- 192.168.0.185'" ;
-    ns2:duration 1.605458e+05 ;
-    ns2:epochTime 1.679069e+09 ;
-    ns2:executionTime "17:07 17/03/2023" ;
-    ns2:resultScore 7.043601e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Port4,
-        ns2:Port5,
-        ns2:Port6,
-        ns2:Port7,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns2:Service4,
-        ns2:Service5,
-        ns2:Service6,
-        ns1:Profile9 .
-
-ns2:Scan7 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/common.txt'" ;
-    ns2:duration 1.11652e+03 ;
-    ns2:epochTime 1.67907e+09 ;
-    ns2:executionTime "17:17 17/03/2023" ;
-    ns2:resultScore 3.791274e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage13,
-        ns2:Webpage14,
-        ns2:Webpage15,
-        ns2:Webpage16,
-        ns2:Webpage17,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage3,
-        ns2:Webpage4,
-        ns2:Webpage5,
-        ns2:Webpage6,
-        ns2:Webpage7,
-        ns2:Webpage8,
-        ns2:Webpage9,
-        ns1:Profile1 .
-
-ns2:Scan8 a ns2:Scan ;
-    ns2:command "b'nmap -F 192.168.0.185'" ;
-    ns2:duration 2.27662e+03 ;
-    ns2:epochTime 1.67907e+09 ;
-    ns2:executionTime "17:17 17/03/2023" ;
-    ns2:resultScore 4.317745e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Port3,
-        ns2:Service1,
-        ns2:Service2,
-        ns2:Service3,
-        ns1:Profile8 .
-
-ns2:Scan9 a ns2:Scan ;
-    ns2:command "b'gobuster dir -u http://192.168.0.185:3580/ -w wordlists/big.txt'" ;
-    ns2:duration 5.8488e+03 ;
-    ns2:epochTime 1.67907e+09 ;
-    ns2:executionTime "17:17 17/03/2023" ;
-    ns2:resultScore 4.215511e+01 ;
-    ns2:scanInfo ns2:Webpage1,
-        ns2:Webpage10,
-        ns2:Webpage11,
-        ns2:Webpage12,
-        ns2:Webpage15,
-        ns2:Webpage18,
-        ns2:Webpage19,
-        ns2:Webpage2,
-        ns2:Webpage20,
-        ns2:Webpage21,
-        ns2:Webpage22,
-        ns2:Webpage23,
-        ns2:Webpage24,
-        ns2:Webpage25,
-        ns2:Webpage26,
-        ns2:Webpage27,
-        ns2:Webpage28,
-        ns2:Webpage29,
-        ns2:Webpage3,
-        ns2:Webpage30,
-        ns2:Webpage31,
-        ns2:Webpage32,
-        ns2:Webpage33,
-        ns2:Webpage34,
-        ns2:Webpage35,
-        ns2:Webpage36,
-        ns2:Webpage37,
-        ns2:Webpage38,
-        ns2:Webpage39,
-        ns2:Webpage4,
-        ns2:Webpage40,
-        ns2:Webpage41,
-        ns2:Webpage42,
-        ns2:Webpage43,
-        ns2:Webpage7,
-        ns2:Webpage9,
-        ns1:Profile3 .
+ns1:Profile1 a ns1:Profile ;
+    ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/common.txt" ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement2 ;
+    ns1:hasResult ns1:Result1 ;
+    ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile2 a ns1:Profile ;
     ns1:Command "gobuster dir -u https://<ip>:<port>/ -w wordlists/common.txt" ;
@@ -483,6 +17,13 @@ ns1:Profile2 a ns1:Profile ;
         ns1:Requirement3 ;
     ns1:hasResult ns1:Result1 ;
     ns1:profileName "https_dir_scan_small" .
+
+ns1:Profile3 a ns1:Profile ;
+    ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/big.txt" ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement4 ;
+    ns1:hasResult ns1:Result1 ;
+    ns1:profileName "http_dir_scan_big" .
 
 ns1:Profile4 a ns1:Profile ;
     ns1:Command "gobuster dir -u https://<ip>:<port>/ -w wordlists/big.txt" ;
@@ -492,50 +33,53 @@ ns1:Profile4 a ns1:Profile ;
     ns1:profileName "https_dir_scan_big" .
 
 ns1:Profile5 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>",
-        "nmap -F <ip>" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement6 ;
+    ns1:Command "nmap -F <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
     ns1:hasResult ns1:Result2,
         ns1:Result3 ;
-    ns1:profileName "fast_scan",
-        "ssh_attack" .
+    ns1:profileName "fast_scan" .
 
 ns1:Profile6 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>",
-        "nmap -sC -sV -p- <ip>" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement7 ;
+    ns1:Command "nmap -sC -sV -p- <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
     ns1:hasResult ns1:Result2,
         ns1:Result3 ;
-    ns1:profileName "ftp_attack",
-        "full_scan" .
+    ns1:profileName "full_scan" .
 
 ns1:Profile7 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>",
-        "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> " ;
+    ns1:Command "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>" ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement6,
-        ns1:Requirement8 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3,
-        ns1:Result4,
+        ns1:Requirement6 ;
+    ns1:hasResult ns1:Result4,
         ns1:Result5 ;
-    ns1:profileName "ssh_attack",
-        "telnet_attack" .
+    ns1:profileName "ssh_attack" .
+
+ns1:Profile8 a ns1:Profile ;
+    ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>" ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement7 ;
+    ns1:hasResult ns1:Result4,
+        ns1:Result5 ;
+    ns1:profileName "ftp_attack" .
+
+ns1:Profile9 a ns1:Profile ;
+    ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> " ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement8 ;
+    ns1:hasResult ns1:Result4,
+        ns1:Result5 ;
+    ns1:profileName "telnet_attack" .
 
 ns1:Tool1 a ns1:Tool ;
     ns1:toolName "gobuster" ;
     ns1:version "" .
 
 ns1:Tool2 a ns1:Tool ;
-    ns1:toolName "hydra",
-        "nmap" ;
+    ns1:toolName "nmap" ;
     ns1:version "" .
 
 ns1:Tool3 a ns1:Tool ;
-    ns1:toolName "hydra",
-        "nmap" ;
+    ns1:toolName "hydra" ;
     ns1:version "" .
 
 ns1:Requirement2 a ns1:Requirement ;
@@ -566,375 +110,22 @@ ns1:Requirement8 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
     ns1:value "['Ip', 'Port', 'telnet']" .
 
-ns2:Profile1 a ns1:Profile ;
-    ns1:profileName "fast_scan",
-        "full_scan" .
-
-ns2:Webpage13 a ns2:Webpage ;
-    ns2:page "/list-search" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage14 a ns2:Webpage ;
-    ns2:page "/list-view" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage16 a ns2:Webpage ;
-    ns2:page "/list-users" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage17 a ns2:Webpage ;
-    ns2:page "/listusers" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage5 a ns2:Webpage ;
-    ns2:page "/list-create" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage6 a ns2:Webpage ;
-    ns2:page "/list-edit" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage8 a ns2:Webpage ;
-    ns2:page "/list_users" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns1:Profile1 a ns1:Profile ;
-    ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/common.txt" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement2 ;
-    ns1:hasResult ns1:Result1 ;
-    ns1:profileName "http_dir_scan_small" .
-
-ns1:Profile8 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>",
-        "nmap -F <ip>" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement7 ;
-    ns1:hasResult ns1:Result4,
-        ns1:Result5 ;
-    ns1:profileName "fast_scan",
-        "ftp_attack" .
-
-ns1:Profile9 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> ",
-        "nmap -sC -sV -p- <ip>" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement8 ;
-    ns1:hasResult ns1:Result4,
-        ns1:Result5 ;
-    ns1:profileName "full_scan",
-        "telnet_attack" .
-
 ns1:Result2 a ns1:Result ;
-    ns1:result "account",
-        "port" .
+    ns1:result "port" .
 
 ns1:Result3 a ns1:Result ;
-    ns1:result "password",
-        "service" .
+    ns1:result "service" .
 
 ns1:Result4 a ns1:Result ;
-    ns1:result "account",
-        "port" .
+    ns1:result "account" .
 
 ns1:Result5 a ns1:Result ;
-    ns1:result "password",
-        "service" .
+    ns1:result "password" .
 
 ns1:Result1 a ns1:Result ;
     ns1:result "webpage" .
 
-ns2:Webpage21 a ns2:Webpage ;
-    ns2:page "/deletemsg" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage22 a ns2:Webpage ;
-    ns2:page "/delete_account" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage23 a ns2:Webpage ;
-    ns2:page "/lista" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage24 a ns2:Webpage ;
-    ns2:page "/listar" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage25 a ns2:Webpage ;
-    ns2:page "/listacorreo" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage26 a ns2:Webpage ;
-    ns2:page "/listas" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage27 a ns2:Webpage ;
-    ns2:page "/listen" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage28 a ns2:Webpage ;
-    ns2:page "/liste" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage29 a ns2:Webpage ;
-    ns2:page "/listes" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage30 a ns2:Webpage ;
-    ns2:page "/listing_photos" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage31 a ns2:Webpage ;
-    ns2:page "/listmail" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage32 a ns2:Webpage ;
-    ns2:page "/listingsdetail" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage33 a ns2:Webpage ;
-    ns2:page "/listini" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage34 a ns2:Webpage ;
-    ns2:page "/listman" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage35 a ns2:Webpage ;
-    ns2:page "/listmessenger" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage36 a ns2:Webpage ;
-    ns2:page "/listorderby" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage37 a ns2:Webpage ;
-    ns2:page "/listmania" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage38 a ns2:Webpage ;
-    ns2:page "/listmanager" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage39 a ns2:Webpage ;
-    ns2:page "/listuse" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage40 a ns2:Webpage ;
-    ns2:page "/listserv" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage41 a ns2:Webpage ;
-    ns2:page "/publishers" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage42 a ns2:Webpage ;
-    ns2:page "/publishingimages" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage43 a ns2:Webpage ;
-    ns2:page "/publishing" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns1:Profile3 a ns1:Profile ;
-    ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/big.txt" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement4 ;
-    ns1:hasResult ns1:Result1 ;
-    ns1:profileName "http_dir_scan_big" .
-
-ns2:Port4 a ns2:Port ;
-    ns2:portNumber "2179" ;
-    ns2:portService ns2:Service4 ;
-    ns2:portStatus "open" .
-
-ns2:Port5 a ns2:Port ;
-    ns2:portNumber "3580" ;
-    ns2:portService ns2:Service1 ;
-    ns2:portStatus "open" .
-
-ns2:Port6 a ns2:Port ;
-    ns2:portNumber "7680" ;
-    ns2:portService ns2:Service5 ;
-    ns2:portStatus "open" .
-
-ns2:Port7 a ns2:Port ;
-    ns2:portNumber "33060" ;
-    ns2:portService ns2:Service6 ;
-    ns2:portStatus "open" .
-
-ns2:Service4 a ns2:Service ;
-    ns2:serviceName "vmrdp?" .
-
-ns2:Service5 a ns2:Service ;
-    ns2:serviceName "pando" .
-
-ns2:Service6 a ns2:Service ;
-    ns2:serviceName "mysqlx?" .
-
-ns2:Webpage1 a ns2:Webpage ;
-    ns2:page "/delete" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage10 a ns2:Webpage ;
-    ns2:page "/listing" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage11 a ns2:Webpage ;
-    ns2:page "/lists" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage12 a ns2:Webpage ;
-    ns2:page "/listings" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage15 a ns2:Webpage ;
-    ns2:page "/listview" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage18 a ns2:Webpage ;
-    ns2:page "/published" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage19 a ns2:Webpage ;
-    ns2:page "/publish" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage2 a ns2:Webpage ;
-    ns2:page "/deleted" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage20 a ns2:Webpage ;
-    ns2:page "/publisher" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage3 a ns2:Webpage ;
-    ns2:page "/deleteme" ;
-    ns2:redirect "" ;
-    ns2:size "120" ;
-    ns2:status "403" .
-
-ns2:Webpage4 a ns2:Webpage ;
-    ns2:page "/listinfo" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage7 a ns2:Webpage ;
-    ns2:page "/list" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
-ns2:Webpage9 a ns2:Webpage ;
-    ns2:page "/listadmin" ;
-    ns2:redirect "" ;
-    ns2:size "2" ;
-    ns2:status "200" .
-
 ns1:Requirement1 a ns1:Requirement ;
     ns1:requirement "ip" ;
     ns1:value "Ip" .
-
-ns2:Port1 a ns2:Port ;
-    ns2:portNumber "80" ;
-    ns2:portService ns2:Service1 ;
-    ns2:portStatus "open" .
-
-ns2:Port2 a ns2:Port ;
-    ns2:portNumber "135" ;
-    ns2:portService ns2:Service2 ;
-    ns2:portStatus "open" .
-
-ns2:Port3 a ns2:Port ;
-    ns2:portNumber "3306" ;
-    ns2:portService ns2:Service3 ;
-    ns2:portStatus "open" .
-
-ns2:Service2 a ns2:Service ;
-    ns2:serviceName "msrpc" .
-
-ns2:Service3 a ns2:Service ;
-    ns2:serviceName "mysql" .
-
-ns2:Service1 a ns2:Service ;
-    ns2:serviceName "http" .
 

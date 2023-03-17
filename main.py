@@ -90,10 +90,12 @@ def start_scanning(target):
 
         for profile in sorted_keys:
             if profile not in executed_tools:
-                #executed_tools.append(profile)
+                executed_tools.append(profile)
                 profile_properties = profiles[profile]
                 execute_scan(profile_properties['Tool'], profile, profile_properties['Command'], target)
                 has_executed = True
+            else:
+                print('HMM')
 
     ontology.saveToFile('ontology/knowledgebase.ttl')
 
