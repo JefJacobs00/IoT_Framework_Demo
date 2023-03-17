@@ -113,6 +113,11 @@
                rdfs:domain :Scan .
 
 
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#epochTime
+:epochTime rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Scan .
+
+
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#hashFunction
 :hashFunction rdf:type owl:DatatypeProperty ;
               rdfs:domain :Hash ;

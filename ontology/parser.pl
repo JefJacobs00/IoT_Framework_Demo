@@ -60,6 +60,15 @@ profileScore(Profile, Score) :-
     rdf(Scan,ns1:'scanInfo',B),
     rdf(B,ns2:'profileName', literal(Profile)).
 
+
+profileTime(Profile, Time) :-
+    rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Scan, ns1:'epochTime', literal(type('http://www.w3.org/2001/XMLSchema#double',T))),
+    atom_number(T, Time),
+    rdf(Scan,ns1:'scanInfo',B),
+    rdf(B,ns2:'profileName', literal(Profile)).
+
+
 profileResult(Profile, Result) :-
     rdfs_individual_of(P, ns2:'Profile'),
     rdf(P, ns2:'hasResult', R),
