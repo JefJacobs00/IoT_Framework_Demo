@@ -171,7 +171,7 @@ class ConfigParser:
             requirements = self.configure_dict_string(profile_config['Requirement'], '(', ')')
             parameters = self.configure_dict_string(profile_config['Parameter'], '=','')
             command_predicates += self.configure_command(profile_config['Command'], profile)
-            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}, \+ executed({profile}). \n"
+            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}, latestProfileExecution({profile}, Time), get_time(Now), Time + 1000 < Now. \n"
 
         return tool_predicates + "\n" + profile_predicates + "\n" + command_predicates
 

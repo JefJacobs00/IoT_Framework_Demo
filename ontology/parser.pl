@@ -87,6 +87,17 @@ avgProfileScore(Profile, Avg) :-
     ; Avg = 0).
 
 
+latestProfileExecution(Profile, Max) :-
+    bagof(Time, profileTime(Profile, Time), Times),
+    max_value(Times, Max).
+
+max_value([H], H).
+max_value([H|T], Max) :-
+    max_value(T, Max1),
+    (H > Max1 -> Max = H ; Max = Max1).
+
+
+
 average(List, Average) :-
     sumlist( List, Sum ),
     length( List, Length ),

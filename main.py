@@ -78,7 +78,7 @@ def start_scanning(target):
     prolog.consult('ontology/parser.pl')
     prolog.consult('ontology/tools_config.pl')
     while has_executed:
-        a = prolog.query('load_ontology()')
+        prolog.query('load_ontology()')
         has_executed = False
         profiles = get_runnable_profiles(prolog, executed_tools)
         for profile in profiles:
@@ -90,7 +90,7 @@ def start_scanning(target):
 
         for profile in sorted_keys:
             if profile not in executed_tools:
-                executed_tools.append(profile)
+                #executed_tools.append(profile)
                 profile_properties = profiles[profile]
                 execute_scan(profile_properties['Tool'], profile, profile_properties['Command'], target)
                 has_executed = True
@@ -117,7 +117,7 @@ ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
-#c.read_profiles('ontology/tools_config.pl')
+c.read_profiles('ontology/tools_config.pl')
 
 start_scanning(r[0]["ipv4"])
 
