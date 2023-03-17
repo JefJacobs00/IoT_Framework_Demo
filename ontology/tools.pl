@@ -58,9 +58,9 @@ getLowest([H|T], Profile, Min) :-
 
 getHighest([], _, -1).
 getHighest([H|T], Profile, Max) :-
-    avgProfileScore(H, Avg),
+    adjust_ProfileScore(H, Score),
     getHighest(T, NewProfile, Max1),
-    (Avg > Max1 -> (Max = Avg, Profile = H) ; (Max = Max1, Profile = NewProfile)).
+    (Score > Max1 -> (Max = Score, Profile = H) ; (Max = Max1, Profile = NewProfile)).
 
 format_command(Template, Parameters, Command) :-
     format(string(Command), Template, Parameters).
