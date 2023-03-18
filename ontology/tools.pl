@@ -1,3 +1,6 @@
+:- consult(parser).
+:- consult(tools_config).
+
 tools(Tool, Profile, Command) :-
     profile(Profile, Parameters),
     call(Profile, Parameters, Command),
@@ -20,7 +23,9 @@ tools_score(Tool, Profile, Command) :-
 adjust_ProfileScore(Profile, Score) :-
     simular_tools_executed(Profile, X),
     avgProfileScore(Profile, Avg),
-    Score is Avg - X.
+    get_time(Now),
+    latestProfileExecution(Profile, Last_execution),
+    Score is Avg - X + ((Now - Last_execution)/1000).
 
 
 simular_tools_executed(Profile, X) :-
