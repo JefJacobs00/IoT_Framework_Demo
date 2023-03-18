@@ -35,67 +35,28 @@ def execute_scan(tool, profile,  command, target):
     print(output)
 
 
-def get_runnable_profiles(prolog, executed_tools):
-    profiles = {}
-    for result in prolog.query(f'tools(Tool, Profile, Command)'):
-        if result['Tool'] in plugins and result not in executed_tools:
-            profile = result['Profile']
-            properties = {}
-            properties['Tool'] = result['Tool']
-            properties['Command'] = result['Command']
-            profiles[profile] = properties
+def get_next_profile(prolog):
+    profile = {}
+    for result in prolog.query(f'tools_score(Tool, Profile, Command)'):
+        profile['Tool'] = result['Tool']
+        profile['Command'] = result['Command']
+        profile['name'] = result['Profile']
 
-    return profiles
-
-
-def get_avg_profile_duration(prolog, profile):
-    durations = []
-    for times in prolog.query(f'profileDuration({profile}, Duration)'):
-        durations.append(float(times['Duration']))
-
-    if len(durations) == 0:
-        return 0
-
-    return sum(durations)/len(durations)
-
-def get_avg_profile_score(prolog, profile):
-    score = []
-    for times in prolog.query(f'profileScore({profile}, Score)'):
-        score.append(int(times['Score']))
-
-    if len(score) == 0:
-        return 0
-
-    return sum(score)/len(score)
+    return profile
 
 def start_scanning(target):
     has_executed = True
 
-    executed_tools = []
-
     prolog = pyswip.Prolog()
     prolog.consult('ontology/tools.pl')
-    prolog.consult('ontology/parser.pl')
-    prolog.consult('ontology/tools_config.pl')
     while has_executed:
-        prolog.query('load_ontology()')
+        for result in prolog.query('load_ontology()'):
+            print(result)
         has_executed = False
-        profiles = get_runnable_profiles(prolog, executed_tools)
-        for profile in profiles:
-            profiles[profile]['avg_duration'] = get_avg_profile_duration(prolog, profile)
-            profiles[profile]['avg_score'] = get_avg_profile_score(prolog, profile)
-
-        sorted_keys = sorted(profiles, key=lambda x: profiles[x]['avg_duration'])
-        print(profiles)
-
-        for profile in sorted_keys:
-            if profile not in executed_tools:
-                executed_tools.append(profile)
-                profile_properties = profiles[profile]
-                execute_scan(profile_properties['Tool'], profile, profile_properties['Command'], target)
-                has_executed = True
-            else:
-                print('HMM')
+        profile = get_next_profile(prolog)
+        if len(profile) > 0:
+            execute_scan(profile['Tool'], profile['name'], profile['Command'], target)
+            has_executed = True
 
     ontology.saveToFile('ontology/knowledgebase.ttl')
 

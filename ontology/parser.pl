@@ -8,7 +8,7 @@
 
 
 load_ontology() :-
-    rdf_load('knowledgebase.ttl', [format('turtle')]).
+    rdf_load('ontology/knowledgebase.ttl', [format('turtle')]).
 
 ip(X) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
