@@ -1,0 +1,14 @@
+{
+  "Tool":{
+  "toolName": "linpeas",
+  "version": "",
+    "Profile": {
+      "linpeas": {
+        "Requirement": {"shell": "Shell"},
+        "Parameter": {},
+        "Result": [],
+        "Command": "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh"
+      }
+    }
+  }
+}

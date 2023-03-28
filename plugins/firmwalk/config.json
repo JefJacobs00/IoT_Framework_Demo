@@ -1,0 +1,14 @@
+{
+  "Tool":{
+  "toolName": "firmwalker",
+  "version": "",
+    "Profile": {
+      "firmware_analysis": {
+        "Requirement": {"firmware": "Firmware"},
+        "Parameter": {"firmware": "Firmware"},
+        "Result": ["username", "password"],
+        "Command": ""
+      }
+    }
+  }
+}

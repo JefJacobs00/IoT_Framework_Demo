@@ -1,0 +1,14 @@
+{
+  "Tool":{
+  "toolName": "john",
+  "version": "",
+    "Profile": {
+      "crack_hash": {
+        "Requirement": {"hash": "Hash"},
+        "Parameter": {"Hash": "Hash"},
+        "Result": ["password"],
+        "Command": "echo <Hash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass"
+      }
+    }
+  }
+}

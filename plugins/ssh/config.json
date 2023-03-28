@@ -1,0 +1,14 @@
+{
+  "Tool":{
+  "toolName": "ssh",
+  "version": "",
+    "Profile": {
+      "ssh_connection": {
+        "Requirement": {"ip": "Ip","username": "Username", "password":"Password"},
+        "Parameter": {"password":"Password", "username": "Username", "ip": "Ip"},
+        "Result": ["shell"],
+        "Command": "sshpass -p <Password> ssh <Username>@<Ip>"
+      }
+    }
+  }
+}
