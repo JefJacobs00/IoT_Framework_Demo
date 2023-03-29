@@ -4,7 +4,7 @@
   "version": "",
     "Profile": {
       "linpeas": {
-        "Requirement": {"shell": "Shell"},
+        "Requirement": {"shell": "connection"},
         "Parameter": {},
         "Result": [],
         "Command": "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh"

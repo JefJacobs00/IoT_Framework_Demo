@@ -36,6 +36,10 @@ devicePorts(Ip, Port) :-
     rdf(A, ns1:'ipv4', literal(Ip)),
     rdf(B, ns1:'portNumber', literal(Port)).
 
+firmware(Path) :-
+    rdfs_individual_of(A, ns1:'Firmware'),
+    rdf(A,ns1:'firmwarePath',Path).
+
 deviceServices(Ip, Port, Service) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
     rdf(A,ns1:'addressPort',B),

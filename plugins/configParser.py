@@ -211,7 +211,7 @@ class ConfigParser:
         if prolog_output is not None:
             # Clear file
             f = open(prolog_output, 'w')
-            headers = ":- discontiguous tool/2.\n:- discontiguous profile/2.\n:- dynamic executed/1.\n"
+            headers = ":- discontiguous tool/2.\n:- discontiguous profile/2.\n:- dynamic executed/1.\n:- dynamic connection/1.\n\n"
             f.write(headers)
 
         for f in os.listdir('plugins'):

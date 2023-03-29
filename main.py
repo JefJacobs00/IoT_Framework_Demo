@@ -73,14 +73,14 @@ ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 
 plugins = find_plugins(['tool.py'])
 # ip = input("Give the target ip:\n")
-ip = "192.168.0.185"
+ip = "192.168.0.106"
 r = [{'ipv4':ip}]
 
 ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')
 
 c = ConfigParser()
-#c.read_profiles('ontology/tools_config.pl')
+c.read_profiles('ontology/tools_config.pl')
 
 start_scanning(r[0]["ipv4"])
 
