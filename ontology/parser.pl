@@ -68,6 +68,16 @@ profileScore(Profile, Score) :-
     rdf(Scan,ns1:'scanInfo',B),
     rdf(B,ns2:'profileName', literal(Profile)).
 
+profileScans(Profile, Scan) :-
+    rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Scan, ns1:'scanProfile',P),
+    rdf(P, ns2:'profileName', literal(Profile)).
+
+
+scanInfo(Scan, Info) :-
+    rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Info, ns1:'scanInfo', Scan).
+
 
 profileTime(Profile, Time) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
@@ -83,16 +93,27 @@ profileResult(Profile, Result) :-
     rdf(R,ns2:'result',literal(Result)),
     rdf(P,ns2:'profileName', literal(Profile)).
 
-profileResults(Profile, Results) :-
-    bagof(R, profileResult(Profile,R), Results).
-
 avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
 
-avgProfileScore(Profile, Avg) :-
-    (bagof(Score, profileScore(Profile, Score), List) ->
-        (List = [] -> Avg = 0 ; average(List, Avg))
-    ; Avg = 0).
+amountProfileInfo(Profile, N) :-
+    bagof(Scan, profileScans(Profile, Scan), Scans),
+    count_profile_info(Scans, N).
+
+amountOfScanInfo(Scan, N) :-
+    (bagof(I, scanInfo(Scan, I), In) -> Info = In; Info = []),
+    count(Info, N).
+
+count_profile_info([], 0).
+count_profile_info([H | T], N) :-
+    count_profile_info(T , N1),
+    amountOfScanInfo(H, N2),
+    N is N1 + N2.
+
+count([], 0).
+count([_|T], N) :-
+    count(T, N1),
+    N is N1+1.
 
 
 latestProfileExecution(Profile, Max) :-

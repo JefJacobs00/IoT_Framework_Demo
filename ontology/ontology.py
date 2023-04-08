@@ -58,6 +58,7 @@ class Ontology:
 
     def putOutputIntoOntology(self, output: list):
         structured = []
+
         for line in output:
             structured.append(self.structureInfo(line))
         for line in structured:
@@ -68,7 +69,17 @@ class Ontology:
                 for link in self.links[key]:
                     test = [key for key in objects if key[0] == link[0]]
                     if len(test) > 0:
+                        if key == "Scan":
+                            if self.objectHasScan(test):
+                                continue
                         self.graph.add((test[0][1], link[1], object))
+
+    def objectHasScan(self, objects):
+        for object in objects:
+            for s,p,o in self.graph.triples((object[1], self.lookup['scanInfo'], None)):
+                return True
+
+        return False
 
     def checkIfExists(self, type, properties):
         for s, p, o in self.graph.triples((None, None, self.lookup[type])):

@@ -37,7 +37,7 @@ def execute_scan(tool, profile,  command, target):
 
 def get_next_profile(prolog):
     profile = {}
-    for result in prolog.query(f'tools_score(Tool, Profile, Command)'):
+    for result in prolog.query(f'tools_duration(Tool, Profile, Command)'):
         profile['Tool'] = result['Tool']
         profile['Command'] = result['Command']
         profile['name'] = result['Profile']
@@ -50,8 +50,6 @@ def start_scanning(target):
     prolog = pyswip.Prolog()
     prolog.consult('ontology/tools.pl')
     while has_executed:
-        for result in prolog.query('load_ontology()'):
-            print(result)
         has_executed = False
         profile = get_next_profile(prolog)
         if len(profile) > 0:

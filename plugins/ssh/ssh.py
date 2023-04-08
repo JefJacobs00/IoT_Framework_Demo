@@ -9,4 +9,4 @@ class Ssh(Tool):
         super().__init__(parser=parser,info_end='\n')
 
     def execute_command(self, command, target, profile):
-        return
+        return {}

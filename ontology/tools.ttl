@@ -153,7 +153,7 @@ ns1:Requirement5 a ns1:Requirement ;
     ns1:value "['Ip', 'Port', 'https']" .
 
 ns1:Requirement6 a ns1:Requirement ;
-    ns1:requirement "shell" ;
+    ns1:requirement "connection" ;
     ns1:value "connection" .
 
 ns1:Requirement7 a ns1:Requirement ;

