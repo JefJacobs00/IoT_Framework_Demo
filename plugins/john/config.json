@@ -4,7 +4,7 @@
   "version": "",
     "Profile": {
       "crack_hash": {
-        "Requirement": {"hash": "Hash"},
+        "Requirement": {"passwordHash": "Hash"},
         "Parameter": {"hash": "Hash"},
         "Result": ["password"],
         "Command": "echo <hash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass"

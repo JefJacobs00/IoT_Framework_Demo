@@ -3,6 +3,8 @@
 :- dynamic executed/1.
 :- dynamic connection/1.
 
+executed("nmap -sC -sV -p- 192.168.0.102").
+
 tool(gobuster, http_dir_scan_small).
 tool(gobuster, https_dir_scan_small).
 tool(gobuster, http_dir_scan_big).
@@ -29,7 +31,7 @@ tool(nmap, fast_scan).
 tool(nmap, full_scan).
 
 profile(fast_scan, [ip=Ip]) :- ip(Ip), latestProfileExecution(fast_scan, Time), get_time(Now), Time + 1000 < Now. 
-profile(full_scan, [ip=Ip]) :- ip(Ip), latestProfileExecution(full_scan, Time), get_time(Now), Time + 1000 < Now. 
+profile(full_scan, [ip=Ip]) :- ip(Ip), full_scan([ip=Ip], Command), \+executed(Command).
 
 fast_scan(Parameters, Command) :- 
 	format_command("nmap -F ~w", [Parameters.ip], Command). 
@@ -53,7 +55,7 @@ firmware_analysis(Parameters, Command) :-
 
 tool(john, crack_hash).
 
-profile(crack_hash, [hash=Hash]) :- hash(Hash), latestProfileExecution(crack_hash, Time), get_time(Now), Time + 1000 < Now. 
+profile(crack_hash, [hash=Hash]) :- passwordHash(Hash), latestProfileExecution(crack_hash, Time), get_time(Now), Time + 1000 < Now. 
 
 crack_hash(Parameters, Command) :- 
 	format_command("echo ~w > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass", [Parameters.hash], Command). 

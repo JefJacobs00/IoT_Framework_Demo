@@ -50,8 +50,7 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#hasScan
 :hasScan rdf:type owl:ObjectProperty ;
-         rdfs:domain :Scan ;
-         rdfs:range :ExecutionData .
+         rdfs:domain :Scan .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#passwordHash
@@ -68,15 +67,13 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#scanInfo
 :scanInfo rdf:type owl:ObjectProperty ;
-          rdfs:domain :Scan ;
-          rdfs:range :Account ,
-                     :Hash ,
-                     :IpAddress ,
-                     :Password ,
-                     :Port ,
-                     :Scan ,
-                     :Service ,
-                     :Webpage .
+          rdfs:domain :Account ,
+                      :Hash ,
+                      :Password ,
+                      :Port ,
+                      :Service ,
+                      :Webpage ;
+          rdfs:range :Scan .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#serviceAccount
@@ -97,7 +94,7 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#Duration
 :Duration rdf:type owl:DatatypeProperty ;
-          rdfs:domain :ExecutionData .
+          rdfs:domain :Scan .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#accountUsername
@@ -113,7 +110,7 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#executionTime
 :executionTime rdf:type owl:DatatypeProperty ;
-               rdfs:domain :ExecutionData .
+               rdfs:domain :Scan .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#firmwarePath
@@ -174,7 +171,7 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#resultScore
 :resultScore rdf:type owl:DatatypeProperty ;
-             rdfs:domain :ExecutionData .
+             rdfs:domain :Scan .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#serviceName
@@ -203,10 +200,6 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#Device
 :Device rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/jef/ontologies/2023/demo#ExecutionData
-:ExecutionData rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#Firmware

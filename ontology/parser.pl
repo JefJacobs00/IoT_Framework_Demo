@@ -36,6 +36,10 @@ devicePorts(Ip, Port) :-
     rdf(A, ns1:'ipv4', literal(Ip)),
     rdf(B, ns1:'portNumber', literal(Port)).
 
+passwordHash(Hash) :-
+    rdfs_individual_of(A, ns1:'Hash'),
+    rdf(A, ns1:'hashValue',literal(Hash)).
+
 firmware(Path) :-
     rdfs_individual_of(A, ns1:'Firmware'),
     rdf(A,ns1:'firmwarePath',Path).

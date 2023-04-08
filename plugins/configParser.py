@@ -132,7 +132,8 @@ class ConfigParser:
         ontoClass = URIRef(self.lookup['ontology'] + "#" + str(name))
         i = 1
         for s, p, o in self.graph.triples((None, None, ontoClass)):
-            i = int(s.__str__()[-1:]) + 1
+            n = s.__str__().replace(o.__str__(), '')
+            i = max(int(n) + 1, i)
         object = URIRef(self.lookup['ontology'] + "#" + str(name) + str(i))
         self.graph.add((object, RDF.type, self.lookup[name]))
         return object
@@ -171,7 +172,7 @@ class ConfigParser:
             requirements = self.configure_dict_string(profile_config['Requirement'], '(', ')')
             parameters = self.configure_dict_string(profile_config['Parameter'], '=','')
             command_predicates += self.configure_command(profile_config['Command'], profile)
-            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}, latestProfileExecution({profile}, Time), get_time(Now), Time + 1000 < Now. \n"
+            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}.\n"
 
         return tool_predicates + "\n" + profile_predicates + "\n" + command_predicates
 
