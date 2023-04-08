@@ -96,9 +96,20 @@ profileResult(Profile, Result) :-
 avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
 
-amountProfileInfo(Profile, N) :-
+totalProfileInfo(Profile, N) :-
     bagof(Scan, profileScans(Profile, Scan), Scans),
     count_profile_info(Scans, N).
+
+listProfileInfo(Profile, List) :-
+    bagof(Scan, profileScans(Profile, Scan), Scans),
+    getAmountScanInfo(Scans, List).
+
+
+getAmountScanInfo([],[]).
+getAmountScanInfo([H | T], List) :-
+    getAmountScanInfo(T, L),
+    amountOfScanInfo(H, N),
+    append(L, [N], List).
 
 amountOfScanInfo(Scan, N) :-
     (bagof(I, scanInfo(Scan, I), In) -> Info = In; Info = []),
