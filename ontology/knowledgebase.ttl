@@ -136,7 +136,8 @@ ns2:Account1 a ns2:Account ;
     ns2:scanInfo ns2:Scan2,
         ns2:Scan3,
         ns2:Scan4,
-        ns2:Scan5 .
+        ns2:Scan5,
+        ns2:Scan6 .
 
 ns2:Account2 a ns2:Account ;
     ns2:accountPassword ns2:Password2 ;
@@ -144,21 +145,24 @@ ns2:Account2 a ns2:Account ;
     ns2:scanInfo ns2:Scan2,
         ns2:Scan3,
         ns2:Scan4,
-        ns2:Scan5 .
+        ns2:Scan5,
+        ns2:Scan6 .
 
 ns2:Password1 a ns2:Password ;
     ns2:passwordCleartext "devpass" ;
     ns2:scanInfo ns2:Scan2,
         ns2:Scan3,
         ns2:Scan4,
-        ns2:Scan5 .
+        ns2:Scan5,
+        ns2:Scan6 .
 
 ns2:Password2 a ns2:Password ;
     ns2:passwordCleartext "password1" ;
     ns2:scanInfo ns2:Scan2,
         ns2:Scan3,
         ns2:Scan4,
-        ns2:Scan5 .
+        ns2:Scan5,
+        ns2:Scan6 .
 
 ns2:Port1 a ns2:Port ;
     ns2:portNumber "22" ;
@@ -168,14 +172,16 @@ ns2:Port1 a ns2:Port ;
         ns2:Scan2,
         ns2:Scan3,
         ns2:Scan4,
-        ns2:Scan5 .
+        ns2:Scan5,
+        ns2:Scan6 .
 
 ns2:Service1 a ns2:Service ;
     ns2:scanInfo ns2:Scan1,
         ns2:Scan2,
         ns2:Scan3,
         ns2:Scan4,
-        ns2:Scan5 ;
+        ns2:Scan5,
+        ns2:Scan6 ;
     ns2:serviceAccount ns2:Account1,
         ns2:Account2 ;
     ns2:serviceName "ssh" .
@@ -273,6 +279,11 @@ ns2:Scan5 a ns2:Scan ;
     ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
     ns2:executionTime "14:36 08/04/2023" ;
     ns2:resultScore 3.475785e+00 .
+
+ns2:Scan6 a ns2:Scan ;
+    ns2:command "b'hydra -C wordlists/default_credentials/test.txt ssh://192.168.0.102:22'" ;
+    ns2:executionTime "15:10 08/04/2023" ;
+    ns2:resultScore 3.464966e+00 .
 
 ns1:Requirement1 a ns1:Requirement ;
     ns1:requirement "ip" ;

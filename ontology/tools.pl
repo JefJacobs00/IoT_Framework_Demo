@@ -4,21 +4,24 @@
 tools(Tool, Profile, Command) :-
     profile(Profile, Parameters),
     call(Profile, Parameters, Command),
-    tool(Tool, Profile).
+    tool(Tool, Profile),
+    assert(executed(Command)).
 
 tools_duration(Tool, Profile, Command) :-
     findall(P, profile(P, _), Profiles),
     getLowest(Profiles, Profile, _),
     profile(Profile, Parameters),
     call(Profile, Parameters, Command),
-    tool(Tool, Profile).
+    tool(Tool, Profile),
+    assert(executed(Command)).
 
 tools_score(Tool, Profile, Command) :-
     findall(P, profile(P, _), Profiles),
     getHighest(Profiles, Profile, _),
     profile(Profile, Parameters),
     call(Profile, Parameters, Command),
-    tool(Tool, Profile).
+    tool(Tool, Profile),
+    assert(executed(Command)).
 
 adjust_ProfileScore(Profile, Score) :-
     simular_tools_executed(Profile, X),

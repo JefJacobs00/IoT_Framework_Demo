@@ -172,7 +172,7 @@ class ConfigParser:
             requirements = self.configure_dict_string(profile_config['Requirement'], '(', ')')
             parameters = self.configure_dict_string(profile_config['Parameter'], '=','')
             command_predicates += self.configure_command(profile_config['Command'], profile)
-            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}.\n"
+            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}, {profile}([{parameters}], Command), \+executed(Command).\n"
 
         return tool_predicates + "\n" + profile_predicates + "\n" + command_predicates
 
