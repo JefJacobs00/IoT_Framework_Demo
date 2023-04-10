@@ -81,7 +81,6 @@
 :scanParameters rdf:type owl:ObjectProperty ;
                 rdfs:domain :Account ,
                             :Hash ,
-                            :IpAddress ,
                             :Password ,
                             :Port ,
                             :Service ,

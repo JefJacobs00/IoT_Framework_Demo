@@ -20,7 +20,7 @@ class Tool(ABC):
         (output, err) = p.communicate()
         end_time = time.time()
         output_parser = OutputParser()
-        result = output_parser.parse(output.decode("utf-8"), self.parser, self.info_start,self.info_end)
+        result = output_parser.parse(output.decode("utf-8"), self.parser, self.info_start, self.info_end)
         for r in result:
             r['ipv4'] = target
             r['profileName'] = profile
