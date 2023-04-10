@@ -19,7 +19,7 @@ def find_plugins(exclude=[]):
         # print(f'starting plugin {f}')
         module = importlib.import_module("plugins.%s.%s" % (f, f))
         class_name = ''.join(map(str.capitalize, f.split('_')))
-        class_ = getattr(module, class_name)()
+        class_ = getattr(module, class_name)(ontology)
         plugins[f] = class_
 
     return plugins

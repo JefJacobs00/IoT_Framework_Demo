@@ -77,17 +77,6 @@
           rdfs:range :Scan .
 
 
-###  http://www.semanticweb.org/jef/ontologies/2023/demo#scanParameters
-:scanParameters rdf:type owl:ObjectProperty ;
-                rdfs:domain :Account ,
-                            :Hash ,
-                            :Password ,
-                            :Port ,
-                            :Service ,
-                            :Webpage ;
-                rdfs:range :Scan .
-
-
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#scanProfile
 :scanProfile rdf:type owl:ObjectProperty ;
              rdfs:domain :Scan ;
@@ -111,7 +100,7 @@
 #################################################################
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#Duration
-:Duration rdf:type owl:DatatypeProperty ;
+:duration rdf:type owl:DatatypeProperty ;
           rdfs:domain :Scan .
 
 
@@ -128,6 +117,10 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#executionTime
 :executionTime rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Scan .
+
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#executionTime
+:epochTime rdf:type owl:DatatypeProperty ;
                rdfs:domain :Scan .
 
 
