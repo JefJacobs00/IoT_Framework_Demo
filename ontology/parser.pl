@@ -73,6 +73,8 @@ profileScans(Profile, Scan) :-
     rdf(Scan, ns1:'scanProfile',P),
     rdf(P, ns2:'profileName', literal(Profile)).
 
+scans(Scan) :-
+    rdfs_individual_of(Scan, ns1:'Scan').
 
 scanInfo(Scan, Info) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
@@ -83,8 +85,13 @@ profileTime(Profile, Time) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
     rdf(Scan, ns1:'epochTime', literal(type('http://www.w3.org/2001/XMLSchema#double',T))),
     atom_number(T, Time),
-    rdf(Scan,ns1:'scanInfo',B),
+    rdf(Scan,ns1:'scanProfile',B),
     rdf(B,ns2:'profileName', literal(Profile)).
+
+scanTime(Scan, Time) :-
+rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Scan, ns1:'epochTime', literal(type('http://www.w3.org/2001/XMLSchema#double',T))),
+    atom_number(T, Time).
 
 
 profileResult(Profile, Result) :-
@@ -104,6 +111,38 @@ listProfileInfo(Profile, List) :-
     bagof(Scan, profileScans(Profile, Scan), Scans),
     getAmountScanInfo(Scans, List).
 
+get_last_scan(Scan) :-
+    bagof(S, scans(S), Scans),
+    highest_value_uri(Scans, Scan).
+
+get_uri_value(Uri, Value) :-
+    write(Uri),
+    atom_codes(Uri, Codes),
+    reverse(Codes, RevCodes),
+    take_while(is_digit, RevCodes, DigitCodes),
+    reverse(DigitCodes, RevDigitCodes),
+    number_codes(V, RevDigitCodes),
+    (scanInfo(Uri, _) -> Value = V; Value = 0).
+
+take_while(_, [], []).
+take_while(Pred, [X|Xs], [X|Ys]) :-
+    call(Pred, X),
+    take_while(Pred, Xs, Ys).
+take_while(_, _, []).
+
+highest_value_uri(UriList, HighestUri) :-
+    maplist(get_uri_value, UriList, ValueList),
+    max_list(ValueList, MaxValue),
+    nth0(Index, ValueList, MaxValue),
+    nth0(Index, UriList, HighestUri).
+
+
+check_value([H], H, Value) :-
+    get_uri_value(H, Value).
+check_value([H | T], HighestUri, Value) :-
+    check_value(T, HighestUri, V0),
+    get_uri_value(H, V1),
+    (V1 > V0 -> Value = V1; Value = V0).
 
 getAmountScanInfo([],[]).
 getAmountScanInfo([H | T], List) :-
@@ -129,6 +168,7 @@ count([_|T], N) :-
 
 latestProfileExecution(Profile, Max) :-
     (bagof(Time, profileTime(Profile, Time), Times) -> max_value(Times, Max); Max = 0).
+
 
 max_value([H], H).
 max_value([H|T], Max) :-

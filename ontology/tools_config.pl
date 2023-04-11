@@ -1,6 +1,6 @@
 :- discontiguous tool/2.
 :- discontiguous profile/2.
-:- dynamic executed/1.
+:- dynamic executed/2.
 :- dynamic connection/1.
 
 tool(gobuster, http_dir_scan_small).
