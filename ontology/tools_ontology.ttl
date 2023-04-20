@@ -49,10 +49,6 @@
 :value rdf:type owl:DatatypeProperty ;
        rdfs:domain :Requirement .
 
-###  http://www.semanticweb.org/jef/ontologies/2023/tools#value
-:value rdf:type owl:DatatypeProperty ;
-       rdfs:domain :Parameter .
-
 ###  http://www.semanticweb.org/jef/ontologies/2023/tools/Command
 :Command rdf:type owl:DatatypeProperty ;
          rdfs:domain :Profile .

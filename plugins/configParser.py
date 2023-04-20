@@ -82,6 +82,10 @@ class ConfigParser:
             requirement_uri = self.add_requirement(requirement, value)
             self.graph.add((profile, self.links['Requirement'][0][1],requirement_uri))
 
+        for parameter in profile_config['Parameter']:
+            parameter_uri = self.add_parameter(parameter)
+            self.graph.add((profile, self.links['Parameter'][0][1],parameter_uri))
+
         for result in profile_config['Result']:
             result_uri = self.add_result(result)
             self.graph.add((profile, self.links['Result'][0][1], result_uri))
@@ -96,6 +100,10 @@ class ConfigParser:
     def add_requirement(self, requirement, value):
         properties = [('requirement', requirement), ('value', value)]
         return self.convertToClass(('Requirement', properties))
+
+    def add_parameter(self, parameter):
+        properties = [('parameter', parameter)]
+        return self.convertToClass(('Parameter', properties))
     def recursive_search(self, config, search_key):
         for key in config:
             if key == search_key:

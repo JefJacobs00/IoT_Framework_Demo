@@ -5,10 +5,11 @@
 :- rdf_register_prefix(ns1, 'http://www.semanticweb.org/jef/ontologies/2023/demo#').
 :- rdf_register_prefix(ns2, 'http://www.semanticweb.org/jef/ontologies/2023/tools#').
 :- rdf_load('knowledgebase.ttl', [format('turtle')]).
-
+:- rdf_load('tools.ttl', [format('turtle')]).
 
 load_ontology() :-
     rdf_load('ontology/knowledgebase.ttl', [format('turtle')]).
+    
 
 ip(X) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
@@ -80,6 +81,9 @@ scanInfo(Scan, Info) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
     rdf(Info, ns1:'scanInfo', Scan).
 
+profile(Profile) :-
+    rdfs_individual_of(P, ns2:'Profile'),
+    rdf(P, ns2:'profileName', literal(Profile)).
 
 profileTime(Profile, Time) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
@@ -99,6 +103,29 @@ profileResult(Profile, Result) :-
     rdf(P, ns2:'hasResult', R),
     rdf(R,ns2:'result',literal(Result)),
     rdf(P,ns2:'profileName', literal(Profile)).
+
+
+% Vergelijken parameters met results
+% Wanneer een result gebruikt wordt als parameter + punten
+
+profileParameter(Profile, Parameter) :- 
+    rdfs_individual_of(P, ns2:'Profile'),
+    rdf(P, ns2:'hasParameter', Par),
+    rdf(Par, ns2:'parameter', literal(Parameter)),
+    rdf(P, ns2:'profileName', literal(Profile)).
+
+
+checkRequiredParameter(Result, Count) :-
+    bagof(Profile, profile(Profile), Profiles).
+    checkProfilesHaveParameter(Profiles, Result, Count).
+
+checkProfilesHaveParameter([], _, 0).
+checkProfilesHaveParameter([H | T], Parameter, N) :-
+    checkProfilesHaveParameter(T, Parameter, N1),
+    (profileParameter(H, Parameter) -> N is N1 + 1; N = N1).
+
+
+
 
 avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
@@ -135,6 +162,7 @@ highest_value_uri(UriList, HighestUri) :-
     max_list(ValueList, MaxValue),
     nth0(Index, ValueList, MaxValue),
     nth0(Index, UriList, HighestUri).
+
 
 
 check_value([H], H, Value) :-

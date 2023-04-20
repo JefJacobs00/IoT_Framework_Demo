@@ -80,7 +80,7 @@ ontology.saveToFile('ontology/knowledgebase.ttl')
 c = ConfigParser()
 c.read_profiles('ontology/tools_config.pl')
 
-start_scanning(r[0]["ipv4"])
+#start_scanning(r[0]["ipv4"])
 
 
 
