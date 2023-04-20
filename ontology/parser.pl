@@ -116,7 +116,7 @@ profileParameter(Profile, Parameter) :-
 
 scanInput(Scan, Input) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
-    rdf(Scan, ns1:'scanInfo', Info),
+    rdf(Scan, ns1:'scanInput', Info),
     rdf(Info, ns1:'ParameterURI', literal(Input)).
 
 
@@ -135,20 +135,22 @@ checkUsefullnessProfile(Profile, InfoUsed) :-
     checkUsefullnessScans(Scans, InfoUsed).
 
 checkUsefullnessScans([], 0).
-checkUsefullnessScans([H | T], InfoUses) :-
-    checkUsefullnessScans(T, Count),
-    bagof(I, scanInfo(H, I), Info),
-    checkInputs(Info, InfoUses).
+checkUsefullnessScans([Scan | Scans], InfoUses) :-
+    checkUsefullnessScans(Scans, C1),
+    (bagof(I, scanInfo(Scan, I), Info) ->
+        checkInputUses(Info, C2), InfoUses is C1 + C2;
+        InfoUses is C1
+    ).
 
-checkInputs([], 0).
-checkInfoUses([H | T], Count) :-
-    checkInputs(T, C1),
-    checkInfoUses(H, C2),
+
+checkInputUses([], 0).
+checkInputUses([Info | T], Count) :-
+    checkInputUses(T, C1),
+    checkInfoUse(Info, C2),
     Count is C1 + C2.
 
-checkInfoUses(Input, Count) :-
-    bagof(Scan, scanInput(Scan, Info), Scans),
-    length(Scans, Count).
+checkInfoUse(Input, Count) :-
+    (bagof(Scan, scanInput(Scan, Input), Scans) -> length(Scans, Count); Count is 0).
 
 avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
