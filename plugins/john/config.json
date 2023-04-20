@@ -5,9 +5,9 @@
     "Profile": {
       "crack_hash": {
         "Requirement": {"passwordHash": "Hash"},
-        "Parameter": {"hash": "Hash"},
+        "Parameter": {"passwordHash": "Hash"},
         "Result": ["password"],
-        "Command": "echo <hash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass"
+        "Command": "echo <passwordHash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass"
       }
     }
   }

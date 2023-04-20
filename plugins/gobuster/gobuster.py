@@ -6,6 +6,6 @@ class Gobuster(Tool):
         line_start = '\['
         super().__init__(ontology=ontology, parser=parser, info_start=line_start)
 
-    def execute_command(self, command, target, profile):
-        return super().execute_command(command, target, profile)
+    def execute_command(self, command, target, parameters, profile):
+        return super().execute_command(command, target, parameters, profile)
 

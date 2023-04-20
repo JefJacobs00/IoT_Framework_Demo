@@ -8,5 +8,5 @@ class Ssh(Tool):
         parser = re.compile(r'')
         super().__init__(ontology=ontology, parser=parser,info_end='\n')
 
-    def execute_command(self, command, target, profile):
+    def execute_command(self, command, target, parameters, profile):
         return {}

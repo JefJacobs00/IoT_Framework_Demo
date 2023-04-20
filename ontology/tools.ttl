@@ -107,7 +107,7 @@ ns1:Profile8 a ns1:Profile ;
     ns1:profileName "firmware_analysis" .
 
 ns1:Profile9 a ns1:Profile ;
-    ns1:Command "echo <hash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass" ;
+    ns1:Command "echo <passwordHash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass" ;
     ns1:hasParameter ns1:Parameter4 ;
     ns1:hasRequirement ns1:Requirement8 ;
     ns1:hasResult ns1:Result5 ;
@@ -145,7 +145,7 @@ ns1:Parameter3 a ns1:Parameter ;
     ns1:parameter "firmware" .
 
 ns1:Parameter4 a ns1:Parameter ;
-    ns1:parameter "hash" .
+    ns1:parameter "passwordHash" .
 
 ns1:Parameter5 a ns1:Parameter ;
     ns1:parameter "account" .

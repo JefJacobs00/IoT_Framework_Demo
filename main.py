@@ -25,11 +25,11 @@ def find_plugins(exclude=[]):
     return plugins
 
 
-def execute_scan(tool, profile,  command, target):
+def execute_scan(tool, profile,  command, parameters, target):
     global running_scan
     print(f"Executing tool {tool} with the command {command}")
     sc = getattr(plugins[tool], 'execute_command')
-    output = sc(command, target, profile)
+    output = sc(command, target, parameters, profile)
     ontology.putOutputIntoOntology(output)
     ontology.saveToFile('ontology/knowledgebase.ttl')
     print(output)
@@ -41,6 +41,12 @@ def get_next_profile(prolog):
         profile['Tool'] = result['Tool']
         profile['Command'] = result['Command']
         profile['name'] = result['Profile']
+        parameters = []
+        for parameter in result['Parameter']:
+            if 'uri' in parameter:
+                test = re.search(r'=\((.*?),\s*(?P<Uri>.*?)\)', parameter)
+                parameters.append(test['Uri'])
+        profile['parameters'] = parameters
 
     return profile
 
@@ -53,7 +59,7 @@ def start_scanning(target):
         has_executed = False
         profile = get_next_profile(prolog)
         if len(profile) > 0:
-            execute_scan(profile['Tool'], profile['name'], profile['Command'], target)
+            execute_scan(profile['Tool'], profile['name'], profile['Command'], profile['parameters'], target)
             has_executed = True
 
     ontology.saveToFile('ontology/knowledgebase.ttl')

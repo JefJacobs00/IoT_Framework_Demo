@@ -8,5 +8,5 @@ class Firmwalker(Tool):
         parser = re.compile(r'')
         super().__init__(ontology=ontology, parser=parser,info_end='\n')
 
-    def execute_command(self, command, target, profile):
-        return super().execute_command(command, target, profile)
+    def execute_command(self, command, target, parameters, profile):
+        return super().execute_command(command, target, parameters, profile)

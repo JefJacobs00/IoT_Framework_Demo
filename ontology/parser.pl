@@ -11,39 +11,39 @@ load_ontology() :-
     rdf_load('ontology/knowledgebase.ttl', [format('turtle')]).
     
 
-ipv4(X) :-
-    rdfs_individual_of(A, ns1:'IpAddress'),
-    rdf(A,ns1:'ipv4',literal(X)).
+ipv4(X, Uri) :-
+    rdfs_individual_of(Uri, ns1:'IpAddress'),
+    rdf(Uri,ns1:'ipv4',literal(X)).
 
-account(X) :-
-    rdfs_individual_of(A, ns1:'Account'),
-    rdf(A,ns1:'accountUsername',literal(X)).
+account(X, Uri) :-
+    rdfs_individual_of(Uri, ns1:'Account'),
+    rdf(Uri,ns1:'accountUsername',literal(X)).
 
-password(X) :-
-    rdfs_individual_of(A, ns1:'Password'),
-    rdf(A,ns1:'passwordCleartext',literal(X)).
+password(X, Uri) :-
+    rdfs_individual_of(Uri, ns1:'Password'),
+    rdf(Uri,ns1:'passwordCleartext',literal(X)).
 
-port(X) :-
-    rdfs_individual_of(A, ns1:'Port'),
-    rdf(A,ns1:'portNumber',literal(X)).
+port(X, Uri) :-
+    rdfs_individual_of(Uri, ns1:'Port'),
+    rdf(Uri,ns1:'portNumber',literal(X)).
 
-service(X) :-
-    rdfs_individual_of(A, ns1:'Service'),
-    rdf(A,ns1:'serviceName',literal(X)).
+passwordHash(Hash, Uri) :-
+    rdfs_individual_of(A, ns1:'Hash'),
+    rdf(A, ns1:'hashValue',literal(Hash)).
+
+firmware(Path, Uri) :-
+    rdfs_individual_of(Uri, ns1:'Firmware'),
+    rdf(Uri,ns1:'firmwarePath',Path).
+
+service(X, Uri) :-
+    rdfs_individual_of(Uri, ns1:'Service'),
+    rdf(Uri,ns1:'serviceName',literal(X)).
 
 devicePorts(Ip, Port) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
     rdf(A,ns1:'addressPort',B),
     rdf(A, ns1:'ipv4', literal(Ip)),
     rdf(B, ns1:'portNumber', literal(Port)).
-
-passwordHash(Hash) :-
-    rdfs_individual_of(A, ns1:'Hash'),
-    rdf(A, ns1:'hashValue',literal(Hash)).
-
-firmware(Path) :-
-    rdfs_individual_of(A, ns1:'Firmware'),
-    rdf(A,ns1:'firmwarePath',Path).
 
 deviceServices(Ip, Port, Service) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
@@ -114,6 +114,11 @@ profileParameter(Profile, Parameter) :-
     rdf(Par, ns2:'parameter', literal(Parameter)),
     rdf(P, ns2:'profileName', literal(Profile)).
 
+scanInput(Scan, Input) :-
+    rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Scan, ns1:'scanInfo', Info),
+    rdf(Info, ns1:'ParameterURI', literal(Input)).
+
 
 checkParameterCount(Result, Count) :-
     bagof(Profile, profile(Profile), Profiles),
@@ -125,6 +130,25 @@ parameterCounter([H | T], Parameter, N) :-
     (profileParameter(H, Parameter) -> N = 1 + N1; N is N1).
 
 
+checkUsefullnessProfile(Profile, InfoUsed) :-
+    bagof(S,profileScans(Profile, S),Scans),
+    checkUsefullnessScans(Scans, InfoUsed).
+
+checkUsefullnessScans([], 0).
+checkUsefullnessScans([H | T], InfoUses) :-
+    checkUsefullnessScans(T, Count),
+    bagof(I, scanInfo(H, I), Info),
+    checkInputs(Info, InfoUses).
+
+checkInputs([], 0).
+checkInfoUses([H | T], Count) :-
+    checkInputs(T, C1),
+    checkInfoUses(H, C2),
+    Count is C1 + C2.
+
+checkInfoUses(Input, Count) :-
+    bagof(Scan, scanInput(Scan, Info), Scans),
+    length(Scans, Count).
 
 avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).

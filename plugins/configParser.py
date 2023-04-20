@@ -177,15 +177,31 @@ class ConfigParser:
             profile_config = tool['Profile'][profile]
             tool_predicates += f"tool({tool['toolName']}, {profile}).\n"
 
-            requirements = self.configure_dict_string(profile_config['Requirement'], '(', ')')
-            parameters = self.configure_dict_string(profile_config['Parameter'], '=','')
+            requirements = self.create_requirementstring(profile_config)
+            parameters = self.create_parametertring(profile_config)
             command_predicates += self.configure_command(profile_config['Command'], profile)
-            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}, {profile}([{parameters}], Command), \+executed({profile}, Command).\n"
+            profile_predicates += f"profile({profile}, [{parameters}]) :- {requirements}, {profile}([{parameters}], Command), \+executed({profile}, Command).\n\n"
 
         return tool_predicates + "\n" + profile_predicates + "\n" + command_predicates
 
+
+    def create_requirementstring(self, profile_config):
+        requirements_json = profile_config['Requirement']
+        for parameter in profile_config['Parameter']:
+            requirements_json[parameter] = [profile_config['Parameter'][parameter], f'Uri_{parameter}']
+        return self.configure_dict_string(requirements_json, '(', ')')
+
+
+    def create_parametertring(self, profile_config):
+        json = {}
+        for parameter in profile_config['Parameter']:
+            json[parameter] = profile_config['Parameter'][parameter]
+            json[f'uri_{parameter}'] = f'Uri_{parameter}'
+        return self.configure_dict_string(json, '=', '')
+
     def configure_dict_string(self, config_json, value_start, value_end):
         str = ""
+
         for key in config_json:
             if str != "":
                 str += ', '
