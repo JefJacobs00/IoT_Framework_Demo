@@ -1,13 +1,13 @@
 :- consult(parser).
 :- consult(tools_config).
 
-tools(Tool, Profile, Command) :-
+tools(Tool, Profile, Command, Parameters) :-
     profile(Profile, Parameters),
     call(Profile, Parameters, Command),
     tool(Tool, Profile),
     assertz(executed(Profile, Command)).
 
-tools_duration(Tool, Profile, Command) :-
+tools_duration(Tool, Profile, Command, Parameters) :-
     findall(P, profile(P, _), Profiles),
     getLowest(Profiles, Profile, _),
     profile(Profile, Parameters),
@@ -15,7 +15,7 @@ tools_duration(Tool, Profile, Command) :-
     tool(Tool, Profile),
     assertz(executed(Profile, Command)).
 
-tools_score(Tool, Profile, Command) :-
+tools_score(Tool, Profile, Command, Parameters) :-
     findall(P, profile(P, _), Profiles),
     getHighest(Profiles, Profile, _),
     profile(Profile, Parameters),

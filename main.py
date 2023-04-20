@@ -37,7 +37,7 @@ def execute_scan(tool, profile,  command, target):
 
 def get_next_profile(prolog):
     profile = {}
-    for result in prolog.query(f'tools_duration(Tool, Profile, Command)'):
+    for result in prolog.query(f'tools_duration(Tool, Profile, Command, Parameter)'):
         profile['Tool'] = result['Tool']
         profile['Command'] = result['Command']
         profile['name'] = result['Profile']
@@ -80,7 +80,7 @@ ontology.saveToFile('ontology/knowledgebase.ttl')
 c = ConfigParser()
 c.read_profiles('ontology/tools_config.pl')
 
-#start_scanning(r[0]["ipv4"])
+start_scanning(r[0]["ipv4"])
 
 
 

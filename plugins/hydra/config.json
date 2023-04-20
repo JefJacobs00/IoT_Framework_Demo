@@ -4,22 +4,22 @@
   "version": "",
     "Profile": {
       "ssh_attack": {
-        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "ssh"]},
-        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "ssh"]},
+        "Parameter": {"ipv4": "Ip", "port": "Port"},
         "Result": ["account", "password"],
-        "Command": "hydra -C wordlists/default_credentials/test.txt ssh://<ip>:<port>"
+        "Command": "hydra -C wordlists/default_credentials/test.txt ssh://<ipv4>:<port>"
       },
       "ftp_attack": {
-        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "ftp"]},
-        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "ftp"]},
+        "Parameter": {"ipv4": "Ip", "port": "Port"},
         "Result": ["account", "password"],
-        "Command": "hydra -C wordlists/default_credentials/test.txt ftp://<ip>:<port>"
+        "Command": "hydra -C wordlists/default_credentials/test.txt ftp://<ipv4>:<port>"
       },
       "telnet_attack": {
-        "Requirement": {"ip": "Ip", "deviceServices": ["Ip", "Port", "telnet"]},
-        "Parameter": {"ip": "Ip", "port": "Port"},
+        "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "telnet"]},
+        "Parameter": {"ipv4": "Ip", "port": "Port"},
         "Result": ["account", "password"],
-        "Command": "hydra -C wordlists/default_credentials/test.txt telnet://<ip>:<port> "
+        "Command": "hydra -C wordlists/default_credentials/test.txt telnet://<ipv4>:<port> "
       }
     }
   }

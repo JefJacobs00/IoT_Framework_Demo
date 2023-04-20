@@ -4,16 +4,16 @@
   "version": "",
     "Profile": {
       "fast_scan": {
-        "Requirement": {"ip": "Ip"},
-        "Parameter": {"ip": "Ip"},
+        "Requirement": {"ipv4": "Ip"},
+        "Parameter": {"ipv4": "Ip"},
         "Result": ["port", "service"],
-        "Command": "nmap -F <ip>"
+        "Command": "nmap -F <ipv4>"
       },
       "full_scan": {
-        "Requirement": {"ip": "Ip"},
-        "Parameter": {"ip": "Ip"},
+        "Requirement": {"ipv4": "Ip"},
+        "Parameter": {"ipv4": "Ip"},
         "Result": ["port", "service"],
-        "Command": "nmap -sC -sV -p- <ip>"
+        "Command": "nmap -sC -sV -p- <ipv4>"
       }
     }
   }

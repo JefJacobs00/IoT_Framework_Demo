@@ -11,7 +11,7 @@ load_ontology() :-
     rdf_load('ontology/knowledgebase.ttl', [format('turtle')]).
     
 
-ip(X) :-
+ipv4(X) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
     rdf(A,ns1:'ipv4',literal(X)).
 
@@ -115,15 +115,14 @@ profileParameter(Profile, Parameter) :-
     rdf(P, ns2:'profileName', literal(Profile)).
 
 
-checkRequiredParameter(Result, Count) :-
-    bagof(Profile, profile(Profile), Profiles).
-    checkProfilesHaveParameter(Profiles, Result, Count).
+checkParameterCount(Result, Count) :-
+    bagof(Profile, profile(Profile), Profiles),
+    parameterCounter(Profiles, Result, Count).
 
-checkProfilesHaveParameter([], _, 0).
-checkProfilesHaveParameter([H | T], Parameter, N) :-
-    checkProfilesHaveParameter(T, Parameter, N1),
-    (profileParameter(H, Parameter) -> N is N1 + 1; N = N1).
-
+parameterCounter([], _, 0).
+parameterCounter([H | T], Parameter, N) :-
+    parameterCounter(T, Parameter, N1),
+    (profileParameter(H, Parameter) -> N = 1 + N1; N is N1).
 
 
 
