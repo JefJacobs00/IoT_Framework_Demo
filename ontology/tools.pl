@@ -31,6 +31,12 @@ adjust_ProfileScore(Profile, Score) :-
     Score is Avg - X + ((Now - Last_execution)/1000).
 
 
+profileScore(Profile, Score) :-
+    totalProfileInfo(Profile, AmountOfInfo),
+    checkUsefullnessProfile(Profile, Usefullness),
+    Score is AmountOfInfo + Usefullness.
+
+
 simular_tools_executed(Profile, X) :-
     bagof(P, executed(P), Profiles) -> has_same_results(Profile, Profiles, X); X = 0.
 
