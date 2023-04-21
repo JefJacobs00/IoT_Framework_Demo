@@ -34,6 +34,7 @@ class Tool(ABC):
         output_parser = OutputParser()
         result = output_parser.parse(output.decode("utf-8"), self.parser, self.info_start, self.info_end)
         self.link_scan(result, scan)
+
         for r in result:
             r['duration'] = round((end_time - start_time) * 1000, 2)
             r['executionTime'] = datetime.datetime.now().strftime('%H:%M %d/%m/%Y')

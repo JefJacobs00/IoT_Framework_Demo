@@ -105,6 +105,11 @@ profileResult(Profile, Result) :-
     rdf(P,ns2:'profileName', literal(Profile)).
 
 
+checkAttackChain(Parameter) :-
+    get_last_scan(X),
+    scanInfo(X, Parameter).
+
+
 % Vergelijken parameters met results
 % Wanneer een result gebruikt wordt als parameter + punten
 
@@ -168,13 +173,18 @@ get_last_scan(Scan) :-
     highest_value_uri(Scans, Scan).
 
 get_uri_value(Uri, Value) :-
-    write(Uri),
     atom_codes(Uri, Codes),
     reverse(Codes, RevCodes),
     take_while(is_digit, RevCodes, DigitCodes),
     reverse(DigitCodes, RevDigitCodes),
-    number_codes(V, RevDigitCodes),
-    (scanInfo(Uri, _) -> Value = V; Value = 0).
+    (   DigitCodes \= [] % Check if any digit codes were extracted
+    ->  number_codes(V, RevDigitCodes),
+        (   scanInfo(Uri, _) % Check if scanInfo/2 succeeds
+        ->  Value = V
+        ;   Value = 0
+        )
+    ;   Value = 0 % No digit codes were extracted, return 0
+    ).
 
 take_while(_, [], []).
 take_while(Pred, [X|Xs], [X|Ys]) :-
@@ -187,8 +197,6 @@ highest_value_uri(UriList, HighestUri) :-
     max_list(ValueList, MaxValue),
     nth0(Index, ValueList, MaxValue),
     nth0(Index, UriList, HighestUri).
-
-
 
 check_value([H], H, Value) :-
     get_uri_value(H, Value).
