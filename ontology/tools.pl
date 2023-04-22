@@ -34,7 +34,8 @@ adjust_ProfileScore(Profile, Score) :-
 profileScore(Profile, Score) :-
     totalProfileInfo(Profile, AmountOfInfo),
     checkUsefullnessProfile(Profile, Usefullness),
-    Score is AmountOfInfo + Usefullness.
+    profileDemand(Profile, Demand),
+    Score is AmountOfInfo + Usefullness + Demand.
 
 
 simular_tools_executed(Profile, X) :-
