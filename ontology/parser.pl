@@ -125,6 +125,17 @@ scanInput(Scan, Input) :-
     rdf(Info, ns1:'ParameterURI', literal(Input)).
 
 
+profileDemand(Profile, Count) :-
+    bagof(Result, profileResult(Profile, Result), Results),
+    demandResults(Results, Count).
+
+
+demandResults([], 0).
+demandResults([H | T], Count) :-
+    demandResults(T, C1),
+    checkParameterCount(H, C2),
+    Count is C1 + C2.
+
 checkParameterCount(Result, Count) :-
     bagof(Profile, profile(Profile), Profiles),
     parameterCounter(Profiles, Result, Count).
