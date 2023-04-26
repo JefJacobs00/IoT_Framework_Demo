@@ -7,9 +7,8 @@
 :- rdf_load('knowledgebase.ttl', [format('turtle')]).
 :- rdf_load('tools.ttl', [format('turtle')]).
 
-load_ontology() :-
-    rdf_load('ontology/knowledgebase.ttl', [format('turtle')]).
-    
+load_ontology(Path) :-
+    rdf_load(Path, [format('turtle')]).
 
 ipv4(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'IpAddress'),

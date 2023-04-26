@@ -59,7 +59,8 @@ def start_scanning(target):
     prolog.consult('ontology/tools.pl')
     while has_executed:
         has_executed = False
-        prolog.query("rdf_load('knowledgebase.ttl', [format('turtle')]).")
+        for result in prolog.query("load_ontology(\"ontology/knowledgebase.ttl\")"):
+            print(result)
         time.sleep(0.2)
         profile = get_next_profile(prolog)
         if len(profile) > 0:
@@ -82,7 +83,7 @@ ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 plugins = find_plugins(['tool.py'])
 # ip = input("Give the target ip:\n")
 ip = "192.168.0.102"
-r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv1/'}]
+r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv2'}]
 
 ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')

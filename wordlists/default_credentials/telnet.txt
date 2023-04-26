@@ -293,3 +293,5 @@ user:ibm
 user:monitor
 user:turnkey
 user:vagrant
+client:devpass
+manager:password1
