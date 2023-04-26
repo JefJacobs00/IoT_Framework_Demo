@@ -4,7 +4,7 @@
   "version": "",
     "Profile": {
       "ssh_connection": {
-        "Requirement": {"ipv4": "Ip","account": "Username", "password":"Password"},
+        "Requirement": {"ipv4": "Ip","account": "Username", "password":"Password", "accountPassword": ["Username", "Password"]},
         "Parameter": {"account": "Username", "password":"Password", "ipv4": "Ip"},
         "Result": ["connection"],
         "Command": "sshpass -p <password> ssh <account>@<ipv4>"

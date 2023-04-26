@@ -61,17 +61,20 @@ firmware_analysis(Parameters, Command) :-
 
 tool(ssh, ssh_connection).
 
-profile(ssh_connection, [account=Username, uri_account=Uri_account, password=Password, uri_password=Uri_password, ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), account(Username, Uri_account), password(Password, Uri_password), ssh_connection([account=Username, uri_account=Uri_account, password=Password, uri_password=Uri_password, ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(ssh_connection, Command).
+profile(ssh_connection, [account=Username, uri_account=Uri_account, password=Password, uri_password=Uri_password, ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), account(Username, Uri_account), password(Password, Uri_password), accountPassword(Username, Password), ssh_connection([account=Username, uri_account=Uri_account, password=Password, uri_password=Uri_password, ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(ssh_connection, Command).
 
 
 ssh_connection(Parameters, Command) :- 
 	format_command("sshpass -p ~w ssh ~w@~w", [Parameters.password, Parameters.account, Parameters.ipv4], Command). 
 
 tool(hydra, ssh_attack).
+tool(hydra, ssh_account_password_attack).
 tool(hydra, ftp_attack).
 tool(hydra, telnet_attack).
 
 profile(ssh_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port]) :- ipv4(Ip, Uri_ipv4), deviceServices(Ip, Port, ssh), port(Port, Uri_port), ssh_attack([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port], Command), \+executed(ssh_attack, Command).
+
+profile(ssh_account_password_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, account=Account, uri_account=Uri_account, password=Password, uri_password=Uri_password]) :- ipv4(Ip, Uri_ipv4), account(Account, Uri_account), password(Password, Uri_password), deviceServices(Ip, Port, ssh), port(Port, Uri_port), ssh_account_password_attack([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, account=Account, uri_account=Uri_account, password=Password, uri_password=Uri_password], Command), \+executed(ssh_account_password_attack, Command).
 
 profile(ftp_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port]) :- ipv4(Ip, Uri_ipv4), deviceServices(Ip, Port, ftp), port(Port, Uri_port), ftp_attack([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port], Command), \+executed(ftp_attack, Command).
 
@@ -80,6 +83,9 @@ profile(telnet_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port
 
 ssh_attack(Parameters, Command) :- 
 	format_command("hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://~w:~w", [Parameters.ipv4, Parameters.port], Command). 
+
+ssh_account_password_attack(Parameters, Command) :- 
+	format_command("hydra -l ~w -p ~w ssh://~w:~w", [Parameters.account, Parameters.password, Parameters.ipv4, Parameters.port], Command). 
 
 ftp_attack(Parameters, Command) :- 
 	format_command("hydra -C wordlists/default_credentials/test.txt ftp://~w:~w", [Parameters.ipv4, Parameters.port], Command). 

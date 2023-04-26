@@ -23,6 +23,12 @@ password(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Password'),
     rdf(Uri,ns1:'passwordCleartext',literal(X)).
 
+accountPassword(Account, Password) :-
+    rdfs_individual_of(A, ns1:'Account'),
+    rdf(A,ns1:'accountPassword',B),
+    rdf(A,ns1:'accountUsername',literal(Account)),
+    rdf(B,ns1:'passwordCleartext',literal(Password)).
+
 port(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Port'),
     rdf(Uri,ns1:'portNumber',literal(X)).

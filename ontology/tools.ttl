@@ -14,35 +14,49 @@ ns1:Profile10 a ns1:Profile ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement10 ;
+        ns1:Requirement11 ;
     ns1:hasResult ns1:Result5,
         ns1:Result8 ;
     ns1:profileName "ssh_attack" .
 
 ns1:Profile11 a ns1:Profile ;
+    ns1:Command "hydra -l <account> -p <password> ssh://<ipv4>:<port>" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter2,
+        ns1:Parameter4,
+        ns1:Parameter5 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement12,
+        ns1:Requirement13,
+        ns1:Requirement9 ;
+    ns1:hasResult ns1:Result5,
+        ns1:Result8 ;
+    ns1:profileName "ssh_account_password_attack" .
+
+ns1:Profile12 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement11 ;
+        ns1:Requirement14 ;
     ns1:hasResult ns1:Result5,
         ns1:Result8 ;
     ns1:profileName "ftp_attack" .
 
-ns1:Profile12 a ns1:Profile ;
+ns1:Profile13 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ipv4>:<port> " ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement12 ;
+        ns1:Requirement15 ;
     ns1:hasResult ns1:Result5,
         ns1:Result8 ;
     ns1:profileName "telnet_attack" .
 
-ns1:Profile13 a ns1:Profile ;
+ns1:Profile14 a ns1:Profile ;
     ns1:Command "hashcat '<passwordHash>' /usr/share/wordlists/rockyou.txt --show" ;
     ns1:hasParameter ns1:Parameter6 ;
-    ns1:hasRequirement ns1:Requirement13 ;
+    ns1:hasRequirement ns1:Requirement16 ;
     ns1:hasResult ns1:Result5 ;
     ns1:profileName "crack_hash" .
 
@@ -109,6 +123,7 @@ ns1:Profile9 a ns1:Profile ;
         ns1:Parameter4,
         ns1:Parameter5 ;
     ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement10,
         ns1:Requirement8,
         ns1:Requirement9 ;
     ns1:hasResult ns1:Result7 ;
@@ -145,28 +160,34 @@ ns1:Tool7 a ns1:Tool ;
 ns1:Parameter3 a ns1:Parameter ;
     ns1:parameter "firmware" .
 
-ns1:Parameter4 a ns1:Parameter ;
-    ns1:parameter "account" .
-
-ns1:Parameter5 a ns1:Parameter ;
-    ns1:parameter "password" .
-
 ns1:Parameter6 a ns1:Parameter ;
     ns1:parameter "passwordHash" .
 
 ns1:Requirement10 a ns1:Requirement ;
-    ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'ssh']" .
+    ns1:requirement "accountPassword" ;
+    ns1:value "['Username', 'Password']" .
 
 ns1:Requirement11 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'ftp']" .
+    ns1:value "['Ip', 'Port', 'ssh']" .
 
 ns1:Requirement12 a ns1:Requirement ;
+    ns1:requirement "account" ;
+    ns1:value "Account" .
+
+ns1:Requirement13 a ns1:Requirement ;
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'ssh']" .
+
+ns1:Requirement14 a ns1:Requirement ;
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'ftp']" .
+
+ns1:Requirement15 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
     ns1:value "['Ip', 'Port', 'telnet']" .
 
-ns1:Requirement13 a ns1:Requirement ;
+ns1:Requirement16 a ns1:Requirement ;
     ns1:requirement "passwordHash" ;
     ns1:value "Hash" .
 
@@ -198,10 +219,6 @@ ns1:Requirement8 a ns1:Requirement ;
     ns1:requirement "account" ;
     ns1:value "Username" .
 
-ns1:Requirement9 a ns1:Requirement ;
-    ns1:requirement "password" ;
-    ns1:value "Password" .
-
 ns1:Result4 a ns1:Result ;
     ns1:result "username" .
 
@@ -211,17 +228,27 @@ ns1:Result6 a ns1:Result ;
 ns1:Result7 a ns1:Result ;
     ns1:result "connection" .
 
+ns1:Parameter4 a ns1:Parameter ;
+    ns1:parameter "account" .
+
+ns1:Parameter5 a ns1:Parameter ;
+    ns1:parameter "password" .
+
+ns1:Requirement9 a ns1:Requirement ;
+    ns1:requirement "password" ;
+    ns1:value "Password" .
+
 ns1:Result2 a ns1:Result ;
     ns1:result "port" .
 
 ns1:Result3 a ns1:Result ;
     ns1:result "service" .
 
-ns1:Result8 a ns1:Result ;
-    ns1:result "account" .
-
 ns1:Result1 a ns1:Result ;
     ns1:result "webpage" .
+
+ns1:Result8 a ns1:Result ;
+    ns1:result "account" .
 
 ns1:Result5 a ns1:Result ;
     ns1:result "password" .
