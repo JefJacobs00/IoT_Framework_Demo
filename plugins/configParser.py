@@ -68,7 +68,7 @@ class ConfigParser:
         profiles_json = self.recursive_search(config_json, 'Profile')
         for profile in profiles_json:
             self.add_profile(profile, profiles_json[profile])
-        print(profiles_json)
+
     def add_profile(self, name, profile_config):
         properties = []
         properties.append(('profileName', name))

@@ -1,6 +1,7 @@
 import importlib
 import os
 import re
+import time
 from threading import Thread
 
 from rdflib import Graph
@@ -32,7 +33,7 @@ def execute_scan(tool, profile,  command, parameters, target):
     output = sc(command, target, parameters, profile)
     ontology.putOutputIntoOntology(output)
     ontology.saveToFile('ontology/knowledgebase.ttl')
-    print(output)
+    #print(output)
 
 
 def get_next_profile(prolog):
@@ -58,10 +59,11 @@ def start_scanning(target):
     prolog.consult('ontology/tools.pl')
     while has_executed:
         has_executed = False
+        prolog.query("rdf_load('knowledgebase.ttl', [format('turtle')]).")
+        time.sleep(0.2)
         profile = get_next_profile(prolog)
         if len(profile) > 0:
             execute_scan(profile['Tool'], profile['name'], profile['Command'], profile['parameters'], target)
-            prolog.consult('ontology/parser.pl')
             has_executed = True
 
     ontology.saveToFile('ontology/knowledgebase.ttl')

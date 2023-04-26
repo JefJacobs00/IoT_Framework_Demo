@@ -7,7 +7,7 @@
         "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "ssh"]},
         "Parameter": {"ipv4": "Ip", "port": "Port"},
         "Result": ["account", "password"],
-        "Command": "hydra -C wordlists/default_credentials/test.txt ssh://<ipv4>:<port>"
+        "Command": "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://<ipv4>:<port>"
       },
       "ftp_attack": {
         "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "ftp"]},

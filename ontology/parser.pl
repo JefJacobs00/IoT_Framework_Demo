@@ -126,7 +126,7 @@ scanInput(Scan, Input) :-
 
 
 profileDemand(Profile, Count) :-
-    (bagof(Result, profileResult(Profile, Result), Results) -> Results; Results = []),
+    bagof(Result, profileResult(Profile, Result), Results),
     demandResults(Results, Count).
 
 
@@ -147,7 +147,7 @@ parameterCounter([H | T], Parameter, N) :-
 
 
 checkUsefullnessProfile(Profile, InfoUsed) :-
-    (bagof(S,profileScans(Profile, S),Scans) -> Scans; Scans = []),
+    bagof(S,profileScans(Profile, S),Scans),
     checkUsefullnessScans(Scans, InfoUsed).
 
 checkUsefullnessScans([], 0).
@@ -172,7 +172,7 @@ avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
 
 totalProfileInfo(Profile, N) :-
-    (bagof(Scan, profileScans(Profile, Scan), Scans) -> Scans; Scans = []),
+    bagof(Scan, profileScans(Profile, Scan), Scans),
     count_profile_info(Scans, N).
 
 listProfileInfo(Profile, List) :-

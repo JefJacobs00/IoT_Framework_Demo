@@ -32,22 +32,23 @@ adjust_ProfileScore(Profile, Score) :-
 
 
 profileScore(Profile, Score) :-
-    totalProfileInfo(Profile, AmountOfInfo),
-    checkUsefullnessProfile(Profile, Usefullness),
+    (totalProfileInfo(Profile, X) -> AmountOfInfo is X; AmountOfInfo = 0),
+    (checkUsefullnessProfile(Profile, Y) -> Usefullness is Y; Usefullness = 0),
+    simular_tools_executed(Profile, N),
     profileDemand(Profile, Demand),
-    Score is AmountOfInfo + Usefullness + Demand.
+    Score is AmountOfInfo + Usefullness + Demand - N.
 
 
 simular_tools_executed(Profile, X) :-
     bagof(P, executed(P, _), Profiles) -> has_same_results(Profile, Profiles, X); X = 0.
 
 has_same_results(Profile, Executed_profiles, X) :-
-    profileResults(Profile, Results),
+    profileResult(Profile, Results),
     has_same_results_helper(Results, Executed_profiles, 0, X).
 
 has_same_results_helper(_, [], Acc, Acc).
 has_same_results_helper(Results, [Executed_profile | Executed_profiles], Acc, X) :-
-    profileResults(Executed_profile, Executed_results),
+    profileResult(Executed_profile, Executed_results),
     (test_X(Results, Executed_results) ->
         Acc1 is Acc + 1,
         has_same_results_helper(Results, Executed_profiles, Acc1, X) ;

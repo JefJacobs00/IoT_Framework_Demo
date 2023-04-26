@@ -10,7 +10,7 @@ ns1:Profile1 a ns1:Profile ;
     ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile10 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/test.txt ssh://<ipv4>:<port>" ;
+    ns1:Command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
