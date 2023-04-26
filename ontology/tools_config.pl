@@ -57,15 +57,7 @@ profile(firmware_analysis, [firmware=Firmware, uri_firmware=Uri_firmware]) :- fi
 
 
 firmware_analysis(Parameters, Command) :- 
-	format_command("", [], Command). 
-
-tool(john, crack_hash).
-
-profile(crack_hash, [passwordHash=Hash, uri_passwordHash=Uri_passwordHash]) :- passwordHash(Hash, Uri_passwordHash), crack_hash([passwordHash=Hash, uri_passwordHash=Uri_passwordHash], Command), \+executed(crack_hash, Command).
-
-
-crack_hash(Parameters, Command) :- 
-	format_command("echo <passwordHash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass", [], Command). 
+	format_command("/usr/src/firmwalker/firmwalker.sh ~w", [Parameters.firmware], Command). 
 
 tool(ssh, ssh_connection).
 
@@ -94,4 +86,12 @@ ftp_attack(Parameters, Command) :-
 
 telnet_attack(Parameters, Command) :- 
 	format_command("hydra -C wordlists/default_credentials/test.txt telnet://~w:~w ", [Parameters.ipv4, Parameters.port], Command). 
+
+tool(hashcat, crack_hash).
+
+profile(crack_hash, [passwordHash=Hash, uri_passwordHash=Uri_passwordHash]) :- passwordHash(Hash, Uri_passwordHash), crack_hash([passwordHash=Hash, uri_passwordHash=Uri_passwordHash], Command), \+executed(crack_hash, Command).
+
+
+crack_hash(Parameters, Command) :- 
+	format_command("hashcat '~w' /usr/share/wordlists/rockyou.txt --show", [Parameters.passwordHash], Command). 
 

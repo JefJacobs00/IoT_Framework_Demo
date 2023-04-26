@@ -14,8 +14,7 @@ class OutputParser:
         for i in range(len(lines)):
             result.append({})
             for key in mapping:
-                result[i][key] = ""
-                matches = re.findall(f'({mapping[key]})([a-zA-Z0-9.@/_!-]+)', lines[i])
+                matches = re.findall(f'({mapping[key]})([a-zA-Z0-9.@/_!-$]+)', lines[i])
                 for item in matches:
                     result[i][key] = item[1]
         return result

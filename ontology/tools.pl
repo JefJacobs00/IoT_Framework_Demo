@@ -25,10 +25,10 @@ tools_score(Tool, Profile, Command, Parameters) :-
 
 adjust_ProfileScore(Profile, Score) :-
     simular_tools_executed(Profile, X),
-    avgProfileScore(Profile, Avg),
-    get_time(Now),
-    latestProfileExecution(Profile, Last_execution),
-    Score is Avg - X + ((Now - Last_execution)/1000).
+    avgProfileScore(Profile, Avg).
+    %get_time(Now),
+    %latestProfileExecution(Profile, Last_execution),
+    %Score is Avg - X + ((Now - Last_execution)/1000).
 
 
 profileScore(Profile, Score) :-
@@ -39,7 +39,7 @@ profileScore(Profile, Score) :-
 
 
 simular_tools_executed(Profile, X) :-
-    bagof(P, executed(P), Profiles) -> has_same_results(Profile, Profiles, X); X = 0.
+    bagof(P, executed(P, _), Profiles) -> has_same_results(Profile, Profiles, X); X = 0.
 
 has_same_results(Profile, Executed_profiles, X) :-
     profileResults(Profile, Results),
@@ -73,7 +73,7 @@ getLowest([H|T], Profile, Min) :-
 
 getHighest([], _, -1).
 getHighest([H|T], Profile, Max) :-
-    adjust_ProfileScore(H, Score),
+    profileScore(H, Score),
     getHighest(T, NewProfile, Max1),
     (Score > Max1 -> (Max = Score, Profile = H) ; (Max = Max1, Profile = NewProfile)).
 

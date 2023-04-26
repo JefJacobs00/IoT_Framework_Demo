@@ -6,8 +6,8 @@
       "firmware_analysis": {
         "Requirement": {"firmware": "Firmware"},
         "Parameter": {"firmware": "Firmware"},
-        "Result": ["username", "password"],
-        "Command": ""
+        "Result": ["username", "password", "hash"],
+        "Command": "/usr/src/firmwalker/firmwalker.sh <firmware>"
       }
     }
   }

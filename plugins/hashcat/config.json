@@ -1,13 +1,13 @@
 {
   "Tool":{
-  "toolName": "john",
+  "toolName": "hashcat",
   "version": "",
     "Profile": {
       "crack_hash": {
         "Requirement": {"passwordHash": "Hash"},
         "Parameter": {"passwordHash": "Hash"},
         "Result": ["password"],
-        "Command": "echo <passwordHash> > pass; john pass --wordlist=/usr/share/wordlist/rockyou.txt ;john --show pass"
+        "Command": "hashcat '<passwordHash>' /usr/share/wordlists/rockyou.txt --show"
       }
     }
   }

@@ -221,8 +221,8 @@ class ConfigParser:
 
     def configure_command(self, command, profile_name):
         command_predicate = f"{profile_name}(Parameters, Command) :- \n"
-        parameters = re.findall(f'<([a-z0-9-]+)>', command)
-        formated_command = re.sub(f'(<[a-z0-9-]+>)', '~w', command)
+        parameters = re.findall(f'<([a-zA-Z0-9-]+)>', command)
+        formated_command = re.sub(f'(<[a-zA-Z0-9-]+>)', '~w', command)
         parameters_str = ""
         for parameter in parameters:
             if parameters_str != "":

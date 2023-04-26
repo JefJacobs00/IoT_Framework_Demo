@@ -37,7 +37,7 @@ def execute_scan(tool, profile,  command, parameters, target):
 
 def get_next_profile(prolog):
     profile = {}
-    for result in prolog.query(f'tools_duration(Tool, Profile, Command, Parameter)'):
+    for result in prolog.query(f'tools_score(Tool, Profile, Command, Parameter)'):
         profile['Tool'] = result['Tool']
         profile['Command'] = result['Command']
         profile['name'] = result['Profile']
@@ -47,6 +47,7 @@ def get_next_profile(prolog):
                 test = re.search(r'=\((.*?),\s*(?P<Uri>.*?)\)', parameter)
                 parameters.append(test['Uri'])
         profile['parameters'] = parameters
+        break
 
     return profile
 
@@ -60,6 +61,7 @@ def start_scanning(target):
         profile = get_next_profile(prolog)
         if len(profile) > 0:
             execute_scan(profile['Tool'], profile['name'], profile['Command'], profile['parameters'], target)
+            prolog.consult('ontology/parser.pl')
             has_executed = True
 
     ontology.saveToFile('ontology/knowledgebase.ttl')
@@ -78,7 +80,7 @@ ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 plugins = find_plugins(['tool.py'])
 # ip = input("Give the target ip:\n")
 ip = "192.168.0.102"
-r = [{'ipv4':ip}]
+r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv1/'}]
 
 ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')

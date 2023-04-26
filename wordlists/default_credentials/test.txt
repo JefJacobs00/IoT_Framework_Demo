@@ -1,3 +1,2 @@
 testuserdemo:Azerty123!
 client:devpass
-manager:password1

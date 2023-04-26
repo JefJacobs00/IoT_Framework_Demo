@@ -28,12 +28,12 @@ port(X, Uri) :-
     rdf(Uri,ns1:'portNumber',literal(X)).
 
 passwordHash(Hash, Uri) :-
-    rdfs_individual_of(A, ns1:'Hash'),
-    rdf(A, ns1:'hashValue',literal(Hash)).
+    rdfs_individual_of(Uri, ns1:'Hash'),
+    rdf(Uri, ns1:'hashValue',literal(Hash)).
 
 firmware(Path, Uri) :-
     rdfs_individual_of(Uri, ns1:'Firmware'),
-    rdf(Uri,ns1:'firmwarePath',Path).
+    rdf(Uri,ns1:'firmwarePath',literal(Path)).
 
 service(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Service'),
@@ -126,7 +126,7 @@ scanInput(Scan, Input) :-
 
 
 profileDemand(Profile, Count) :-
-    bagof(Result, profileResult(Profile, Result), Results),
+    (bagof(Result, profileResult(Profile, Result), Results) -> Results; Results = []),
     demandResults(Results, Count).
 
 
@@ -147,7 +147,7 @@ parameterCounter([H | T], Parameter, N) :-
 
 
 checkUsefullnessProfile(Profile, InfoUsed) :-
-    bagof(S,profileScans(Profile, S),Scans),
+    (bagof(S,profileScans(Profile, S),Scans) -> Scans; Scans = []),
     checkUsefullnessScans(Scans, InfoUsed).
 
 checkUsefullnessScans([], 0).
@@ -172,7 +172,7 @@ avgProfileDuration(Profile, Avg) :-
     (bagof(Duration, profileDuration(Profile, Duration), List) -> average(List,Avg); Avg = 0).
 
 totalProfileInfo(Profile, N) :-
-    bagof(Scan, profileScans(Profile, Scan), Scans),
+    (bagof(Scan, profileScans(Profile, Scan), Scans) -> Scans; Scans = []),
     count_profile_info(Scans, N).
 
 listProfileInfo(Profile, List) :-
