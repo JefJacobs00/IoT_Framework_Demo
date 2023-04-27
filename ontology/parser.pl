@@ -14,6 +14,10 @@ ipv4(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'IpAddress'),
     rdf(Uri,ns1:'ipv4',literal(X)).
 
+webpage(X, Uri) :-
+    rdfs_individual_of(Uri, ns1:'Webpage'),
+    rdf(Uri, ns1:'page', literal(X)).
+
 account(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Account'),
     rdf(Uri,ns1:'accountUsername',literal(X)).

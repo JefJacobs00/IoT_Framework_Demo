@@ -67,6 +67,14 @@ profile(ssh_connection, [account=Username, uri_account=Uri_account, password=Pas
 ssh_connection(Parameters, Command) :- 
 	format_command("sshpass -p ~w ssh ~w@~w", [Parameters.password, Parameters.account, Parameters.ipv4], Command). 
 
+tool(ffuf, http_param_fuzz).
+
+profile(http_param_fuzz, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, webpage=Webpage, uri_webpage=Uri_webpage]) :- ipv4(Ip, Uri_ipv4), webpage(Webpage, Uri_webpage), deviceServices(Ip, Port, http), port(Port, Uri_port), http_param_fuzz([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, webpage=Webpage, uri_webpage=Uri_webpage], Command), \+executed(http_param_fuzz, Command).
+
+
+http_param_fuzz(Parameters, Command) :- 
+	format_command("ffuf -ac -u http://~w:~w~w?FUZZ=a -w wordlists/parameter-names.txt", [Parameters.ipv4, Parameters.port, Parameters.webpage], Command). 
+
 tool(hydra, ssh_attack).
 tool(hydra, ssh_account_password_attack).
 tool(hydra, ftp_attack).

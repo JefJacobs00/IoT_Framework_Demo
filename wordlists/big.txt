@@ -4347,6 +4347,9 @@ cgi-bin-church
 cgi-bin-debug
 cgi-bin-live
 cgi-bin/
+cgi-bin/run.cgi
+cgi-bin/script.cgi
+cgi-bin/LFI.cgi
 cgi-bin2
 cgi-bin_ssl
 cgi-data
@@ -16069,7 +16072,7 @@ sec_id
 seccio
 seccion
 secciones
-secció
+secciï¿½
 second
 second-love-nl3
 secondary
