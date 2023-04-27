@@ -10,7 +10,7 @@ ns1:Profile1 a ns1:Profile ;
     ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile10 a ns1:Profile ;
-    ns1:Command "ffuf -ac -u http://<ipv4>:<port><webpage>?FUZZ=a -w wordlists/parameter-names.txt" ;
+    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=a -w wordlists/parameter-names.txt" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2,
         ns1:Parameter6 ;
@@ -176,7 +176,7 @@ ns1:Parameter3 a ns1:Parameter ;
     ns1:parameter "firmware" .
 
 ns1:Parameter6 a ns1:Parameter ;
-    ns1:parameter "webpage" .
+    ns1:parameter "page" .
 
 ns1:Parameter7 a ns1:Parameter ;
     ns1:parameter "passwordHash" .
@@ -186,7 +186,7 @@ ns1:Requirement10 a ns1:Requirement ;
     ns1:value "['Username', 'Password']" .
 
 ns1:Requirement11 a ns1:Requirement ;
-    ns1:requirement "webpage" ;
+    ns1:requirement "page" ;
     ns1:value "Webpage" .
 
 ns1:Requirement12 a ns1:Requirement ;

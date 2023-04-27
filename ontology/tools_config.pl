@@ -69,11 +69,11 @@ ssh_connection(Parameters, Command) :-
 
 tool(ffuf, http_param_fuzz).
 
-profile(http_param_fuzz, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, webpage=Webpage, uri_webpage=Uri_webpage]) :- ipv4(Ip, Uri_ipv4), webpage(Webpage, Uri_webpage), deviceServices(Ip, Port, http), port(Port, Uri_port), http_param_fuzz([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, webpage=Webpage, uri_webpage=Uri_webpage], Command), \+executed(http_param_fuzz, Command).
+profile(http_param_fuzz, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, page=Webpage, uri_page=Uri_page]) :- ipv4(Ip, Uri_ipv4), page(Webpage, Uri_page), deviceServices(Ip, Port, http), port(Port, Uri_port), http_param_fuzz([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, page=Webpage, uri_page=Uri_page], Command), \+executed(http_param_fuzz, Command).
 
 
 http_param_fuzz(Parameters, Command) :- 
-	format_command("ffuf -ac -u http://~w:~w~w?FUZZ=a -w wordlists/parameter-names.txt", [Parameters.ipv4, Parameters.port, Parameters.webpage], Command). 
+	format_command("ffuf -ac -u http://~w:~w~w?FUZZ=a -w wordlists/parameter-names.txt", [Parameters.ipv4, Parameters.port, Parameters.page], Command). 
 
 tool(hydra, ssh_attack).
 tool(hydra, ssh_account_password_attack).
