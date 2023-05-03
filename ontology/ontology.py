@@ -69,9 +69,9 @@ class Ontology:
                 for link in self.links[key]:
                     test = [key for key in objects if key[0] == link[0]]
                     if len(test) > 0:
-                        if key == "Scan":
-                            if self.objectHasScan(test):
-                                continue
+                        # if key == "Scan":
+                        #     if self.objectHasScan(test):
+                        #         continue
                         self.graph.add((test[0][1], link[1], object))
 
     def objectHasScan(self, objects):

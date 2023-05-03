@@ -34,9 +34,7 @@ adjust_ProfileScore(Profile, Score) :-
 profileScore(Profile, Score) :-
     profile(Profile, Parameters),
     attackChain(Parameters, Chain),
-    %write(Profile),
-    %writeln(Chain),
-    %writeln(Parameters),
+    % Profile info --> avg/max
     (totalProfileInfo(Profile, X) -> AmountOfInfo is X; AmountOfInfo = 0),
     (checkUsefullnessProfile(Profile, Y) -> Usefullness is Y; Usefullness = 0),
     simular_tools_executed(Profile, N),
