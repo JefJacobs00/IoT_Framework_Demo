@@ -6,6 +6,6 @@ class Ffuf(Tool):
         line_start = '    *'
         super().__init__(ontology=ontology, parser=parser, info_start=line_start)
 
-    def execute_command(self, command, target, parameters, profile):
-        return super().execute_command(command, target, parameters, profile)
+    def execute_command(self, command, target, parameters_uri, parameters, profile):
+        return super().execute_command(command, target, parameters_uri, parameters, profile)
 

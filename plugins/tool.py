@@ -15,16 +15,16 @@ class Tool(ABC):
         self.ontology = ontology
 
     @abstractmethod
-    def execute_command(self, command, target, parameters, profile):
+    def execute_command(self, command, target, parameters_uri, parameters, profile):
         scan = {'ipv4': target, 'profileName': profile, 'command': command, 'epochTime': time.time()}
         scan_info = []
-        for parameter in parameters:
+        for parameter in parameters_uri:
             info = {'ParameterURI': parameter}
             for key in scan:
                 info[key] = scan[key]
             scan_info.append(info)
 
-        self.ontology.putOutputIntoOntology(scan_info)
+        self.ontology.putOutputIntoOntology(scan_info, parameters)
         self.ontology.saveToFile('ontology/knowledgebase.ttl')
 
         start_time = time.time()
@@ -34,8 +34,9 @@ class Tool(ABC):
         output_parser = OutputParser()
         result = output_parser.parse(output.decode("utf-8"), self.parser, self.info_start, self.info_end)
         self.link_scan(result, scan)
-
         for r in result:
+            for parameter in parameters:
+                r[parameter] = parameters[parameter]
             r['duration'] = round((end_time - start_time) * 1000, 2)
             r['executionTime'] = datetime.datetime.now().strftime('%H:%M %d/%m/%Y')
 

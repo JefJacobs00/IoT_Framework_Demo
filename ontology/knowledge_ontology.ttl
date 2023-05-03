@@ -97,8 +97,8 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#webpageParameter
 :webpageParameter rdf:type owl:ObjectProperty ;
-                  rdfs:domain :Webpage ;
-                  rdfs:range :WebParameter .
+                  rdfs:domain :WebParameter ;
+                  rdfs:range :Webpage .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#webservicePage

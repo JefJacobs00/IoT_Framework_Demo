@@ -56,11 +56,12 @@ class Ontology:
             if self.ontology_classes[key].__contains__(property):
                 return key
 
-    def putOutputIntoOntology(self, output: list):
+    def putOutputIntoOntology(self, output: list, parameters=[]):
         structured = []
-
+        # Format the output to Class: [value] dicts
         for line in output:
             structured.append(self.structureInfo(line))
+
         for line in structured:
             objects = []
             for key in line:
@@ -69,16 +70,17 @@ class Ontology:
                 for link in self.links[key]:
                     test = [key for key in objects if key[0] == link[0]]
                     if len(test) > 0:
-                        # if key == "Scan":
-                        #     if self.objectHasScan(test):
-                        #         continue
+                        if key == "Scan":
+                            if self.objectIsParameter(line[test[0][0]], parameters):
+                                continue
                         self.graph.add((test[0][1], link[1], object))
 
-    def objectHasScan(self, objects):
-        for object in objects:
-            for s,p,o in self.graph.triples((object[1], self.lookup['scanInfo'], None)):
+    def objectIsParameter(self, values, parameters):
+        for parameter in parameters:
+            if parameters[parameter] in values[0][1]:
+                print(values)
+                print(parameters)
                 return True
-
         return False
 
     def checkIfExists(self, type, properties):

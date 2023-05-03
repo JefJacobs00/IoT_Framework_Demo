@@ -7,7 +7,7 @@
         "Requirement": {"ipv4": "Ip", "page": "Webpage", "deviceServices": ["Ip", "Port", "http"]},
         "Parameter": {"ipv4": "Ip", "port": "Port", "page": "Webpage"},
         "Result": ["webpage"],
-        "Command": "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=a -w wordlists/parameter-names.txt"
+        "Command": "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt"
       }
     }
   }

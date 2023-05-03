@@ -26,12 +26,13 @@ def find_plugins(exclude=[]):
     return plugins
 
 
-def execute_scan(tool, profile,  command, parameters, target):
+def execute_scan(tool, profile,  command, parameters_uri, parameters, target):
     global running_scan
     print(f"Executing tool {tool} with the command {command}")
     sc = getattr(plugins[tool], 'execute_command')
-    output = sc(command, target, parameters, profile)
-    ontology.putOutputIntoOntology(output)
+    output = sc(command, target, parameters_uri, parameters, profile)
+    # TODO add parameters
+    ontology.putOutputIntoOntology(output, parameters)
     ontology.saveToFile('ontology/knowledgebase.ttl')
     #print(output)
 
@@ -42,11 +43,16 @@ def get_next_profile(prolog):
         profile['Tool'] = result['Tool']
         profile['Command'] = result['Command']
         profile['name'] = result['Profile']
-        parameters = []
+        uri_parameters = []
+        parameters = {}
         for parameter in result['Parameter']:
             if 'uri' in parameter:
-                test = re.search(r'=\((.*?),\s*(?P<Uri>.*?)\)', parameter)
-                parameters.append(test['Uri'])
+                match = re.search(r'=\((.*?),\s*(?P<Uri>.*?)\)', parameter)
+                uri_parameters.append(match['Uri'])
+            else:
+                match = re.search(r'=\((?P<Key>.*?),\s*(?P<Value>.*?)\)', parameter)
+                parameters[match['Key']] = match['Value']
+        profile['uri_parameters'] = uri_parameters
         profile['parameters'] = parameters
         break
 
@@ -64,7 +70,7 @@ def start_scanning(target):
         time.sleep(0.2)
         profile = get_next_profile(prolog)
         if len(profile) > 0:
-            execute_scan(profile['Tool'], profile['name'], profile['Command'], profile['parameters'], target)
+            execute_scan(profile['Tool'], profile['name'], profile['Command'], profile['uri_parameters'], profile['parameters'], target)
             has_executed = True
 
     ontology.saveToFile('ontology/knowledgebase.ttl')
