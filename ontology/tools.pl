@@ -32,12 +32,27 @@ adjust_ProfileScore(Profile, Score) :-
 
 
 profileScore(Profile, Score) :-
+    profile(Profile, Parameters),
+    attackChain(Parameters, Chain),
+    %write(Profile),
+    %writeln(Chain),
+    %writeln(Parameters),
     (totalProfileInfo(Profile, X) -> AmountOfInfo is X; AmountOfInfo = 0),
     (checkUsefullnessProfile(Profile, Y) -> Usefullness is Y; Usefullness = 0),
     simular_tools_executed(Profile, N),
     profileDemand(Profile, Demand),
-    Score is AmountOfInfo + Usefullness + Demand - N.
+    Score is AmountOfInfo + Usefullness + Demand + Chain*5000 - N.
 
+
+attackChain(Parameters, Score) :-
+    findall(X, member(_=X, Parameters), CleanParameters),
+    attackChainHelper(CleanParameters, Score).
+
+attackChainHelper([], 0).
+attackChainHelper([H | T], Score) :-
+    attackChainHelper(T, Score1),
+    (checkAttackChain(H) -> Score2 is 1; Score2 is 0),
+    Score is Score1 + Score2.
 
 simular_tools_executed(Profile, X) :-
     bagof(P, executed(P, _), Profiles) -> has_same_results(Profile, Profiles, X); X = 0.
