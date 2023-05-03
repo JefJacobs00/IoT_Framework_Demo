@@ -116,8 +116,13 @@ profileResult(Profile, Result) :-
 
 checkAttackChain(Parameter) :-
     get_last_scan(X),
-    scanInfo(X, Parameter).
+    setof(P, scanInfo(X, P), Parameters),
+    member(Parameter, Parameters).
 
+checkChainProfile([]).
+checkChainProfile([H | T]) :-
+    checkChainProfile(T),
+    checkAttackChain(H).
 
 % Vergelijken parameters met results
 % Wanneer een result gebruikt wordt als parameter + punten
@@ -188,42 +193,9 @@ listProfileInfo(Profile, List) :-
     bagof(Scan, profileScans(Profile, Scan), Scans),
     getAmountScanInfo(Scans, List).
 
-get_last_scan(Scan) :-
-    bagof(S, scans(S), Scans),
-    highest_value_uri(Scans, Scan).
-
-get_uri_value(Uri, Value) :-
-    atom_codes(Uri, Codes),
-    reverse(Codes, RevCodes),
-    take_while(is_digit, RevCodes, DigitCodes),
-    reverse(DigitCodes, RevDigitCodes),
-    (   DigitCodes \= [] % Check if any digit codes were extracted
-    ->  number_codes(V, RevDigitCodes),
-        (   scanInfo(Uri, _) % Check if scanInfo/2 succeeds
-        ->  Value = V
-        ;   Value = 0
-        )
-    ;   Value = 0 % No digit codes were extracted, return 0
-    ).
-
-take_while(_, [], []).
-take_while(Pred, [X|Xs], [X|Ys]) :-
-    call(Pred, X),
-    take_while(Pred, Xs, Ys).
-take_while(_, _, []).
-
-highest_value_uri(UriList, HighestUri) :-
-    maplist(get_uri_value, UriList, ValueList),
-    max_list(ValueList, MaxValue),
-    nth0(Index, ValueList, MaxValue),
-    nth0(Index, UriList, HighestUri).
-
-check_value([H], H, Value) :-
-    get_uri_value(H, Value).
-check_value([H | T], HighestUri, Value) :-
-    check_value(T, HighestUri, V0),
-    get_uri_value(H, V1),
-    (V1 > V0 -> Value = V1; Value = V0).
+get_last_scan(LastScan) :-
+    findall(S, scans(S), Scans),
+    last(Scans, LastScan).
 
 getAmountScanInfo([],[]).
 getAmountScanInfo([H | T], List) :-
@@ -246,17 +218,13 @@ count([_|T], N) :-
     count(T, N1),
     N is N1+1.
 
-
 latestProfileExecution(Profile, Max) :-
     (bagof(Time, profileTime(Profile, Time), Times) -> max_value(Times, Max); Max = 0).
-
 
 max_value([H], H).
 max_value([H|T], Max) :-
     max_value(T, Max1),
     (H > Max1 -> Max = H ; Max = Max1).
-
-
 
 average(List, Average) :-
     sumlist( List, Sum ),
