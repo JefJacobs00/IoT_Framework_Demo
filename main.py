@@ -97,7 +97,10 @@ ontology.saveToFile('ontology/knowledgebase.ttl')
 c = ConfigParser()
 c.read_profiles('ontology/tools_config.pl')
 
+start_time = time.time()
 start_scanning(r[0]["ipv4"])
+end = time.time()
 
+print("Scanning took: " + str(end - start_time))
 
 

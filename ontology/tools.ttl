@@ -10,7 +10,7 @@ ns1:Profile1 a ns1:Profile ;
     ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile10 a ns1:Profile ;
-    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=a -w wordlists/parameter-names.txt" ;
+    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2,
         ns1:Parameter6 ;

