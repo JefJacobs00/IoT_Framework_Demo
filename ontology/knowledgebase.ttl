@@ -54,9 +54,90 @@ ns2:Scan12 a ns2:Scan ;
         ns2:Input6 ;
     ns2:scanProfile ns1:Profile12 .
 
+ns2:Scan13 a ns2:Scan ;
+    ns2:command "b'nmap -sC -sV -p- 192.168.0.102'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input1 ;
+    ns2:scanProfile ns1:Profile6 .
+
+ns2:Scan14 a ns2:Scan ;
+    ns2:command "b'/usr/src/firmwalker/firmwalker.sh ~/Downloads/studentv2'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input3 ;
+    ns2:scanProfile ns1:Profile8 .
+
+ns2:Scan16 a ns2:Scan ;
+    ns2:command "b'hydra -l root -p devpass ssh://192.168.0.102:22'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input2,
+        ns2:Input5,
+        ns2:Input6 ;
+    ns2:scanProfile ns1:Profile12 .
+
+ns2:Scan18 a ns2:Scan ;
+    ns2:command "b'hydra -l root -p password1 ssh://192.168.0.102:22'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input2,
+        ns2:Input5,
+        ns2:Input9 ;
+    ns2:scanProfile ns1:Profile12 .
+
+ns2:Scan19 a ns2:Scan ;
+    ns2:command "b\"hashcat '$6$WQBiS3eMvOMsmsDy$nebw3AB8weP3mqP/1qqcJsN/Xh.CW5S2hsSHMVSxdH5sqEMdJZzzDfmcoBeZeNNh43JqXSquoRES3D4bgxKBy.' /usr/share/wordlists/rockyou.txt --show\"" ;
+    ns2:duration 3.4327e+02 ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:executionTime "10:28 09/05/2023" ;
+    ns2:scanInput ns2:Input11 ;
+    ns2:scanProfile ns1:Profile15 .
+
 ns2:Scan2 a ns2:Scan ;
     ns2:command "b'hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://192.168.0.102:22'" ;
     ns2:epochTime 1.683223e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input2 ;
+    ns2:scanProfile ns1:Profile11 .
+
+ns2:Scan20 a ns2:Scan ;
+    ns2:command "b'hydra -l client -p devpass ssh://192.168.0.102:22'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input2,
+        ns2:Input6,
+        ns2:Input7 ;
+    ns2:scanProfile ns1:Profile12 .
+
+ns2:Scan21 a ns2:Scan ;
+    ns2:command "b'hydra -l client -p password1 ssh://192.168.0.102:22'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input2,
+        ns2:Input7,
+        ns2:Input9 ;
+    ns2:scanProfile ns1:Profile12 .
+
+ns2:Scan22 a ns2:Scan ;
+    ns2:command "b'hydra -l manager -p devpass ssh://192.168.0.102:22'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input10,
+        ns2:Input2,
+        ns2:Input6 ;
+    ns2:scanProfile ns1:Profile12 .
+
+ns2:Scan23 a ns2:Scan ;
+    ns2:command "b'hydra -l manager -p password1 ssh://192.168.0.102:22'" ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input10,
+        ns2:Input2,
+        ns2:Input9 ;
+    ns2:scanProfile ns1:Profile12 .
+
+ns2:Scan24 a ns2:Scan ;
+    ns2:command "b'hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://192.168.0.102:22'" ;
+    ns2:epochTime 1.683621e+09 ;
     ns2:scanInput ns2:Input1,
         ns2:Input2 ;
     ns2:scanProfile ns1:Profile11 .
@@ -214,31 +295,37 @@ ns2:Account3 a ns2:Account ;
     ns2:accountUsername "manager" ;
     ns2:scanInfo ns2:Scan3 .
 
-ns2:Input11 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash3" .
-
-ns2:Input3 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Firmware1" .
-
-ns2:Input4 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash1" .
-
-ns2:Input8 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash2" .
-
 ns2:Password1 a ns2:Password ;
     ns2:passwordCleartext "devpass" ;
-    ns2:scanInfo ns2:Scan4 .
+    ns2:scanInfo ns2:Scan15,
+        ns2:Scan4 .
 
 ns2:Password2 a ns2:Password ;
     ns2:passwordCleartext "password1" ;
-    ns2:scanInfo ns2:Scan7 .
+    ns2:scanInfo ns2:Scan17,
+        ns2:Scan7 .
 
 ns2:Port1 a ns2:Port ;
     ns2:portNumber "22" ;
     ns2:portService ns2:Service1 ;
     ns2:portStatus "open" ;
     ns2:scanInfo ns2:Scan1 .
+
+ns2:Scan15 a ns2:Scan ;
+    ns2:command "b\"hashcat '$6$vOsShJfzJ$nspR/.gahnFFRBL9hrTkWCwr8fCjhkIaEyABvCCpCVL6p1G3dZVEhvmbcOg2Bh1OG.a9ZmKkzwo2V5ZDOin73/' /usr/share/wordlists/rockyou.txt --show\"" ;
+    ns2:duration 4.29873e+03 ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:executionTime "10:28 09/05/2023" ;
+    ns2:scanInput ns2:Input4 ;
+    ns2:scanProfile ns1:Profile15 .
+
+ns2:Scan17 a ns2:Scan ;
+    ns2:command "b\"hashcat '$6$dY5hO/6B48/9D.66$QHHDlmdkw.CHtzQg.W/e7s8SnGJaJgwVYwKzLu1vB6ZTeKBb2BXj1xc7wJJUl7nFgUXy6AHf/6z63yOPuXBT7/' /usr/share/wordlists/rockyou.txt --show\"" ;
+    ns2:duration 4.1206e+02 ;
+    ns2:epochTime 1.683621e+09 ;
+    ns2:executionTime "10:28 09/05/2023" ;
+    ns2:scanInput ns2:Input8 ;
+    ns2:scanProfile ns1:Profile15 .
 
 ns2:Scan4 a ns2:Scan ;
     ns2:command "b\"hashcat '$6$vOsShJfzJ$nspR/.gahnFFRBL9hrTkWCwr8fCjhkIaEyABvCCpCVL6p1G3dZVEhvmbcOg2Bh1OG.a9ZmKkzwo2V5ZDOin73/' /usr/share/wordlists/rockyou.txt --show\"" ;
@@ -294,33 +381,6 @@ ns1:Parameter6 a ns1:Parameter ;
 
 ns1:Parameter7 a ns1:Parameter ;
     ns1:parameter "passwordHash" .
-
-ns1:Profile11 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://<ipv4>:<port>" ;
-    ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter2 ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement14 ;
-    ns1:hasResult ns1:Result5,
-        ns1:Result8 ;
-    ns1:profileName "ssh_attack" .
-
-ns1:Profile6 a ns1:Profile ;
-    ns1:Command "nmap -sC -sV -p- <ipv4>" ;
-    ns1:hasParameter ns1:Parameter1 ;
-    ns1:hasRequirement ns1:Requirement1 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3 ;
-    ns1:profileName "full_scan" .
-
-ns1:Profile8 a ns1:Profile ;
-    ns1:Command "/usr/src/firmwalker/firmwalker.sh <firmware>" ;
-    ns1:hasParameter ns1:Parameter3 ;
-    ns1:hasRequirement ns1:Requirement8 ;
-    ns1:hasResult ns1:Result4,
-        ns1:Result5,
-        ns1:Result6 ;
-    ns1:profileName "firmware_analysis" .
 
 ns1:Requirement11 a ns1:Requirement ;
     ns1:requirement "accountPassword" ;
@@ -399,14 +459,17 @@ ns1:Result6 a ns1:Result ;
 ns1:Result7 a ns1:Result ;
     ns1:result "connection" .
 
-ns2:Input10 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account3" .
+ns2:Input11 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash3" .
 
-ns2:Input5 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account1" .
+ns2:Input3 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Firmware1" .
 
-ns2:Input7 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account2" .
+ns2:Input4 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash1" .
+
+ns2:Input8 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash2" .
 
 ns2:Scan1 a ns2:Scan ;
     ns2:command "b'nmap -sC -sV -p- 192.168.0.102'" ;
@@ -422,6 +485,33 @@ ns1:Parameter4 a ns1:Parameter ;
 ns1:Parameter5 a ns1:Parameter ;
     ns1:parameter "password" .
 
+ns1:Profile11 a ns1:Profile ;
+    ns1:Command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://<ipv4>:<port>" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter2 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement14 ;
+    ns1:hasResult ns1:Result5,
+        ns1:Result8 ;
+    ns1:profileName "ssh_attack" .
+
+ns1:Profile6 a ns1:Profile ;
+    ns1:Command "nmap -sC -sV -p- <ipv4>" ;
+    ns1:hasParameter ns1:Parameter1 ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result2,
+        ns1:Result3 ;
+    ns1:profileName "full_scan" .
+
+ns1:Profile8 a ns1:Profile ;
+    ns1:Command "/usr/src/firmwalker/firmwalker.sh <firmware>" ;
+    ns1:hasParameter ns1:Parameter3 ;
+    ns1:hasRequirement ns1:Requirement8 ;
+    ns1:hasResult ns1:Result4,
+        ns1:Result5,
+        ns1:Result6 ;
+    ns1:profileName "firmware_analysis" .
+
 ns1:Requirement10 a ns1:Requirement ;
     ns1:requirement "password" ;
     ns1:value "Password" .
@@ -432,24 +522,26 @@ ns1:Result2 a ns1:Result ;
 ns1:Result3 a ns1:Result ;
     ns1:result "service" .
 
-ns2:Input6 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Password1" .
+ns2:Input10 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account3" .
 
-ns2:Input9 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Password2" .
+ns2:Input5 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account1" .
 
-ns1:Profile15 a ns1:Profile ;
-    ns1:Command "hashcat '<passwordHash>' /usr/share/wordlists/rockyou.txt --show" ;
-    ns1:hasParameter ns1:Parameter7 ;
-    ns1:hasRequirement ns1:Requirement19 ;
-    ns1:hasResult ns1:Result5 ;
-    ns1:profileName "crack_hash" .
+ns2:Input7 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account2" .
 
 ns1:Result8 a ns1:Result ;
     ns1:result "account" .
 
 ns1:Result1 a ns1:Result ;
     ns1:result "webpage" .
+
+ns2:Input6 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Password1" .
+
+ns2:Input9 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Password2" .
 
 ns2:Scan3 a ns2:Scan ;
     ns2:command "b'/usr/src/firmwalker/firmwalker.sh ~/Downloads/studentv2'" ;
@@ -458,6 +550,22 @@ ns2:Scan3 a ns2:Scan ;
     ns2:executionTime "19:49 04/05/2023" ;
     ns2:scanInput ns2:Input3 ;
     ns2:scanProfile ns1:Profile8 .
+
+ns1:Profile15 a ns1:Profile ;
+    ns1:Command "hashcat '<passwordHash>' /usr/share/wordlists/rockyou.txt --show" ;
+    ns1:hasParameter ns1:Parameter7 ;
+    ns1:hasRequirement ns1:Requirement19 ;
+    ns1:hasResult ns1:Result5 ;
+    ns1:profileName "crack_hash" .
+
+ns1:Result5 a ns1:Result ;
+    ns1:result "password" .
+
+ns1:Parameter2 a ns1:Parameter ;
+    ns1:parameter "port" .
+
+ns1:Parameter1 a ns1:Parameter ;
+    ns1:parameter "ipv4" .
 
 ns1:Profile12 a ns1:Profile ;
     ns1:Command "hydra -l <account> -p <password> ssh://<ipv4>:<port>" ;
@@ -473,22 +581,13 @@ ns1:Profile12 a ns1:Profile ;
         ns1:Result8 ;
     ns1:profileName "ssh_account_password_attack" .
 
-ns1:Result5 a ns1:Result ;
-    ns1:result "password" .
+ns1:Requirement1 a ns1:Requirement ;
+    ns1:requirement "ipv4" ;
+    ns1:value "Ip" .
 
 ns2:Input2 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Port1" .
 
 ns2:Input1 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#IpAddress1" .
-
-ns1:Parameter2 a ns1:Parameter ;
-    ns1:parameter "port" .
-
-ns1:Parameter1 a ns1:Parameter ;
-    ns1:parameter "ipv4" .
-
-ns1:Requirement1 a ns1:Requirement ;
-    ns1:requirement "ipv4" ;
-    ns1:value "Ip" .
 
