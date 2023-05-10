@@ -75,7 +75,7 @@ test_X([X | Xs], Ys) :-
 
 
 % https://stackoverflow.com/questions/40530172/check-if-an-element-is-member-of-a-list
-memberCheckSimple([H|T], H).
+memberCheckSimple([H| T], H).
 memberCheckSimple([_|T], H) :- memberCheckSimple(T, H).
 
 getLowest([], _, 9999999).

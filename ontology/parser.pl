@@ -16,15 +16,18 @@ ipv4(X, Uri) :-
 
 page(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Webpage'),
-    rdf(Uri, ns1:'page', literal(X)).
+    rdf(Uri, ns1:'page', literal(X)),
+    current_session(Uri).
 
 account(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Account'),
-    rdf(Uri,ns1:'accountUsername',literal(X)).
+    rdf(Uri,ns1:'accountUsername',literal(X)),
+    current_session(Uri).
 
 password(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Password'),
-    rdf(Uri,ns1:'passwordCleartext',literal(X)).
+    rdf(Uri,ns1:'passwordCleartext',literal(X)),
+    current_session(Uri).
 
 accountPassword(Account, Password) :-
     rdfs_individual_of(A, ns1:'Account'),
@@ -34,11 +37,13 @@ accountPassword(Account, Password) :-
 
 port(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Port'),
-    rdf(Uri,ns1:'portNumber',literal(X)).
+    rdf(Uri,ns1:'portNumber',literal(X)),
+    current_session(Uri).
 
 passwordHash(Hash, Uri) :-
     rdfs_individual_of(Uri, ns1:'Hash'),
-    rdf(Uri, ns1:'hashValue',literal(Hash)).
+    rdf(Uri, ns1:'hashValue',literal(Hash)),
+    current_session(Uri).
 
 firmware(Path, Uri) :-
     rdfs_individual_of(Uri, ns1:'Firmware'),
@@ -46,7 +51,8 @@ firmware(Path, Uri) :-
 
 service(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Service'),
-    rdf(Uri,ns1:'serviceName',literal(X)).
+    rdf(Uri,ns1:'serviceName',literal(X)),
+    current_session(Uri).
 
 devicePorts(Ip, Port) :-
     rdfs_individual_of(A, ns1:'IpAddress'),
@@ -85,6 +91,11 @@ profileScans(Profile, Scan) :-
 
 scans(Scan) :-
     rdfs_individual_of(Scan, ns1:'Scan').
+
+scanCommand(Scan, Command) :-
+    rdfs_individual_of(Scan, ns1:'Scan'),
+    rdf(Scan, ns1:'command', literal(Command)).
+
 
 scanInfo(Scan, Info) :-
     rdfs_individual_of(Scan, ns1:'Scan'),
@@ -193,10 +204,21 @@ listProfileInfo(Profile, List) :-
     bagof(Scan, profileScans(Profile, Scan), Scans),
     getAmountScanInfo(Scans, List).
 
+current_session(Parameter) :-
+    get_last_parameter_scan(Parameter, Scan),
+    scanCommand(Scan, Command),
+    atom_codes(Command, Codes),
+    string_codes(String_Command, Codes),
+    executed(_, String_Command).
+
 
 get_last_scan(LastScan) :-
     findall(S, scanInfo(S, _), Scans),
     last(Scans,_, LastScan), !.
+
+get_last_parameter_scan(Parameter, LastScan) :-
+    bagof(S, scanInfo(S, Parameter), Scans),
+    last(Scans, _, LastScan), !.
 
 last([],-1, _).
 last([H | T], Max, LastScan) :-

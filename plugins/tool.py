@@ -16,7 +16,7 @@ class Tool(ABC):
 
     @abstractmethod
     def execute_command(self, command, target, parameters_uri, parameters, profile):
-        scan = {'ipv4': target, 'profileName': profile, 'command': command, 'epochTime': time.time()}
+        scan = {'ipv4': target, 'profileName': profile, 'command': command.decode('utf8'), 'epochTime': time.time()}
         scan_info = []
         for parameter in parameters_uri:
             info = {'ParameterURI': parameter}
