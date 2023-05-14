@@ -33,7 +33,10 @@ accountPassword(Account, Password) :-
     rdfs_individual_of(A, ns1:'Account'),
     rdf(A,ns1:'accountPassword',B),
     rdf(A,ns1:'accountUsername',literal(Account)),
-    rdf(B,ns1:'passwordCleartext',literal(Password)).
+    rdf(B,ns1:'passwordCleartext',literal(Password)),
+    account(Account , _),
+    password(Password, _).
+
 
 port(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Port'),
@@ -206,11 +209,17 @@ listProfileInfo(Profile, List) :-
 
 current_session(Parameter) :-
     get_last_parameter_scan(Parameter, Scan),
+    is_last_scan(Scan),
     scanCommand(Scan, Command),
     atom_codes(Command, Codes),
     string_codes(String_Command, Codes),
     executed(_, String_Command).
 
+is_last_scan(Scan) :-
+    scanCommand(Scan, Command),
+    bagof(S, scanCommand(S,Command), Scans),
+    last(Scans, _, LastScan),!,
+    LastScan == Scan.
 
 get_last_scan(LastScan) :-
     findall(S, scanInfo(S, _), Scans),

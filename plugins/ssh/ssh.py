@@ -9,4 +9,5 @@ class Ssh(Tool):
         super().__init__(ontology=ontology, parser=parser,info_end='\n')
 
     def execute_command(self, command, target, parameters_uri, parameters, profile):
+        print("Trying to get ssh connection: " + command.decode('utf8'))
         return {}

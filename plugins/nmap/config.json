@@ -4,7 +4,7 @@
   "version": "",
     "Profile": {
       "fast_scan": {
-        "Requirement": {"ipv4": "Ip", "\\+executed(ssh_attack": "_"},
+        "Requirement": {"ipv4": "Ip", "\\+executed": ["full_scan", "_"]},
         "Parameter": {"ipv4": "Ip"},
         "Result": ["port", "service"],
         "Command": "nmap -F <ipv4>"

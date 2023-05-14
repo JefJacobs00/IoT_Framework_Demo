@@ -32,7 +32,7 @@ https_dir_scan_big(Parameters, Command) :-
 tool(nmap, fast_scan).
 tool(nmap, full_scan).
 
-profile(fast_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), \+executed(ssh_attack(_), fast_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(fast_scan, Command).
+profile(fast_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), \+executed(full_scan, _), fast_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(fast_scan, Command).
 
 profile(full_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), full_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(full_scan, Command).
 
@@ -82,7 +82,7 @@ tool(hydra, telnet_attack).
 
 profile(ssh_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port]) :- ipv4(Ip, Uri_ipv4), deviceServices(Ip, Port, ssh), port(Port, Uri_port), ssh_attack([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port], Command), \+executed(ssh_attack, Command).
 
-profile(ssh_account_password_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, account=Account, uri_account=Uri_account, password=Password, uri_password=Uri_password]) :- ipv4(Ip, Uri_ipv4), account(Account, Uri_account), password(Password, Uri_password), deviceServices(Ip, Port, ssh), port(Port, Uri_port), ssh_account_password_attack([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, account=Account, uri_account=Uri_account, password=Password, uri_password=Uri_password], Command), \+executed(ssh_account_password_attack, Command).
+profile(ssh_account_password_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, account=Account, uri_account=Uri_account, password=Password, uri_password=Uri_password]) :- ipv4(Ip, Uri_ipv4), account(Account, Uri_account), password(Password, Uri_password), deviceServices(Ip, Port, ssh), \+accountPassword(Account, _), port(Port, Uri_port), ssh_account_password_attack([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, account=Account, uri_account=Uri_account, password=Password, uri_password=Uri_password], Command), \+executed(ssh_account_password_attack, Command).
 
 profile(ftp_attack, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port]) :- ipv4(Ip, Uri_ipv4), deviceServices(Ip, Port, ftp), port(Port, Uri_port), ftp_attack([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port], Command), \+executed(ftp_attack, Command).
 

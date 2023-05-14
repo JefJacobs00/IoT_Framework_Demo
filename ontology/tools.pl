@@ -39,7 +39,7 @@ profileScore(Profile, Score) :-
     (checkUsefullnessProfile(Profile, Y) -> Usefullness is Y; Usefullness = 0),
     simular_tools_executed(Profile, N),
     profileDemand(Profile, Demand),
-    Score is AmountOfInfo + Usefullness + Demand + Chain*5000 - N.
+    Score is AmountOfInfo + Usefullness + Demand + Chain*10 - N.
 
 
 attackChain(Parameters, Score) :-

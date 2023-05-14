@@ -10,7 +10,7 @@
         "Command": "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://<ipv4>:<port>"
       },
       "ssh_account_password_attack": {
-        "Requirement": {"ipv4": "Ip", "account": "Account", "password":"Password", "deviceServices": ["Ip", "Port", "ssh"]},
+        "Requirement": {"ipv4": "Ip", "account": "Account", "password":"Password", "deviceServices": ["Ip", "Port", "ssh"], "\\+accountPassword": ["Account", "_"]},
         "Parameter": {"ipv4": "Ip", "port": "Port", "account":  "Account", "password": "Password"},
         "Result": ["account", "password"],
         "Command": "hydra -l <account> -p <password> ssh://<ipv4>:<port>"

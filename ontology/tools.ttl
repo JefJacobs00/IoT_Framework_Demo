@@ -39,7 +39,8 @@ ns1:Profile12 a ns1:Profile ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement10,
         ns1:Requirement15,
-        ns1:Requirement16 ;
+        ns1:Requirement16,
+        ns1:Requirement17 ;
     ns1:hasResult ns1:Result5,
         ns1:Result8 ;
     ns1:profileName "ssh_account_password_attack" .
@@ -49,7 +50,7 @@ ns1:Profile13 a ns1:Profile ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement17 ;
+        ns1:Requirement18 ;
     ns1:hasResult ns1:Result5,
         ns1:Result8 ;
     ns1:profileName "ftp_attack" .
@@ -59,7 +60,7 @@ ns1:Profile14 a ns1:Profile ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement18 ;
+        ns1:Requirement19 ;
     ns1:hasResult ns1:Result5,
         ns1:Result8 ;
     ns1:profileName "telnet_attack" .
@@ -67,7 +68,7 @@ ns1:Profile14 a ns1:Profile ;
 ns1:Profile15 a ns1:Profile ;
     ns1:Command "hashcat '<passwordHash>' /usr/share/wordlists/rockyou.txt --show" ;
     ns1:hasParameter ns1:Parameter7 ;
-    ns1:hasRequirement ns1:Requirement19 ;
+    ns1:hasRequirement ns1:Requirement20 ;
     ns1:hasResult ns1:Result5 ;
     ns1:profileName "crack_hash" .
 
@@ -207,20 +208,24 @@ ns1:Requirement16 a ns1:Requirement ;
     ns1:value "['Ip', 'Port', 'ssh']" .
 
 ns1:Requirement17 a ns1:Requirement ;
-    ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'ftp']" .
+    ns1:requirement "\\+accountPassword" ;
+    ns1:value "['Account', '_']" .
 
 ns1:Requirement18 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'telnet']" .
+    ns1:value "['Ip', 'Port', 'ftp']" .
 
 ns1:Requirement19 a ns1:Requirement ;
-    ns1:requirement "passwordHash" ;
-    ns1:value "Hash" .
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'telnet']" .
 
 ns1:Requirement2 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
     ns1:value "['Ip', 'Port', 'http']" .
+
+ns1:Requirement20 a ns1:Requirement ;
+    ns1:requirement "passwordHash" ;
+    ns1:value "Hash" .
 
 ns1:Requirement3 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
@@ -235,8 +240,8 @@ ns1:Requirement5 a ns1:Requirement ;
     ns1:value "['Ip', 'Port', 'https']" .
 
 ns1:Requirement6 a ns1:Requirement ;
-    ns1:requirement "\\+executed(ssh_attack" ;
-    ns1:value "_" .
+    ns1:requirement "\\+executed" ;
+    ns1:value "['full_scan', '_']" .
 
 ns1:Requirement7 a ns1:Requirement ;
     ns1:requirement "connection" ;

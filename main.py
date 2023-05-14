@@ -28,7 +28,6 @@ def find_plugins(exclude=[]):
 
 def execute_scan(tool, profile,  command, parameters_uri, parameters, target):
     global running_scan
-    print(f"Executing tool {tool} with the command {command}")
     sc = getattr(plugins[tool], 'execute_command')
     output = sc(command, target, parameters_uri, parameters, profile)
     # TODO add parameters
@@ -66,7 +65,7 @@ def start_scanning(target):
     while has_executed:
         has_executed = False
         for result in prolog.query("load_ontology(\"ontology/knowledgebase.ttl\")"):
-            print(result)
+            pass
         time.sleep(0.2)
         profile = get_next_profile(prolog)
         if len(profile) > 0:
@@ -89,7 +88,7 @@ ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 plugins = find_plugins(['tool.py'])
 # ip = input("Give the target ip:\n")
 ip = "192.168.0.102"
-r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv2'}]
+r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv1'}]
 
 ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')
