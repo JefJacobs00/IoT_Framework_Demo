@@ -73,6 +73,7 @@
                       :Password ,
                       :Port ,
                       :Service ,
+                      :WebParameter ,
                       :Webpage ;
           rdfs:range :Scan .
 

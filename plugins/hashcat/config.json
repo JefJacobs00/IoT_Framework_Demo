@@ -4,10 +4,10 @@
   "version": "",
     "Profile": {
       "crack_hash": {
-        "Requirement": {"passwordHash": "Hash"},
-        "Parameter": {"passwordHash": "Hash"},
+        "Requirement": {"hashValue": "Hash"},
+        "Parameter": {"hashValue": "Hash"},
         "Result": ["password"],
-        "Command": "hashcat '<passwordHash>' /usr/share/wordlists/rockyou.txt --show"
+        "Command": "hashcat '<hashValue>' /usr/share/wordlists/rockyou.txt --show"
       }
     }
   }

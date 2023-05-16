@@ -88,7 +88,7 @@ ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 plugins = find_plugins(['tool.py'])
 # ip = input("Give the target ip:\n")
 ip = "192.168.0.102"
-r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv1'}]
+r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv2'}]
 
 ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')

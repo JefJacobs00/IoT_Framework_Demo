@@ -35,11 +35,12 @@ profileScore(Profile, Score) :-
     profile(Profile, Parameters),
     attackChain(Parameters, Chain),
     % Profile info --> avg/max
-    (totalProfileInfo(Profile, X) -> AmountOfInfo is X; AmountOfInfo = 0),
+    %(totalProfileInfo(Profile, X) -> AmountOfInfo is X; AmountOfInfo = 0),
+    profileConsistencyRate(Profile, Rate),
     (checkUsefullnessProfile(Profile, Y) -> Usefullness is Y; Usefullness = 0),
-    simular_tools_executed(Profile, N),
+    %simular_tools_executed(Profile, N),
     profileDemand(Profile, Demand),
-    Score is AmountOfInfo + Usefullness + Demand + Chain*10 - N.
+    Score is Rate*5 + Usefullness + Demand + Chain*10.
 
 
 attackChain(Parameters, Score) :-

@@ -6,8 +6,14 @@
       "http_param_fuzz": {
         "Requirement": {"ipv4": "Ip", "page": "Webpage", "deviceServices": ["Ip", "Port", "http"]},
         "Parameter": {"ipv4": "Ip", "port": "Port", "page": "Webpage"},
-        "Result": ["webpage"],
+        "Result": ["parameter"],
         "Command": "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt"
+      },
+      "http_param_input_fuzz": {
+        "Requirement": {"ipv4": "Ip", "page": "Webpage", "webparam": "Webparam", "webpage_param":  ["Webpage", "WebParameter"], "deviceServices": ["Ip", "Port", "http"]},
+        "Parameter": {"ipv4": "Ip", "port": "Port", "page": "Webpage","webparam": "Webparam" },
+        "Result": ["webpage"],
+        "Command": "ffuf -ac -u http://<ipv4>:<port><page>?<webparam>=FUZZ -w wordlists/input_fuzzing.txt"
       }
     }
   }

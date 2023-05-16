@@ -14,10 +14,25 @@ ipv4(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'IpAddress'),
     rdf(Uri,ns1:'ipv4',literal(X)).
 
+webparam(X, Uri) :-
+    rdfs_individual_of(Uri, ns1:'WebParameter'),
+    rdf(Uri, ns1:'webParameterName', literal(X)),
+    current_session(Uri).
+
+
 page(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Webpage'),
     rdf(Uri, ns1:'page', literal(X)),
     current_session(Uri).
+
+webpage_param(Page, Parameter) :-
+    rdfs_individual_of(A, ns1:'Webpage'),
+    rdf(B,ns1:'webpageParameter',A),
+    rdf(A,ns1:'page',literal(Page)),
+    rdf(B,ns1:'webParameterName',literal(Parameter)),
+    page(Page , _),
+    webparam(Parameter, _).
+
 
 account(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Account'),
@@ -43,10 +58,17 @@ port(X, Uri) :-
     rdf(Uri,ns1:'portNumber',literal(X)),
     current_session(Uri).
 
-passwordHash(Hash, Uri) :-
+hashValue(Hash, Uri) :-
     rdfs_individual_of(Uri, ns1:'Hash'),
     rdf(Uri, ns1:'hashValue',literal(Hash)),
     current_session(Uri).
+
+passwordHash(Hash, Password) :-
+    rdfs_individual_of(A, ns1:'Hash'),
+    rdf(B,ns1:'passwordHash',A),
+    rdf(A,ns1:'hashValue',literal(Hash)),
+    rdf(B,ns1:'passwordCleartext',literal(Password)),
+    hashValue(Hash, _).
 
 firmware(Path, Uri) :-
     rdfs_individual_of(Uri, ns1:'Firmware'),
@@ -202,6 +224,22 @@ avgProfileDuration(Profile, Avg) :-
 totalProfileInfo(Profile, N) :-
     bagof(Scan, profileScans(Profile, Scan), Scans),
     count_profile_info(Scans, N).
+
+profileConsistencyRate(Profile, Rate) :-
+    (maxProfileInfo(Profile, M) -> Max is M; Max is 1),
+    (averageProfileInfo(Profile, A) -> Avg is A; Avg is 1),
+    Rate is Avg/Max.
+
+maxProfileInfo(Profile, Max) :-
+    listProfileInfo(Profile, List),
+    max_member(M, List),
+    (M == 0 -> Max is 0.000000001; Max is M).
+
+averageProfileInfo(Profile, Average) :-
+    listProfileInfo(Profile, List),
+    sumlist(List, Sum),
+    count(List, Count),
+    Average is Sum/Count.
 
 listProfileInfo(Profile, List) :-
     bagof(Scan, profileScans(Profile, Scan), Scans),
