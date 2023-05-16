@@ -54,6 +54,12 @@
          rdfs:domain :Scan .
 
 
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#parameterInput
+:parameterInput rdf:type owl:ObjectProperty ;
+                rdfs:domain :WebParameter ;
+                rdfs:range :Input .
+
+
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#passwordHash
 :passwordHash rdf:type owl:ObjectProperty ;
               rdfs:domain :Password ;
@@ -70,6 +76,7 @@
 :scanInfo rdf:type owl:ObjectProperty ;
           rdfs:domain :Account ,
                       :Hash ,
+                      :Input ,
                       :Password ,
                       :Port ,
                       :Service ,
@@ -158,6 +165,11 @@
 :hashValue rdf:type owl:DatatypeProperty ;
            rdfs:domain :Hash ;
            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#inputValue
+:inputValue rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Input .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#ipv4
