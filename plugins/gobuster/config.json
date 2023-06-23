@@ -6,28 +6,28 @@
       "http_dir_scan_small": {
         "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "http"]},
         "Parameter": {"ipv4": "Ip", "port": "Port"},
-        "Result": ["webpage"],
+        "Result": ["page"],
         "Command": "gobuster dir -u http://<ipv4>:<port>/ -w wordlists/common.txt"
       },
 
       "https_dir_scan_small": {
         "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "https"]},
         "Parameter": {"ipv4": "Ip", "port": "Port"},
-        "Result": ["webpage"],
+        "Result": ["page"],
         "Command": "gobuster dir -u https://<ipv4>:<port>/ -w wordlists/common.txt"
       },
 
       "http_dir_scan_big": {
         "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "http"]},
         "Parameter": {"ipv4": "Ip", "port": "Port"},
-        "Result": ["webpage"],
+        "Result": ["page"],
         "Command": "gobuster dir -u http://<ipv4>:<port>/ -w wordlists/big.txt"
       },
 
       "https_dir_scan_big": {
         "Requirement": {"ipv4": "Ip", "deviceServices": ["Ip", "Port", "https"]},
         "Parameter": {"ipv4": "Ip", "port": "Port"},
-        "Result": ["webpage"],
+        "Result": ["page"],
         "Command": "gobuster dir -u https://<ipv4>:<port>/ -w wordlists/big.txt"
       }
     }

@@ -88,7 +88,7 @@
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#scanInput
 :scanInput rdf:type owl:ObjectProperty ;
            rdfs:domain :Scan ;
-           rdfs:range :WebInput .
+           rdfs:range :Input .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#scanProfile
@@ -121,7 +121,7 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#ParameterURI
 :ParameterURI rdf:type owl:DatatypeProperty ;
-              rdfs:domain :WebInput .
+              rdfs:domain :Input .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#accountUsername
@@ -274,6 +274,9 @@
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#WebInput
 :WebInput rdf:type owl:Class .
+
+###  http://www.semanticweb.org/jef/ontologies/2023/demo#Input
+:Input rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter

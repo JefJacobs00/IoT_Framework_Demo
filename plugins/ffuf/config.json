@@ -12,7 +12,7 @@
       "http_param_input_fuzz": {
         "Requirement": {"ipv4": "Ip", "page": "Webpage", "webparam": "Webparam", "webpage_param":  ["Webpage", "WebParameter"], "deviceServices": ["Ip", "Port", "http"]},
         "Parameter": {"ipv4": "Ip", "port": "Port", "page": "Webpage","webparam": "Webparam" },
-        "Result": ["webpage"],
+        "Result": ["input"],
         "Command": "ffuf -ac -u http://<ipv4>:<port><page>?<webparam>=FUZZ -w wordlists/input_fuzzing.txt"
       }
     }
