@@ -49,9 +49,8 @@ accountPassword(Account, Password) :-
     rdf(A,ns1:'accountPassword',B),
     rdf(A,ns1:'accountUsername',literal(Account)),
     rdf(B,ns1:'passwordCleartext',literal(Password)),
-    account(Account , _),
-    password(Password, _).
-
+    current_session(A),
+    current_session(B).
 
 port(X, Uri) :-
     rdfs_individual_of(Uri, ns1:'Port'),
@@ -227,7 +226,7 @@ totalProfileInfo(Profile, N) :-
 
 profileConsistencyRate(Profile, Rate) :-
     (maxProfileInfo(Profile, M) -> Max is M; Max is 1),
-    (averageProfileInfo(Profile, A) -> Avg is A; Avg is 1),
+    (averageProfileInfo(Profile, A) -> Avg is A; Avg is 0),
     Rate is Avg/Max.
 
 maxProfileInfo(Profile, Max) :-

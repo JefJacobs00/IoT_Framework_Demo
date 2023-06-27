@@ -31,13 +31,10 @@ https_dir_scan_big(Parameters, Command) :-
 
 tool(nmap, fast_scan).
 tool(nmap, full_scan).
-tool(nmap, udp_scan).
 
 profile(fast_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), \+executed(full_scan, _), fast_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(fast_scan, Command).
 
 profile(full_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), full_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(full_scan, Command).
-
-profile(udp_scan, [ipv4=Ip, uri_ipv4=Uri_ipv4]) :- ipv4(Ip, Uri_ipv4), udp_scan([ipv4=Ip, uri_ipv4=Uri_ipv4], Command), \+executed(udp_scan, Command).
 
 
 fast_scan(Parameters, Command) :- 
@@ -45,9 +42,6 @@ fast_scan(Parameters, Command) :-
 
 full_scan(Parameters, Command) :- 
 	format_command("nmap -sC -sV -p- ~w", [Parameters.ipv4], Command). 
-
-udp_scan(Parameters, Command) :- 
-	format_command("sudo nmap -sU ~w", [Parameters.ipv4], Command). 
 
 tool(linpeas, linpeas).
 

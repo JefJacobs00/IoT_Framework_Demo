@@ -86,9 +86,11 @@ g.parse('ontology/knowledge_ontology.ttl')
 ontology = Ontology(g, 'ontology/knowledgebase.ttl')
 
 plugins = find_plugins(['tool.py'])
-# ip = input("Give the target ip:\n")
+ip = input("Give the target ip:\n")
 ip = "192.168.0.102"
-r = [{'ipv4':ip, 'firmwarePath':'~/Downloads/studentv2'}]
+firmware = input("Give the target firmware: ")
+firmware = "~/Downloads/studentv2"
+r = [{'ipv4': ip, 'firmwarePath': firmware}]
 
 ontology.putOutputIntoOntology(r)
 ontology.saveToFile('ontology/knowledgebase.ttl')

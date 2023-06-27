@@ -14,12 +14,6 @@
         "Parameter": {"ipv4": "Ip"},
         "Result": ["port", "service"],
         "Command": "nmap -sC -sV -p- <ipv4>"
-      },
-      "udp_scan": {
-        "Requirement": {"ipv4": "Ip"},
-        "Parameter": {"ipv4": "Ip"},
-        "Result": ["port", "service"],
-        "Command": "sudo nmap -sU <ipv4>"
       }
     }
   }
